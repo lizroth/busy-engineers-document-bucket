@@ -22,12 +22,21 @@ export class DocumentBucketStack extends cdk.Stack {
     });
 
     // DynamoDB Table
+    // Uses composite keys to provide lookup by GUID and by context keys.
+    // Partition key format 1: HASH(GUID) RANGE("S3Pointer")
+    // Partition key format 2: HASH("context_" + $CONTEXT_KEY) RANGE(GUID)
+    // See https://www.youtube.com/watch?v=HaEPXoXVf2k&t=2210s
     new ddb.Table(this, config.document_table.name, {
       partitionKey: {
         name: config.document_table.partition_key,
         type: ddb.AttributeType.STRING
       },
+      sortKey: {
+        name: config.document_table.sort_key,
+        type: ddb.AttributeType.STRING
+        },
       billingMode: ddb.BillingMode.PAY_PER_REQUEST
     });
+    
   }
 }
