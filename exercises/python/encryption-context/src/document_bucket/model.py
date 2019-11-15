@@ -9,14 +9,12 @@ from boto3.dynamodb.conditions import Key  # type: ignore
 from .config import config
 
 
-class DocumentBucketItemException(Exception):
+class DataModelException(Exception):
     pass
 
 
-# FIXME seebees rightly points out that everything bieng named DocumentBucket makes
-# the name useless; rename
 @dataclass
-class DocumentBucketItem:
+class BaseItem:
     partition_key: Union[UUID, str]
     sort_key: Optional[Union[str, UUID]]
 
@@ -40,38 +38,34 @@ class DocumentBucketItem:
 
     def _assert_set(self):
         if self.partition_key is None:
-            raise DocumentBucketItemException(
-                "partition_key not set correctly after init!"
-            )
+            raise DataModelException("partition_key not set correctly after init!")
         if self.sort_key is None:
-            raise DocumentBucketItemException("sort_key not set correctly after init!")
+            raise DataModelException("sort_key not set correctly after init!")
 
     def get_s3_key(self) -> str:
-        raise DocumentBucketItemException(
-            "Cannot use a {} as an S3 Key!".format(self.__class__)
-        )
+        raise DataModelException("Cannot use a {} as an S3 Key!".format(self.__class__))
 
     def to_key(self):
         key = {
-            DocumentBucketItem.partition_key_name(): self.partition_key,
-            DocumentBucketItem.sort_key_name(): self.sort_key,
+            BaseItem.partition_key_name(): self.partition_key,
+            BaseItem.sort_key_name(): self.sort_key,
         }
         return key
 
 
 @dataclass
-class DocumentBucketContextQuery:
+class ContextQuery:
     partition_key: str
 
     def __post_init__(self):
-        self.partition_key = DocumentBucketContextItem.canonicalize(self.partition_key)
+        self.partition_key = ContextItem.canonicalize(self.partition_key)
 
     def expression(self) -> Dict[str, str]:
-        return Key(DocumentBucketItem.partition_key_name()).eq(self.partition_key)
+        return Key(BaseItem.partition_key_name()).eq(self.partition_key)
 
 
 @dataclass
-class DocumentBucketContextItem(DocumentBucketItem):
+class ContextItem(BaseItem):
     def __hash__(self):
         return super().__hash__()
 
@@ -84,23 +78,23 @@ class DocumentBucketContextItem(DocumentBucketItem):
 
     @classmethod
     def is_context_key_fmt(cls, key: str) -> bool:
-        return key.startswith(DocumentBucketContextItem._prefix())
+        return key.startswith(ContextItem._prefix())
 
     @classmethod
     def canonicalize(cls, context_key: str) -> str:
         context_key = context_key.upper()
-        if not DocumentBucketContextItem.is_context_key_fmt(context_key):
-            context_key = DocumentBucketContextItem._prefix() + context_key
+        if not ContextItem.is_context_key_fmt(context_key):
+            context_key = ContextItem._prefix() + context_key
         return context_key
 
     def __post_init__(self):
         self._assert_set()
-        self.partition_key = DocumentBucketContextItem.canonicalize(self.partition_key)
+        self.partition_key = ContextItem.canonicalize(self.partition_key)
         self.sort_key = str(UUID(self.sort_key))
 
 
 @dataclass
-class DocumentBucketPointerItem(DocumentBucketItem):
+class PointerItem(BaseItem):
     sort_key: str = config["document_bucket"]["document_table"]["object_target"]
     context: Dict[str, str] = field(default_factory=dict)
 
@@ -121,9 +115,7 @@ class DocumentBucketPointerItem(DocumentBucketItem):
 
     @classmethod
     def generate(cls, context: Dict[str, str]):
-        return DocumentBucketPointerItem(
-            partition_key=cls._generate_uuid(), context=context
-        )
+        return PointerItem(partition_key=cls._generate_uuid(), context=context)
 
     @classmethod
     def from_key_and_context(cls, key: str, context: Dict[str, str]):
@@ -131,10 +123,10 @@ class DocumentBucketPointerItem(DocumentBucketItem):
 
     @staticmethod
     def _validate_reserved_ec_keys(context: Dict[str, str]):
-        pkn = DocumentBucketItem.partition_key_name()
-        skn = DocumentBucketItem.sort_key_name()
+        pkn = BaseItem.partition_key_name()
+        skn = BaseItem.sort_key_name()
         if pkn in context.keys() or skn in context.keys():
-            raise DocumentBucketItemException(
+            raise DataModelException(
                 "Can't use DB key names ({}, {}) as Encryption Context keys!".format(
                     pkn, skn
                 )
@@ -148,9 +140,9 @@ class DocumentBucketPointerItem(DocumentBucketItem):
         if isinstance(self.partition_key, str):
             # Validate that the UUID is well formed before continuing.
             self.partition_key = str(UUID(self.partition_key))
-        DocumentBucketPointerItem._validate_reserved_ec_keys(self.context)
+        PointerItem._validate_reserved_ec_keys(self.context)
         if self.sort_key != self.sort_key_config():
-            raise DocumentBucketItemException(
+            raise DataModelException(
                 "Sort key should be {}, was {}".format(
                     self.sort_key_config(), self.sort_key
                 )
@@ -159,20 +151,20 @@ class DocumentBucketPointerItem(DocumentBucketItem):
 
     def context_from_item(self, item: Dict[str, str]) -> Dict[str, str]:
         if item is None:
-            raise DocumentBucketItemException("Got empty pointer item!")
-        del item[DocumentBucketItem.partition_key_name()]
-        del item[DocumentBucketItem.sort_key_name()]
+            raise DataModelException("Got empty pointer item!")
+        del item[BaseItem.partition_key_name()]
+        del item[BaseItem.sort_key_name()]
         return copy.deepcopy(item)
 
-    def context_items(self) -> Set[DocumentBucketContextItem]:
-        result: Set[DocumentBucketContextItem] = set()
+    def context_items(self) -> Set[ContextItem]:
+        result: Set[ContextItem] = set()
         for context_key in self.context.keys():
-            result.add(DocumentBucketContextItem(context_key, self.get_s3_key()))
+            result.add(ContextItem(context_key, self.get_s3_key()))
         return result
 
     @classmethod
     def filter_for(cls):
-        return Key(DocumentBucketItem.sort_key_name()).eq(cls.sort_key)
+        return Key(BaseItem.sort_key_name()).eq(cls.sort_key)
 
     def to_item(self):
         key = self.to_key()
@@ -181,11 +173,11 @@ class DocumentBucketPointerItem(DocumentBucketItem):
 
 
 @dataclass
-class DocumentBucketBundle:
-    key: DocumentBucketItem
+class DocumentBundle:
+    key: BaseItem
     data: bytes
 
     @staticmethod
     def from_data_and_context(data: bytes, context: Dict[str, str]):
-        key = DocumentBucketPointerItem.generate(context)
-        return DocumentBucketBundle(key, data)
+        key = PointerItem.generate(context)
+        return DocumentBundle(key, data)

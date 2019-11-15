@@ -7,10 +7,8 @@ from unittest.mock import call
 import pytest
 from aws_encryption_sdk import KMSMasterKeyProvider  # type: ignore
 from document_bucket.api import DocumentBucketOperations
-from document_bucket.model import (DocumentBucketContextItem,
-                                   DocumentBucketContextQuery,
-                                   DocumentBucketItem,
-                                   DocumentBucketPointerItem)
+from document_bucket.model import (BaseItem, ContextItem, ContextQuery,
+                                   PointerItem)
 
 
 def standard_context():
@@ -30,7 +28,7 @@ def random_key_or_value():
 
 
 def get_pointer_key():
-    return str(DocumentBucketPointerItem._generate_uuid())
+    return str(PointerItem._generate_uuid())
 
 
 def random_context(pair_count: int):
@@ -43,11 +41,11 @@ def random_context(pair_count: int):
 
 
 def random_context_item():
-    return DocumentBucketContextItem(random_key_or_value(), get_pointer_key())
+    return ContextItem(random_key_or_value(), get_pointer_key())
 
 
 def random_pointer_item():
-    return DocumentBucketPointerItem.generate(random_context(random.randint(0, 10)))
+    return PointerItem.generate(random_context(random.randint(0, 10)))
 
 
 @pytest.fixture
@@ -77,7 +75,7 @@ def random_context_key_ddb_result():
 
 @pytest.fixture
 def pointer_item():
-    return DocumentBucketPointerItem.generate(standard_context())
+    return PointerItem.generate(standard_context())
 
 
 @pytest.fixture
@@ -131,21 +129,19 @@ def test_populate_keys_happy_case(mocked_dbo, pointer_item):
     mocked_dbo._populate_key_records(pointer_item)
     calls = []
     for key in pointer_item.context.keys():
-        ctx_key = DocumentBucketContextItem(key, pointer_item.get_s3_key())
+        ctx_key = ContextItem(key, pointer_item.get_s3_key())
         calls.append(call(Item=ctx_key.to_key()))
     mocked_dbo.table.put_item.assert_has_calls(calls, any_order=True)
 
 
 def test_query_for_context_key(mocked_dbo, random_context_key_ddb_result):
     # Grab a partition key to "query" for
-    test_key = random_context_key_ddb_result["Items"][0][
-        DocumentBucketItem.partition_key_name()
-    ]
+    test_key = random_context_key_ddb_result["Items"][0][BaseItem.partition_key_name()]
     expected_guids = set()
     for item in random_context_key_ddb_result["Items"]:
-        expected_guids.add(item[DocumentBucketItem.sort_key_name()])
+        expected_guids.add(item[BaseItem.sort_key_name()])
     # Set up the query for the key
-    q = DocumentBucketContextQuery(test_key)
+    q = ContextQuery(test_key)
     # Set up returning the fake DDB Item when we call query
     mocked_dbo.table.query = mock.Mock(return_value=random_context_key_ddb_result)
     # Query
@@ -165,14 +161,14 @@ def test_list_items(mocked_dbo, random_ddb_pointer_table):
     mocked_dbo.table.scan = mock.Mock(return_value=random_ddb_pointer_table)
     expected_guids = set()
     for item in random_ddb_pointer_table["Items"]:
-        partition_key = item[DocumentBucketItem.partition_key_name()]
-        if not DocumentBucketContextItem.is_context_key_fmt(partition_key):
+        partition_key = item[BaseItem.partition_key_name()]
+        if not ContextItem.is_context_key_fmt(partition_key):
             expected_guids.add(partition_key)
     pointers = mocked_dbo.list()
     actual_guids = set()
     for p in pointers:
         # Ensure we filtered out context keys
-        assert DocumentBucketContextItem._prefix() not in p.partition_key
+        assert ContextItem._prefix() not in p.partition_key
         # Add this guid
         actual_guids.add(p.partition_key)
     assert expected_guids == actual_guids
@@ -180,6 +176,6 @@ def test_list_items(mocked_dbo, random_ddb_pointer_table):
 
 def test_context_key(mocked_dbo):
     key = random_key_or_value()
-    query = DocumentBucketContextQuery(key)
+    query = ContextQuery(key)
     mocked_dbo.search_by_context_key(key)
     mocked_dbo.table.query.assert_called_with(KeyConditionExpression=query.expression())
