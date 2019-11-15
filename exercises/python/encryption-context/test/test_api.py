@@ -117,13 +117,13 @@ def test_write_object_happy_case(mocked_dbo, pointer_item):
 def test_get_object_happy_case(mocked_dbo, pointer_item):
     # Mock out the interaction with S3 -- set up something with expected bytes
     data = io.BytesIO(bytes.fromhex("decafbad"))
-    mock_s3obj = mock.MagicMock()
-    mock_s3obj.get = mock.Mock(return_value={"Body": data})
+    class MockedObject(mock.MagicMock):
+        def get(self):
+            return {"Body": data}
     # Actually return the mock object from the "S3 call"
-    mocked_dbo.bucket.get_object = mock.Mock(return_value=mock_s3obj)
+    mocked_dbo.bucket.Object = MockedObject
     # Now see if our method actually returned the data
     actual_bytes = mocked_dbo._get_object(pointer_item)
-    mocked_dbo.bucket.get_object.assert_called_with(Key=pointer_item.get_s3_key())
     assert actual_bytes == data.getvalue()
 
 
@@ -151,7 +151,7 @@ def test_query_for_context_key(mocked_dbo, random_context_key_ddb_result):
     # Query
     pointers = mocked_dbo._query_for_context_key(q)
     # Assert the call happened
-    mocked_dbo.table.query.assert_called_with(q.query_condition())
+    mocked_dbo.table.query.assert_called_with(KeyConditionExpression=q.expression())
     # Assert we got a Pointer for each GUID back
     actual_guids = set()
     for pointer in pointers:
@@ -182,4 +182,4 @@ def test_context_key(mocked_dbo):
     key = random_key_or_value()
     query = DocumentBucketContextQuery(key)
     mocked_dbo.search_by_context_key(key)
-    mocked_dbo.table.query.assert_called_with(query.query_condition())
+    mocked_dbo.table.query.assert_called_with(KeyConditionExpression=query.expression())

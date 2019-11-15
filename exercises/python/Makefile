@@ -28,7 +28,7 @@ bootstrap:
 	@echo "==========================================================================="
 	PATH="/home/ec2-user/.pyenv/bin:$$PATH" pyenv install 3.8.0
 	PATH="/home/ec2-user/.pyenv/bin:$$PATH" pyenv global 3.8.0
-	PATH="/home/ec2-user/.pyenv/bin:$$PATH" pip install boto3
+	PATH="/home/ec2-user/.pyenv/bin:$$PATH" pip install tox
 	@echo "==========================================================================="
 	@echo "Python install complete. Starting new shell for environment changes."
 	@echo "==========================================================================="

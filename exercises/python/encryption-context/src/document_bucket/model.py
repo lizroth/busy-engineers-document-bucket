@@ -6,7 +6,7 @@ from uuid import UUID
 
 from boto3.dynamodb.conditions import Key  # type: ignore
 
-from . import config
+from .config import config
 
 
 class DocumentBucketItemException(Exception):
@@ -66,7 +66,7 @@ class DocumentBucketContextQuery:
     def __post_init__(self):
         self.partition_key = DocumentBucketContextItem.canonicalize(self.partition_key)
 
-    def query_condition(self):
+    def expression(self) -> Dict[str,str]:
         return Key(DocumentBucketItem.partition_key_name()).eq(self.partition_key)
 
 
@@ -153,6 +153,8 @@ class DocumentBucketPointerItem(DocumentBucketItem):
         self.partition_key = str(self.partition_key)
 
     def context_from_item(self, item: Dict[str, str]) -> Dict[str, str]:
+        if item is None:
+            raise DocumentBucketItemException("Got empty pointer item!")
         del item[DocumentBucketItem.partition_key_name()]
         del item[DocumentBucketItem.sort_key_name()]
         return copy.deepcopy(item)

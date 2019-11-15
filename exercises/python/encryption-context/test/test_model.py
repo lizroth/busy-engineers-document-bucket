@@ -2,7 +2,7 @@ import uuid
 from typing import Dict
 
 import pytest
-from document_bucket import config
+from document_bucket.config import config
 from document_bucket.model import (DocumentBucketBundle,
                                    DocumentBucketContextItem,
                                    DocumentBucketContextQuery,
@@ -118,9 +118,9 @@ def test_context_from_item(sample_context):
     assert sample_context.items() == context.items()
 
 
-def test_query_condition():
+def test_query_expression():
     query = DocumentBucketContextQuery("fleet")
-    assert query.partition_key in query.query_condition()._values
+    assert query.partition_key in query.expression()._values
 
 
 def test_duplicate_keys_throw():

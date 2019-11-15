@@ -8,7 +8,6 @@ from .model import (DocumentBucketBundle, DocumentBucketContextItem,
                     DocumentBucketPointerItem)
 
 
-# TODO Retries
 class DocumentBucketOperations:
     def __init__(self, bucket, table, master_key_provider: KMSMasterKeyProvider):
         self.bucket = bucket
@@ -25,8 +24,8 @@ class DocumentBucketOperations:
         return s3object
 
     def _get_object(self, item: DocumentBucketPointerItem) -> bytes:
-        s3object = self.bucket.get_object(Key=item.get_s3_key())
-        return s3object.get()["Body"].getvalue()
+        s3object = self.bucket.Object(item.get_s3_key()).get()
+        return s3object["Body"].read()
 
     def _populate_key_records(
         self, pointer: DocumentBucketPointerItem
@@ -36,23 +35,22 @@ class DocumentBucketOperations:
             self.table.put_item(Item=context_item.to_key())
         return context_items
 
-    # FIXME pagination, JSONDecoder
+    # JSONDecoder
     def _query_for_context_key(
         self, query: DocumentBucketContextQuery
     ) -> Set[DocumentBucketPointerItem]:
-        result = self.table.query(query.query_condition())
+        result = self.table.query(KeyConditionExpression=query.expression())
         pointers: Set[DocumentBucketPointerItem] = set()
         for ddb_item in result["Items"]:
             key = ddb_item[
                 DocumentBucketItem.sort_key_name()
-            ]  # FIXME should be sort key no?
+            ]
             pointer = DocumentBucketPointerItem(key)
-            pointer_data = self.table.get_item(pointer)
+            pointer_data = self.table.get_item(pointer).get("Item")
             pointer.context = pointer.context_from_item(pointer_data)
             pointers.add(pointer)
         return pointers
 
-    # FIXME pagination
     def _scan_table(self) -> Set[DocumentBucketPointerItem]:
         result = self.table.scan()
         pointers = set()
