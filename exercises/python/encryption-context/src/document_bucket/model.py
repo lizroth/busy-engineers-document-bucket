@@ -66,29 +66,31 @@ class DocumentBucketContextQuery:
     def __post_init__(self):
         self.partition_key = DocumentBucketContextItem.canonicalize(self.partition_key)
 
-    def expression(self) -> Dict[str,str]:
+    def expression(self) -> Dict[str, str]:
         return Key(DocumentBucketItem.partition_key_name()).eq(self.partition_key)
 
 
 @dataclass
 class DocumentBucketContextItem(DocumentBucketItem):
-    _prefix: str = config["document_bucket"]["document_table"]["ctx_prefix"].upper()
-
     def __hash__(self):
         return super().__hash__()
 
     def __eq__(self, other):
         return super().__eq__(other)
 
-    @staticmethod
-    def is_context_key_fmt(key: str) -> bool:
-        return key.startswith(DocumentBucketContextItem._prefix)
+    @classmethod
+    def _prefix(cls) -> str:
+        return config["document_bucket"]["document_table"]["ctx_prefix"].upper()
 
-    @staticmethod
-    def canonicalize(context_key: str) -> str:
+    @classmethod
+    def is_context_key_fmt(cls, key: str) -> bool:
+        return key.startswith(DocumentBucketContextItem._prefix())
+
+    @classmethod
+    def canonicalize(cls, context_key: str) -> str:
         context_key = context_key.upper()
         if not DocumentBucketContextItem.is_context_key_fmt(context_key):
-            context_key = DocumentBucketContextItem._prefix + context_key
+            context_key = DocumentBucketContextItem._prefix() + context_key
         return context_key
 
     def __post_init__(self):
@@ -109,19 +111,23 @@ class DocumentBucketPointerItem(DocumentBucketItem):
     def __eq__(self, other):
         return super().__eq__(other)
 
-    @staticmethod
-    def _generate_uuid() -> UUID:
+    @classmethod
+    def sort_key_config(cls) -> str:
+        return config["document_bucket"]["document_table"]["object_target"]
+
+    @classmethod
+    def _generate_uuid(cls) -> UUID:
         return uuid.uuid4()
 
-    @staticmethod
-    def generate(context: Dict[str, str]):
+    @classmethod
+    def generate(cls, context: Dict[str, str]):
         return DocumentBucketPointerItem(
-            partition_key=DocumentBucketPointerItem._generate_uuid(), context=context
+            partition_key=cls._generate_uuid(), context=context
         )
 
-    @staticmethod
-    def from_key_and_context(key: str, context: Dict[str, str]):
-        return DocumentBucketPointerItem(partition_key=key, context=context)
+    @classmethod
+    def from_key_and_context(cls, key: str, context: Dict[str, str]):
+        return cls(partition_key=key, context=context)
 
     @staticmethod
     def _validate_reserved_ec_keys(context: Dict[str, str]):
@@ -143,12 +149,11 @@ class DocumentBucketPointerItem(DocumentBucketItem):
             # Validate that the UUID is well formed before continuing.
             self.partition_key = str(UUID(self.partition_key))
         DocumentBucketPointerItem._validate_reserved_ec_keys(self.context)
-        expected_sort_key: str = config["document_bucket"]["document_table"][
-            "object_target"
-        ]
-        if self.sort_key != expected_sort_key:
+        if self.sort_key != self.sort_key_config():
             raise DocumentBucketItemException(
-                "Sort key should be {}, was {}".format(expected_sort_key, self.sort_key)
+                "Sort key should be {}, was {}".format(
+                    self.sort_key_config(), self.sort_key
+                )
             )
         self.partition_key = str(self.partition_key)
 
@@ -164,6 +169,10 @@ class DocumentBucketPointerItem(DocumentBucketItem):
         for context_key in self.context.keys():
             result.add(DocumentBucketContextItem(context_key, self.get_s3_key()))
         return result
+
+    @classmethod
+    def filter_for(cls):
+        return Key(DocumentBucketItem.sort_key_name()).eq(cls.sort_key)
 
     def to_item(self):
         key = self.to_key()

@@ -42,9 +42,7 @@ class DocumentBucketOperations:
         result = self.table.query(KeyConditionExpression=query.expression())
         pointers: Set[DocumentBucketPointerItem] = set()
         for ddb_item in result["Items"]:
-            key = ddb_item[
-                DocumentBucketItem.sort_key_name()
-            ]
+            key = ddb_item[DocumentBucketItem.sort_key_name()]
             pointer = DocumentBucketPointerItem(key)
             pointer_data = self.table.get_item(pointer).get("Item")
             pointer.context = pointer.context_from_item(pointer_data)
@@ -52,13 +50,10 @@ class DocumentBucketOperations:
         return pointers
 
     def _scan_table(self) -> Set[DocumentBucketPointerItem]:
-        result = self.table.scan()
+        result = self.table.scan(DocumentBucketPointerItem.filter_for())
         pointers = set()
         for ddb_item in result["Items"]:
             partition_key = ddb_item[DocumentBucketItem.partition_key_name()]
-            # Skip context key entries
-            if DocumentBucketContextItem.is_context_key_fmt(partition_key):
-                continue
             # TODO Use the JSONDecoder
             pointer = DocumentBucketPointerItem(partition_key)
             pointers.add(pointer)

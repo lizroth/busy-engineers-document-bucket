@@ -51,7 +51,7 @@ def random_pointer_item():
 
 
 @pytest.fixture
-def random_ddb_table():
+def random_ddb_pointer_table():
     num_keys = random.randint(1, 24)
     pointers = []
     table_items = []
@@ -59,8 +59,6 @@ def random_ddb_table():
         p = random_pointer_item()
         pointers.append(p)
         table_items.append(p.to_item())
-        for c in p.context_items():
-            table_items.append(c.to_key())
     result = {}
     result["Items"] = table_items
     return result
@@ -117,9 +115,11 @@ def test_write_object_happy_case(mocked_dbo, pointer_item):
 def test_get_object_happy_case(mocked_dbo, pointer_item):
     # Mock out the interaction with S3 -- set up something with expected bytes
     data = io.BytesIO(bytes.fromhex("decafbad"))
+
     class MockedObject(mock.MagicMock):
         def get(self):
             return {"Body": data}
+
     # Actually return the mock object from the "S3 call"
     mocked_dbo.bucket.Object = MockedObject
     # Now see if our method actually returned the data
@@ -161,10 +161,10 @@ def test_query_for_context_key(mocked_dbo, random_context_key_ddb_result):
     assert expected_guids == actual_guids
 
 
-def test_list_items(mocked_dbo, random_ddb_table):
-    mocked_dbo.table.scan = mock.Mock(return_value=random_ddb_table)
+def test_list_items(mocked_dbo, random_ddb_pointer_table):
+    mocked_dbo.table.scan = mock.Mock(return_value=random_ddb_pointer_table)
     expected_guids = set()
-    for item in random_ddb_table["Items"]:
+    for item in random_ddb_pointer_table["Items"]:
         partition_key = item[DocumentBucketItem.partition_key_name()]
         if not DocumentBucketContextItem.is_context_key_fmt(partition_key):
             expected_guids.add(partition_key)
@@ -172,7 +172,7 @@ def test_list_items(mocked_dbo, random_ddb_table):
     actual_guids = set()
     for p in pointers:
         # Ensure we filtered out context keys
-        assert DocumentBucketContextItem._prefix not in p.partition_key
+        assert DocumentBucketContextItem._prefix() not in p.partition_key
         # Add this guid
         actual_guids.add(p.partition_key)
     assert expected_guids == actual_guids
