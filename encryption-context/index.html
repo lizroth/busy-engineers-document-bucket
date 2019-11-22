@@ -434,6 +434,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#use-in-the-document-bucket" class="md-nav__link">
+    Use in the Document Bucket
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -565,6 +572,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#use-in-the-document-bucket" class="md-nav__link">
+    Use in the Document Bucket
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -652,7 +666,7 @@
                 
                 <h1 id="exercise-3-encryption-context">Exercise 3: Encryption Context</h1>
 <h2 id="background">Background</h2>
-<p>The Busy Engineer's Document Bucket has metadata associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
+<p>The Busy Engineer's Document Bucket has metadata, called <code>context</code>, associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
 <p>One of the features AWS KMS and the AWS Encryption SDK both provide is called Encryption Context. At its core, Encryption Context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
 <p>One useful model for thinking about encryption context is as Assertions about the <a href="https://en.wikipedia.org/wiki/Five_Ws" target="_blank">Five Ws</a>: Who, What, Where, When, Why. For example:</p>
 <ul>
@@ -672,8 +686,21 @@
 <p>Additionally, as part of the audit features that KMS provides, it logs the encryption context that was supplied with every operation. You can use this information to audit who was accessing what data and when, to detect anomalous call patterns, or to identify unexpected system states.</p>
 <p>What questions would you like to answer with CloudTrail Logs for your KMS operations? Encryption Context can help.</p>
 <h3 id="the-aws-encryption-sdk">The AWS Encryption SDK</h3>
-<p>The AWS Encryption SDK includes the encryption context as a core component. Encryption context may be supplied on encrypt -- it is optional, both for the Encryption SDK and for KMS, but strongly recommended. The Encryption SDK writes the encryption context in the encrypted message format. And on decrypt, the Encryption SDK validates the Encryption Context with KMS and returns the contents to you for you to make assertions about the contents.</p>
+<p>The AWS Encryption SDK includes the encryption context as a core component. Encryption context <em>may</em> be supplied on encrypt -- it is optional, both for the Encryption SDK and for KMS, but strongly recommended.</p>
+<p>The Encryption SDK writes the encryption context in the encrypted message format. And on decrypt, the Encryption SDK validates the Encryption Context with KMS and returns the contents to you for you to make assertions about the contents.</p>
 <p>Using the Encryption SDK with KMS, you can use all of KMS' policy and audit features from Encryption Context, and use the Encryption SDK to make assertions to safeguard your application.</p>
+<h3 id="use-in-the-document-bucket">Use in the Document Bucket</h3>
+<p>So how can encryption context be useful in the Document Bucket?</p>
+<p>In this exercise, you will walk through a few examples of how leveraging encryption context can help you secure and audit your application, and even build some convenience features.</p>
+<p>The Document Bucket already has the <code>context</code> map available for operations. It writes the <code>context</code> to the DynamoDB records for objects as well, and generates searchable DynamoDB records for context keys, to let you find documents that have certain attributes.</p>
+<p>Now you will plumb that context through the AWS Encryption SDK, so that KMS and the Encryption SDK bind those properties as security assertions about your data. You will also add an assertion facility to ensure that your data is what you expect it to be when you call <code>retrieve</code>.</p>
+<p>What this means is that with this change, you will be able to use encryption context to defend against these kind of risks:</p>
+<ul>
+<li>DynamoDB record updates that create metadata mismatches between a document and its properties</li>
+<li>Swapping objects in S3 so that the data is no longer what it was expected to be</li>
+<li>Accidentally loading the wrong data blob</li>
+<li>Ensuring that objects listed as matching a context key actually do have that context key</li>
+</ul>
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <div class="superfences-tabs">
