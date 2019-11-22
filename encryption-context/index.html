@@ -831,7 +831,21 @@
 </td></tr></table></div>
 <input name="__tabs_2" type="radio" id="__tab_2_2" />
 <label for="__tab_2_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
+<span class="c1"># ENCRYPTION-CONTEXT-START: Set Encryption Context on Encrypt</span>
+<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
+<span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -849,19 +863,7 @@
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_2" />
 <label for="__tab_3_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
-<span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
-<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
-    <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-    <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
-<span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-</span><span class="p">)</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span> 
 </pre></div>
 </td></tr></table></div>
 </div>
