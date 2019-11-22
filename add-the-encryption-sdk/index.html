@@ -109,19 +109,19 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
-<p> <pre><code class=Java>~/environment/workshop/exercises/java
+<p> <pre><code class=java>~/environment/workshop/exercises/java
 </code></pre></p>
-<p>```Javascript Node.js
+<p>``` javascript Node.js
 ~/environment/workshop/exercises/node-javascript</p>
 <p> <pre><code class>
-```Python
+``` python
 ~/environment/workshop/exercises/python
 </code></pre></p>
 <p><code>cd</code> into the <code>add-esdk-start</code> directory.</p>
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
-<p>```Javascript Node.js
+<p>``` javascript Node.js
 // Edit ./store.js</p>
 <p>const { encryptStream, KmsKeyringNode } = require("@aws-crypto/client-node");</p>
 <p>// Save and exit</p>
@@ -129,7 +129,7 @@
 <p>const { decryptStream, KmsKeyringNode } = require("@aws-crypto/client-node");</p>
 <p>// Save and exit</p>
 <p> <pre><code class>
-```Python
+``` python
 # Edit src/document_bucket/__init__.py
 
 import aws_encryption_sdk
@@ -156,12 +156,12 @@ def __init__(self, bucket, table, master_key_provider: KMSMasterKeyProvider):
 <p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
 <h3 id="step-2-add-encryption-to-store">Step 2: Add Encryption to <code>store</code></h3>
 <p>Now that you have the AWS Encryption SDK imported, start encrypting your data before storing it.</p>
-<p>```Javascript Node.js
+<p>``` javascript Node.js
 // Edit ./store.js</p>
 <p>const Body = fileStream.pipe(encryptStream(encryptKeyring));</p>
 <p>// Save and exit</p>
 <p> <pre><code class>
-```Python
+``` python
 # Edit src/document_bucket/api.py
 
 def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
@@ -184,7 +184,7 @@ def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
 <p>Now that you are encrypting data before storing it, you need to decrypt it before returning it to your caller. At least for it to be useful, anyway.</p>
-<p>```Javascript Node.js
+<p>``` javascript Node.js
 // Edit retrieve.js</p>
 <p>return s3
     .getObject({ Bucket, Key })
@@ -193,7 +193,7 @@ def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
 <p>// Save and Exit</p>
 <p> <pre><code class>
 #### What Just Happened
-```Python
+``` python
 # Edit src/document_bucket/api.py
 
     def retrieve(
@@ -224,7 +224,7 @@ def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
 </ol>
 <h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
-<p>```Javascript Node.js</p>
+<p>``` javascript Node.js</p>
 <p>// Edit store.js</p>
 <p>const faytheCMK = config.state.getFaytheCMK();
 const encryptKeyring = new KmsKeyringNode({
@@ -236,7 +236,7 @@ const encryptKeyring = new KmsKeyringNode({
 const decryptKeyring = new KmsKeyringNode({ keyIds: [faytheCMK] });</p>
 <p>// Save and exit</p>
 <p> <pre><code class>
-```Python
+``` python
 
 # Edit src/document_bucket/__init__.py
 
@@ -261,31 +261,28 @@ operations = DocumentBucketOperations(bucket, table, mkp)
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
-<p> <pre><code class=Java>~/environment/workshop/exercises/java/add-esdk-complete
+<p> <pre><code class=java>~/environment/workshop/exercises/java/add-esdk-complete
 </code></pre></p>
-<p>```Javascript Node.js
+<p>``` javascript Node.js
 ~/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js
 ~/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js</p>
 <p> <pre><code class>
-```Python
+``` python
 ~/environment/workshop/exercises/python/add-esdk-complete
 </code></pre></p>
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
-<p>```Javascript Node.js REPL
-node
-list = require("./list.js")
-store = require("./store.js")
+<div class=md-fenced-code-tabs id=tab-tab-group-8><input name=tab-group-8 type=radio id=tab-group-8-0_javascript checked=checked class=code-tab data-lang=javascript aria-controls=tab-group-8-0_javascript-panel role=tab><label for=tab-group-8-0_javascript class=code-tab-label data-lang=javascript id=tab-group-8-0_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-8-0_javascript-panel aria-labelledby=tab-group-8-0_javascript-label><pre><code class=javascript>node
+list = require(&quot;./list.js&quot;)
+store = require(&quot;./store.js&quot;)
 list().then(console.log)
-store(fs.createReadStream("./store.js")).then(console.log)
-list().then(console.log)</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-8><input name=tab-group-8 type=radio id=tab-group-8-0_vq4q5r1t2txcc45 checked=checked class=code-tab data-lang aria-controls=tab-group-8-0_vq4q5r1t2txcc45-panel role=tab><label for=tab-group-8-0_vq4q5r1t2txcc45 class=code-tab-label data-lang id=tab-group-8-0_vq4q5r1t2txcc45-label></label><div class=code-tabpanel role=tabpanel data-lang id=tab-group-8-0_vq4q5r1t2txcc45-panel aria-labelledby=tab-group-8-0_vq4q5r1t2txcc45-label><pre><code class>
-```Javascript Node.js CLI
-./cli.js list
+store(fs.createReadStream(&quot;./store.js&quot;)).then(console.log)
+list().then(console.log)
+</code></pre></div><input name=tab-group-8 type=radio id=tab-group-8-1_bash class=code-tab data-lang=bash aria-controls=tab-group-8-1_bash-panel role=tab><label for=tab-group-8-1_bash class=code-tab-label data-lang=bash id=tab-group-8-1_bash-label>Node.js CLI</label><div class=code-tabpanel role=tabpanel data-lang=bash id=tab-group-8-1_bash-panel aria-labelledby=tab-group-8-1_bash-label><pre><code class=bash>./cli.js list
 ./cli.js store ./store.js
 ./cli.js list
-</code></pre></div><input name=tab-group-8 type=radio id=tab-group-8-1_Python class=code-tab data-lang=Python aria-controls=tab-group-8-1_Python-panel role=tab><label for=tab-group-8-1_Python class=code-tab-label data-lang=Python id=tab-group-8-1_Python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=Python id=tab-group-8-1_Python-panel aria-labelledby=tab-group-8-1_Python-label><pre><code class=Python>tox -e repl
+</code></pre></div><input name=tab-group-8 type=radio id=tab-group-8-2_python class=code-tab data-lang=python aria-controls=tab-group-8-2_python-panel role=tab><label for=tab-group-8-2_python class=code-tab-label data-lang=python id=tab-group-8-2_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-8-2_python-panel aria-labelledby=tab-group-8-2_python-label><pre><code class=python>tox -e repl
 import document_bucket
 ops = document_bucket.initialize()
 ops.list()
