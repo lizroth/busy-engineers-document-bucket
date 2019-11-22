@@ -109,15 +109,15 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span>
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript</span>
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span>
 </pre></div>
 </td></tr></table>
 
@@ -125,7 +125,7 @@
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -149,7 +149,7 @@
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -196,7 +196,7 @@
 <p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
 <h3 id="step-2-add-encryption-to-store">Step 2: Add Encryption to <code>store</code></h3>
 <p>Now that you have the AWS Encryption SDK imported, start encrypting your data before storing it.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -208,7 +208,7 @@
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -241,7 +241,7 @@
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
 <p>Now that you are encrypting data before storing it, you need to decrypt it before returning it to your caller. At least for it to be useful, anyway.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -260,7 +260,7 @@
 </td></tr></table>
 
 <h4 id="what-just-happened_2">What Just Happened</h4>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -310,7 +310,7 @@
 </ol>
 <h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -342,7 +342,7 @@
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -382,24 +382,24 @@
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js</span>
 <span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js</span>
 </pre></div>
 </td></tr></table>
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
 </pre></div>
 </td></tr></table>
 
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -416,8 +416,8 @@
 <p>``` bash fct_label="Node.js CLI"
 ./cli.js list
 ./cli.js store ./store.js
-./cli.js list</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+./cli.js list
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -433,8 +433,7 @@
 <span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
 <span class="c1"># Ctrl-D when finished to exit the REPL</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></p>
 <h2 id="explore-further">Explore Further</h2>
 <ul>
 <li>TODO Retrieve</li>
