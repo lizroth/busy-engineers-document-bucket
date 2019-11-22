@@ -761,7 +761,7 @@
 </td></tr></table></div>
 </div>
 <h2 id="explore-further">Explore Further</h2>
-<p>Encryption context can provide different types of features and guardrails in your application logic. Consider these ideas:</p>
+<p>Encryption context can provide different types of features and guardrails in your application logic. Consider these ideas for further exploration:</p>
 <ul>
 <li><strong>Meta-operations on Encryption Context</strong> - the encryption context is stored on the <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/message-format.html" target="_blank">open-specification AWS Encryption SDK Message Format</a>. Would it help your system to write tools to process the metadata -- such as the encryption context -- on the message format?</li>
 <li><strong>DynamoDB Keys and Indexes</strong> - the Document Bucket adds composite indexes by <code>context</code> key. What about adding composite keys by key-value pairs? If you know a particular key should always be present in well-formed encrypted data, perhaps that should also be a <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">Secondary Index</a>?</li>
