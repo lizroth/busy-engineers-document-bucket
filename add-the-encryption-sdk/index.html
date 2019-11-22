@@ -652,18 +652,23 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">Java</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java
 </pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript</span>
+</td></tr></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript
 </pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span>
+</td></tr></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_2" />
+<label for="__tab_1_2">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <p><code>cd</code> into the <code>add-esdk-start</code> directory.</p>
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
@@ -926,18 +931,18 @@
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
 <div class="superfences-tabs">
-<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
-<label for="__tab_1_0">Java</label>
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_1" type="radio" id="__tab_1_1" />
-<label for="__tab_1_1">JavaScript Node.JS</label>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">Python</label>
+<input name="__tabs_2" type="radio" id="__tab_2_2" />
+<label for="__tab_2_2">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
@@ -959,19 +964,24 @@
 </pre></div>
 </td></tr></table>
 
-<p>``` bash fct_label="Node.js CLI"
-./cli.js list
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">Node.JS CLI</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
 ./cli.js store ./store.js
 ./cli.js list
+</pre></div>
+</td></tr></table></div>
+</div>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
 5
 6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="sb">``</span><span class="err">`</span> <span class="n">python</span>
-<span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">repl</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">repl</span>
 <span class="kn">import</span> <span class="nn">document_bucket</span>
 <span class="n">ops</span> <span class="o">=</span> <span class="n">document_bucket</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
@@ -979,7 +989,8 @@
 <span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
 <span class="c1"># Ctrl-D when finished to exit the REPL</span>
 </pre></div>
-</td></tr></table></p>
+</td></tr></table>
+
 <h2 id="explore-further">Explore Further</h2>
 <ul>
 <li>TODO Retrieve</li>
