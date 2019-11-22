@@ -464,8 +464,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-4-plumb-in-your-config" class="md-nav__link">
-    Step 4: Plumb In Your Config
+  <a href="#step-4-set-up-a-keyring-to-use-faythes-cmk-for-decrypting" class="md-nav__link">
+    Step 4: Set up a keyring to use Faythe's CMK for decrypting.
   </a>
   
     <nav class="md-nav">
@@ -526,7 +526,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../multi-cmk.md" title="Using Multiple CMKs" class="md-nav__link">
+    <a href="../multi-cmk/" title="Using Multiple CMKs" class="md-nav__link">
       Using Multiple CMKs
     </a>
   </li>
@@ -652,8 +652,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-4-plumb-in-your-config" class="md-nav__link">
-    Step 4: Plumb In Your Config
+  <a href="#step-4-set-up-a-keyring-to-use-faythes-cmk-for-decrypting" class="md-nav__link">
+    Step 4: Set up a keyring to use Faythe's CMK for decrypting.
   </a>
   
     <nav class="md-nav">
@@ -771,14 +771,18 @@
  8
  9
 10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
+<span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
 
 <span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit ./retrieve.js</span>
 
+<span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
 
 <span class="c1">// Save and exit</span>
@@ -840,8 +844,10 @@
 2
 3
 4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
+<span class="c1">// ADD-ESDK-START: Encrypt the stream with a keyring</span>
 <span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
 
 <span class="c1">// Save and exit</span>
@@ -892,8 +898,10 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit retrieve.js</span>
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit retrieve.js</span>
 
+  <span class="c1">// ADD-ESDK-START: Decrypt the stream with a keyring</span>
   <span class="k">return</span> <span class="nx">s3</span>
     <span class="p">.</span><span class="nx">getObject</span><span class="p">({</span> <span class="nx">Bucket</span><span class="p">,</span> <span class="nx">Key</span> <span class="p">})</span>
     <span class="p">.</span><span class="nx">createReadStream</span><span class="p">()</span>
@@ -943,7 +951,7 @@
 <li>Used the decrypted data key to decrypt the message</li>
 <li>Returned the message plaintext and Encryption SDK headers to you</li>
 </ol>
-<h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
+<h3 id="step-4-set-up-a-keyring-to-use-faythes-cmk-for-decrypting">Step 4: Set up a keyring to use Faythe's CMK for decrypting.</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
 <div class="superfences-tabs">
 <input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
@@ -962,8 +970,11 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
 
+<span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
 <span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
   <span class="nx">generatorKeyId</span><span class="o">:</span> <span class="nx">faytheCMK</span>
@@ -973,6 +984,7 @@
 
 <span class="c1">// Edit retrieve.js</span>
 
+<span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
 <span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
 
@@ -1088,7 +1100,7 @@
 <li>TODO Generate and load files to store/retrieve</li>
 </ul>
 <h1 id="next-exercise">Next exercise</h1>
-<p>Now that you are encrypting and decrypting, how about <a href="./multi-cmk.md">adding Multiple CMKs</a>?</p>
+<p>Now that you are encrypting and decrypting, how about <a href="../multi-cmk/">adding Multiple CMKs</a>?</p>
                 
                   
                 
@@ -1123,6 +1135,20 @@
             </div>
           </a>
         
+        
+          <a href="../multi-cmk/" title="Using Multiple CMKs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Using Multiple CMKs
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
