@@ -464,8 +464,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-1-set-encrypion-context-on-encrypt" class="md-nav__link">
-    Step 1: Set Encrypion Context on Encrypt
+  <a href="#step-1-set-encryption-context-on-encrypt" class="md-nav__link">
+    Step 1: Set Encryption Context on Encrypt
   </a>
   
     <nav class="md-nav">
@@ -654,8 +654,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-1-set-encrypion-context-on-encrypt" class="md-nav__link">
-    Step 1: Set Encrypion Context on Encrypt
+  <a href="#step-1-set-encryption-context-on-encrypt" class="md-nav__link">
+    Step 1: Set Encryption Context on Encrypt
   </a>
   
     <nav class="md-nav">
@@ -816,7 +816,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h3 id="step-1-set-encrypion-context-on-encrypt">Step 1: Set Encrypion Context on Encrypt</h3>
+<h3 id="step-1-set-encryption-context-on-encrypt">Step 1: Set Encryption Context on Encrypt</h3>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">Java</label>
@@ -936,17 +936,17 @@
 <span class="c1"># of the encryption context validated by the Encryption SDK</span>
 
 <span class="c1"># ENCRYPTION-CONTEXT-START: Making Assertions</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context_keys</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="hll">    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-</span>        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
+<span class="hll"><span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context_keys</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span>    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
         <span class="n">f</span><span class="s2">&quot;Expected all these keys: {expected_context_keys}, &quot;</span>
         <span class="n">f</span><span class="s2">&quot;but got {header.encryption_context}!&quot;</span>
     <span class="p">)</span>
     <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="hll">        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
-</span>        <span class="n">f</span><span class="s2">&quot;Expected {expected_context}, &quot;</span>
+<span class="hll"><span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span>    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
+        <span class="n">f</span><span class="s2">&quot;Expected {expected_context}, &quot;</span>
         <span class="n">f</span><span class="s2">&quot;but got {header.encryption_context}!&quot;</span>
     <span class="p">)</span>
     <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
@@ -954,7 +954,8 @@
 </td></tr></table></div>
 </div>
 <h4 id="what-just-happened_2">What Just Happened</h4>
-<p><code>retrieve</code> will use its "expected context keys" argument to validate that all of those keys (regardless of the associated values) are present in the encryption context. <code>retrieve</code> will also use its "expected context" argument to validate that those exact key-value pairs are present in the encryption context. If either of those assumptions is invalid, <code>retrieve</code> will raise an exception before returning the data. These assertions safeguard against accidentally returning unintended, corrupted, or tampered data to the application.</p>
+<p><code>retrieve</code> will use its "expected context keys" argument to validate that all of those keys (with any associated values) are present in the encryption context. <code>retrieve</code> will also use its "expected context" argument to validate that the exact key-value pairs specified in expected context are present in the actual encryption context. If either of those assumptions is invalid, <code>retrieve</code> will raise an exception before returning the data. These assertions safeguard against accidentally returning unintended, corrupted, or tampered data to the application.</p>
+<p>Now the Document Bucket will use AWS KMS and the AWS Encryption SDK to ensure that the <code>context</code> metadata is consistent throughout the lifetime of the objects, resistant to tampering or corruption, and make the validated context available to the application logic to make additional business logic assertions safely.</p>
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>If you want to check your progress, or compare what you've done versus a finished example, check out the code in one of the <code>-complete</code> folders to compare.</p>
 <p>There is a <code>-complete</code> folder for each language.</p>
@@ -996,6 +997,7 @@
 <h2 id="explore-further">Explore Further</h2>
 <p>Encryption context can provide different types of features and guardrails in your application logic. Consider these ideas for further exploration:</p>
 <ul>
+<li><strong>Detecting Drift</strong> - <code>context</code> contents are stored on the DynamoDB item. S3 has object metadata that could also use the <code>context</code> pairs. How would you use the validated encryption context to validate and guardrail those two data sources? What could that feature add to your application?</li>
 <li><strong>Meta-operations on Encryption Context</strong> - the encryption context is stored on the <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/message-format.html" target="_blank">open-specification AWS Encryption SDK Message Format</a>. Would it help your system to write tools to process the metadata -- such as the encryption context -- on the message format?</li>
 <li><strong>DynamoDB Keys and Indexes</strong> - the Document Bucket adds composite indexes by <code>context</code> key. What about adding composite keys by key-value pairs? If you know a particular key should always be present in well-formed encrypted data, perhaps that should also be a <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">Secondary Index</a>?</li>
 <li><strong>Enforing EC Keys</strong> - If you know that there is a key that should always be present, and that you want to index on in DynamoDB, do you want to enforce that it's always present? You can extend the <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/concepts.html#crypt-materials-manager" target="_blank">Cryptographic Materials Manager</a> component in the AWS Encryption SDK to enforce this during cryptographic operations.</li>
