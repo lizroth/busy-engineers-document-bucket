@@ -674,7 +674,19 @@
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">TODO</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+<span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
+<span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
+
+<span class="c1">// Edit retrieve.js</span>
+<span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
+<span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_2" type="radio" id="__tab_2_1" />
@@ -695,7 +707,23 @@
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
 <label for="__tab_3_0">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">TODO</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+<span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
+<span class="p">...</span>
+<span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
+
+<span class="c1">// Edit store.js</span>
+<span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
+<span class="p">...</span>
+<span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_1" />
@@ -751,20 +779,39 @@
 <p>Try out combinations of Grant permissions for your application and watch how the behavior changes:</p>
 <ul>
 <li>Revoke permission to use Faythe, and watch calls move to Walter</li>
+<li>Revoke permissions to both Faythe and Walter -- now operations fail</li>
+<li>Encrypt some data with both Faythe and Walter active, and revoke permission to either one -- notice that application operations continue to work</li>
 <li>Change the configuration order of Faythe and Walter, and watch how call patterns change to use the two CMKs</li>
 <li>Revoke permission to Walter, and encrypt some data with Faythe. Then, add permission back to Walter, revoke permission to use Faythe, and try to decrypt that data</li>
-<li>And many more!</li>
+<li>What other interesting access patterns can you imagine?</li>
 </ul>
+<div class="superfences-tabs">
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">Java</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_2" />
+<label for="__tab_5_2">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>tox -e repl
+</pre></div>
+</td></tr></table></div>
+</div>
 <h2 id="explore-further">Explore Further</h2>
 <p>Want to dive into more content related to this exercise? Try out these links.</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">AWS KMS: Key Grants</a></li>
 <li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">AWS KMS: Key Policies</a></li>
 <li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html">AWS KMS: Cross-account CMK Usage</a></li>
-<li>TODO CloudTrail logs</li>
-<li>TODO Restricting CMKs to try</li>
+<li><a href="https://aws.amazon.com/blogs/security/how-to-decrypt-ciphertexts-multiple-regions-aws-encryption-sdk-in-c/">Blog Post: How to decrypt ciphertexts in multiple regions with the AWS Encryption SDK in C</a></li>
 </ul>
 <h1 id="next-exercise">Next exercise</h1>
+<p>Ready to explore more? Next you will work with </p>
                 
                   
                 
