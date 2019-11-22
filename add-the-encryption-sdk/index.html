@@ -673,7 +673,10 @@
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -695,9 +698,10 @@
 
 <span class="c1">// Save and exit</span>
 </pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+</td></tr></table></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -737,14 +741,17 @@
 
 <span class="c1"># Save and exit</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <h4 id="what-just-happened">What Just Happened</h4>
 <p>You just imported a dependency on the AWS Encryption SDK library in your code.</p>
 <p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
 <h3 id="step-2-add-encryption-to-store">Step 2: Add Encryption to <code>store</code></h3>
 <p>Now that you have the AWS Encryption SDK imported, start encrypting your data before storing it.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -754,9 +761,10 @@
 
 <span class="c1">// Save and exit</span>
 </pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+</td></tr></table></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -776,8 +784,8 @@
 
 <span class="c1"># Save and exit</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <h4 id="what-just-happened_1">What Just Happened</h4>
 <p>The application just started encrypting data client-side with the AWS Encryption SDK and KMS!</p>
 <p>Now, before storing data in the Document Bucket, it uses the AWS Encryption SDK to:</p>
@@ -789,7 +797,10 @@
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
 <p>Now that you are encrypting data before storing it, you need to decrypt it before returning it to your caller. At least for it to be useful, anyway.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+<div class="superfences-tabs">
+<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
+<label for="__tab_4_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -805,10 +816,13 @@
 
 <span class="c1">// Save and Exit</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <h4 id="what-just-happened_2">What Just Happened</h4>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<div class="superfences-tabs">
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -846,8 +860,8 @@
 
 <span class="c1"># Save and exit</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <p>The application just started decrypting data client-side as well!</p>
 <p>The data returned from S3 for <code>retrieve</code> is now encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK:</p>
 <ol>
@@ -858,7 +872,10 @@
 </ol>
 <h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<div class="superfences-tabs">
+<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
+<label for="__tab_6_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -888,9 +905,10 @@
 
 <span class="c1">// Save and exit</span>
 </pre></div>
-</td></tr></table>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+</td></tr></table></div>
+<input name="__tabs_6" type="radio" id="__tab_6_1" />
+<label for="__tab_6_1">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -922,8 +940,8 @@
 
 <span class="c1"># Save and exit</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <h4 id="what-just-happened_3">What Just Happened</h4>
 <p>In Getting Started, you launched CloudFormation stacks for CMKs. One of these CMKs was nicknamed Faythe. As part of launching these templates, the CMK's Amazon Resource Name (ARN) was written to a configuration file on disk, the <code>state</code> variable that is loaded and parsed.</p>
 <p>Now Faythe's ARN is pulled into a variable, and used to initialize a keyring or master key provider that will use the Faythe CMK. That new keyring/master key provider is passed in to your API, and you are set to start encrypting and decrypting with KMS and the Encryption SDK.</p>
@@ -931,18 +949,18 @@
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
 <div class="superfences-tabs">
-<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
-<label for="__tab_2_0">Java</label>
+<input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
+<label for="__tab_7_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_2" type="radio" id="__tab_2_1" />
-<label for="__tab_2_1">JavaScript Node.JS</label>
+<input name="__tabs_7" type="radio" id="__tab_7_1" />
+<label for="__tab_7_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_2" type="radio" id="__tab_2_2" />
-<label for="__tab_2_2">Python</label>
+<input name="__tabs_7" type="radio" id="__tab_7_2" />
+<label for="__tab_7_2">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
@@ -950,7 +968,10 @@
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+<div class="superfences-tabs">
+<input name="__tabs_8" type="radio" id="__tab_8_0" checked="checked" />
+<label for="__tab_8_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -962,11 +983,9 @@
 <span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 </pre></div>
-</td></tr></table>
-
-<div class="superfences-tabs">
-<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
-<label for="__tab_3_0">Node.JS CLI</label>
+</td></tr></table></div>
+<input name="__tabs_8" type="radio" id="__tab_8_1" />
+<label for="__tab_8_1">Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
@@ -974,8 +993,9 @@
 ./cli.js list
 </pre></div>
 </td></tr></table></div>
-</div>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+<input name="__tabs_8" type="radio" id="__tab_8_2" />
+<label for="__tab_8_2">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
@@ -989,8 +1009,8 @@
 <span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
 <span class="c1"># Ctrl-D when finished to exit the REPL</span>
 </pre></div>
-</td></tr></table>
-
+</td></tr></table></div>
+</div>
 <h2 id="explore-further">Explore Further</h2>
 <ul>
 <li>TODO Retrieve</li>
