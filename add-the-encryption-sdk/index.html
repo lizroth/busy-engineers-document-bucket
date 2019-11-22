@@ -109,70 +109,126 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-0><input name=tab-group-0 type=radio id=tab-group-0-0_java checked=checked class=code-tab data-lang=java aria-controls=tab-group-0-0_java-panel role=tab><label for=tab-group-0-0_java class=code-tab-label data-lang=java id=tab-group-0-0_java-label>Java</label><div class=code-tabpanel role=tabpanel data-lang=java id=tab-group-0-0_java-panel aria-labelledby=tab-group-0-0_java-label><pre><code class=java>~/environment/workshop/exercises/java
-</code></pre></div><input name=tab-group-0 type=radio id=tab-group-0-1_javascript class=code-tab data-lang=javascript aria-controls=tab-group-0-1_javascript-panel role=tab><label for=tab-group-0-1_javascript class=code-tab-label data-lang=javascript id=tab-group-0-1_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-0-1_javascript-panel aria-labelledby=tab-group-0-1_javascript-label><pre><code class=javascript>~/environment/workshop/exercises/node-javascript
-</code></pre></div><input name=tab-group-0 type=radio id=tab-group-0-2_python class=code-tab data-lang=python aria-controls=tab-group-0-2_python-panel role=tab><label for=tab-group-0-2_python class=code-tab-label data-lang=python id=tab-group-0-2_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-0-2_python-panel aria-labelledby=tab-group-0-2_python-label><pre><code class=python>~/environment/workshop/exercises/python
-</code></pre></div></div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span>
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript</span>
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span>
+</pre></div>
+</td></tr></table>
 
 <p><code>cd</code> into the <code>add-esdk-start</code> directory.</p>
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-1><input name=tab-group-1 type=radio id=tab-group-1-0_javascript checked=checked class=code-tab data-lang=javascript aria-controls=tab-group-1-0_javascript-panel role=tab><label for=tab-group-1-0_javascript class=code-tab-label data-lang=javascript id=tab-group-1-0_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-1-0_javascript-panel aria-labelledby=tab-group-1-0_javascript-label><pre><code class=javascript>// Edit ./store.js
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
-const { encryptStream, KmsKeyringNode } = require(&quot;@aws-crypto/client-node&quot;);
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
 
-// Save and exit
+<span class="c1">// Save and exit</span>
 
-// Edit ./retrieve.js
+<span class="c1">// Edit ./retrieve.js</span>
 
-const { decryptStream, KmsKeyringNode } = require(&quot;@aws-crypto/client-node&quot;);
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
 
-// Save and exit
-</code></pre></div><input name=tab-group-1 type=radio id=tab-group-1-1_python class=code-tab data-lang=python aria-controls=tab-group-1-1_python-panel role=tab><label for=tab-group-1-1_python class=code-tab-label data-lang=python id=tab-group-1-1_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-1-1_python-panel aria-labelledby=tab-group-1-1_python-label><pre><code class=python># Edit src/document_bucket/__init__.py
+<span class="c1">// Save and exit</span>
+</pre></div>
+</td></tr></table>
 
-import aws_encryption_sdk
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
 
-# Save and exit
-# Edit src/document_bucket/api.py
+<span class="kn">import</span> <span class="nn">aws_encryption_sdk</span>
 
-# ADD-ESDK-START
-import aws_encryption_sdk
-from aws_encryption_sdk import KMSMasterKeyProvider
+<span class="c1"># Save and exit</span>
+<span class="c1"># Edit src/document_bucket/api.py</span>
 
-# Add a Master Key Provider to your __init__
-# ADD-ESDK-START
-def __init__(self, bucket, table, master_key_provider: KMSMasterKeyProvider):
-    self.bucket = bucket
-    self.table = table
-    # ADD-ESDK-START
-    self.master_key_provider = master_key_provider
+<span class="c1"># ADD-ESDK-START</span>
+<span class="kn">import</span> <span class="nn">aws_encryption_sdk</span>
+<span class="kn">from</span> <span class="nn">aws_encryption_sdk</span> <span class="kn">import</span> <span class="n">KMSMasterKeyProvider</span>
 
-# Save and exit
-</code></pre></div></div>
+<span class="c1"># Add a Master Key Provider to your __init__</span>
+<span class="c1"># ADD-ESDK-START</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">master_key_provider</span><span class="p">:</span> <span class="n">KMSMasterKeyProvider</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span> <span class="o">=</span> <span class="n">bucket</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+    <span class="c1"># ADD-ESDK-START</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span> <span class="o">=</span> <span class="n">master_key_provider</span>
+
+<span class="c1"># Save and exit</span>
+</pre></div>
+</td></tr></table>
 
 <h4 id="what-just-happened">What Just Happened</h4>
 <p>You just imported a dependency on the AWS Encryption SDK library in your code.</p>
 <p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
 <h3 id="step-2-add-encryption-to-store">Step 2: Add Encryption to <code>store</code></h3>
 <p>Now that you have the AWS Encryption SDK imported, start encrypting your data before storing it.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-2><input name=tab-group-2 type=radio id=tab-group-2-0_javascript checked=checked class=code-tab data-lang=javascript aria-controls=tab-group-2-0_javascript-panel role=tab><label for=tab-group-2-0_javascript class=code-tab-label data-lang=javascript id=tab-group-2-0_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-2-0_javascript-panel aria-labelledby=tab-group-2-0_javascript-label><pre><code class=javascript>// Edit ./store.js
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
-const Body = fileStream.pipe(encryptStream(encryptKeyring));
+<span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
 
-// Save and exit
+<span class="c1">// Save and exit</span>
+</pre></div>
+</td></tr></table>
 
-</code></pre></div><input name=tab-group-2 type=radio id=tab-group-2-1_python class=code-tab data-lang=python aria-controls=tab-group-2-1_python-panel role=tab><label for=tab-group-2-1_python class=code-tab-label data-lang=python id=tab-group-2-1_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-2-1_python-panel aria-labelledby=tab-group-2-1_python-label><pre><code class=python># Edit src/document_bucket/api.py
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
 
-def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
-    # ADD-ESDK-START
-    encrypted_data, header = aws_encryption_sdk.encrypt(
-        source=data,
-        key_provider=self.master_key_provider,
-    )
+<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">PointerItem</span><span class="p">:</span>
+    <span class="c1"># ADD-ESDK-START</span>
+    <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
+    <span class="p">)</span>
 
-# Save and exit
-</code></pre></div></div>
+<span class="c1"># Save and exit</span>
+</pre></div>
+</td></tr></table>
 
 <h4 id="what-just-happened_1">What Just Happened</h4>
 <p>The application just started encrypting data client-side with the AWS Encryption SDK and KMS!</p>
@@ -185,36 +241,65 @@ def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
 <p>Now that you are encrypting data before storing it, you need to decrypt it before returning it to your caller. At least for it to be useful, anyway.</p>
-<p> <pre><code class=javascript>// Edit retrieve.js
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit retrieve.js</span>
 
-  return s3
-    .getObject({ Bucket, Key })
-    .createReadStream()
-    .pipe(decryptStream(decryptKeyring));
+  <span class="k">return</span> <span class="nx">s3</span>
+    <span class="p">.</span><span class="nx">getObject</span><span class="p">({</span> <span class="nx">Bucket</span><span class="p">,</span> <span class="nx">Key</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">createReadStream</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">decryptStream</span><span class="p">(</span><span class="nx">decryptKeyring</span><span class="p">));</span>
 
-// Save and Exit
-</code></pre></p>
+<span class="c1">// Save and Exit</span>
+</pre></div>
+</td></tr></table>
+
 <h4 id="what-just-happened_2">What Just Happened</h4>
-<p> <pre><code class=python># Edit src/document_bucket/api.py
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
 
-    def retrieve(
-            self,
-            pointer_key: str,
-            expected_context_keys: Set[str] = set(),
-            expected_context: Dict[str, str] = {},
-    ) -&gt; DocumentBundle:
-        item = self._get_pointer_item(PointerQuery.from_key(pointer_key))
-        # ADD-ESDK-START
-        encrypted_data = self._get_object(item)
-        plaintext, header = aws_encryption_sdk.decrypt(
-            source=encrypted_data, key_provider=self.master_key_provider
-        )
-        return DocumentBundle.from_data_and_context(
-            plaintext, item.context
-        )
+    <span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">pointer_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">expected_context_keys</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span>
+            <span class="n">expected_context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentBundle</span><span class="p">:</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pointer_item</span><span class="p">(</span><span class="n">PointerQuery</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="n">pointer_key</span><span class="p">))</span>
+        <span class="c1"># ADD-ESDK-START</span>
+        <span class="n">encrypted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_object</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">plaintext</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="n">from_data_and_context</span><span class="p">(</span>
+            <span class="n">plaintext</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">context</span>
+        <span class="p">)</span>
 
-# Save and exit
-</code></pre></p>
+<span class="c1"># Save and exit</span>
+</pre></div>
+</td></tr></table>
+
 <p>The application just started decrypting data client-side as well!</p>
 <p>The data returned from S3 for <code>retrieve</code> is now encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK:</p>
 <ol>
@@ -225,40 +310,71 @@ def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
 </ol>
 <h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-5><input name=tab-group-5 type=radio id=tab-group-5-0_javascript checked=checked class=code-tab data-lang=javascript aria-controls=tab-group-5-0_javascript-panel role=tab><label for=tab-group-5-0_javascript class=code-tab-label data-lang=javascript id=tab-group-5-0_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-5-0_javascript-panel aria-labelledby=tab-group-5-0_javascript-label><pre><code class=javascript>
-// Edit store.js
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
 
-const faytheCMK = config.state.getFaytheCMK();
-const encryptKeyring = new KmsKeyringNode({
-  generatorKeyId: faytheCMK
-});
+<span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
+  <span class="nx">generatorKeyId</span><span class="o">:</span> <span class="nx">faytheCMK</span>
+<span class="p">});</span>
 
-// Save and exit
+<span class="c1">// Save and exit</span>
 
-// Edit retrieve.js
+<span class="c1">// Edit retrieve.js</span>
 
-const faytheCMK = config.state.getFaytheCMK();
-const decryptKeyring = new KmsKeyringNode({ keyIds: [faytheCMK] });
+<span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
 
-// Save and exit
-</code></pre></div><input name=tab-group-5 type=radio id=tab-group-5-1_python class=code-tab data-lang=python aria-controls=tab-group-5-1_python-panel role=tab><label for=tab-group-5-1_python class=code-tab-label data-lang=python id=tab-group-5-1_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-5-1_python-panel aria-labelledby=tab-group-5-1_python-label><pre><code class=python>
-# Edit src/document_bucket/__init__.py
+<span class="c1">// Save and exit</span>
+</pre></div>
+</td></tr></table>
 
-...
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
 
-# ADD-ESDK-START
-# Pull configuration of KMS resources
-faythe_cmk = state[&quot;FaytheCMK&quot;]
-# And the Master Key Provider configuring how to use KMS
-cmk = [faythe_cmk]
-mkp = aws_encryption_sdk.KMSMasterKeyProvider(key_ids=[cmk])
+<span class="o">...</span>
 
-...
+<span class="c1"># ADD-ESDK-START</span>
+<span class="c1"># Pull configuration of KMS resources</span>
+<span class="n">faythe_cmk</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;FaytheCMK&quot;</span><span class="p">]</span>
+<span class="c1"># And the Master Key Provider configuring how to use KMS</span>
+<span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">]</span>
+<span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cmk</span><span class="p">])</span>
 
-operations = DocumentBucketOperations(bucket, table, mkp)
+<span class="o">...</span>
 
-# Save and exit
-</code></pre></div></div>
+<span class="n">operations</span> <span class="o">=</span> <span class="n">DocumentBucketOperations</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">mkp</span><span class="p">)</span>
+
+<span class="c1"># Save and exit</span>
+</pre></div>
+</td></tr></table>
 
 <h4 id="what-just-happened_3">What Just Happened</h4>
 <p>In Getting Started, you launched CloudFormation stacks for CMKs. One of these CMKs was nicknamed Faythe. As part of launching these templates, the CMK's Amazon Resource Name (ARN) was written to a configuration file on disk, the <code>state</code> variable that is loaded and parsed.</p>
@@ -266,32 +382,58 @@ operations = DocumentBucketOperations(bucket, table, mkp)
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-6><input name=tab-group-6 type=radio id=tab-group-6-0_java checked=checked class=code-tab data-lang=java aria-controls=tab-group-6-0_java-panel role=tab><label for=tab-group-6-0_java class=code-tab-label data-lang=java id=tab-group-6-0_java-label>Java</label><div class=code-tabpanel role=tabpanel data-lang=java id=tab-group-6-0_java-panel aria-labelledby=tab-group-6-0_java-label><pre><code class=java>~/environment/workshop/exercises/java/add-esdk-complete
-</code></pre></div><input name=tab-group-6 type=radio id=tab-group-6-1_javascript class=code-tab data-lang=javascript aria-controls=tab-group-6-1_javascript-panel role=tab><label for=tab-group-6-1_javascript class=code-tab-label data-lang=javascript id=tab-group-6-1_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-6-1_javascript-panel aria-labelledby=tab-group-6-1_javascript-label><pre><code class=javascript>~/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js
-~/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js
-</code></pre></div><input name=tab-group-6 type=radio id=tab-group-6-2_python class=code-tab data-lang=python aria-controls=tab-group-6-2_python-panel role=tab><label for=tab-group-6-2_python class=code-tab-label data-lang=python id=tab-group-6-2_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-6-2_python-panel aria-labelledby=tab-group-6-2_python-label><pre><code class=python>~/environment/workshop/exercises/python/add-esdk-complete
-</code></pre></div></div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js</span>
+<span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js</span>
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
+</pre></div>
+</td></tr></table>
 
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-7><input name=tab-group-7 type=radio id=tab-group-7-0_javascript checked=checked class=code-tab data-lang=javascript aria-controls=tab-group-7-0_javascript-panel role=tab><label for=tab-group-7-0_javascript class=code-tab-label data-lang=javascript id=tab-group-7-0_javascript-label>Javascript</label><div class=code-tabpanel role=tabpanel data-lang=javascript id=tab-group-7-0_javascript-panel aria-labelledby=tab-group-7-0_javascript-label><pre><code class=javascript>node
-list = require(&quot;./list.js&quot;)
-store = require(&quot;./store.js&quot;)
-list().then(console.log)
-store(fs.createReadStream(&quot;./store.js&quot;)).then(console.log)
-list().then(console.log)
-</code></pre></div><input name=tab-group-7 type=radio id=tab-group-7-1_bash class=code-tab data-lang=bash aria-controls=tab-group-7-1_bash-panel role=tab><label for=tab-group-7-1_bash class=code-tab-label data-lang=bash id=tab-group-7-1_bash-label>Node.js CLI</label><div class=code-tabpanel role=tabpanel data-lang=bash id=tab-group-7-1_bash-panel aria-labelledby=tab-group-7-1_bash-label><pre><code class=bash>./cli.js list
-./cli.js store ./store.js
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span>
+<span class="nx">list</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./list.js&quot;</span><span class="p">)</span>
+<span class="nx">store</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>``` bash fct_label="Node.js CLI"
 ./cli.js list
-</code></pre></div><input name=tab-group-7 type=radio id=tab-group-7-2_python class=code-tab data-lang=python aria-controls=tab-group-7-2_python-panel role=tab><label for=tab-group-7-2_python class=code-tab-label data-lang=python id=tab-group-7-2_python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=python id=tab-group-7-2_python-panel aria-labelledby=tab-group-7-2_python-label><pre><code class=python>tox -e repl
-import document_bucket
-ops = document_bucket.initialize()
-ops.list()
-ops.store(b'some data')
-ops.list()
-# Ctrl-D when finished to exit the REPL
-</code></pre></div></div>
+./cli.js store ./store.js
+./cli.js list</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="sb">``</span><span class="err">`</span> <span class="n">python</span>
+<span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">repl</span>
+<span class="kn">import</span> <span class="nn">document_bucket</span>
+<span class="n">ops</span> <span class="o">=</span> <span class="n">document_bucket</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="n">ops</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;some data&#39;</span><span class="p">)</span>
+<span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="c1"># Ctrl-D when finished to exit the REPL</span>
+</pre></div>
+</td></tr></table>
 
 <h2 id="explore-further">Explore Further</h2>
 <ul>
