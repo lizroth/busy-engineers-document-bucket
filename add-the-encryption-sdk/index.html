@@ -626,13 +626,14 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
-<p> <div class=codehilite><pre><span></span><span class=o>~/</span><span class=n>environment</span><span class=o>/</span><span class=n>workshop</span><span class=o>/</span><span class=n>exercises</span><span class=o>/</span><span class=n>java</span>
-</pre></div></p>
+<p> <pre><code class=Java>~/environment/workshop/exercises/java
+</code></pre></p>
 <p>```Javascript Node.js
 ~/environment/workshop/exercises/node-javascript</p>
-<p> <div class=codehilite><pre><span></span><span class=o>```</span><span class=n>Python</span>
-<span class=o>~/</span><span class=n>environment</span><span class=o>/</span><span class=n>workshop</span><span class=o>/</span><span class=n>exercises</span><span class=o>/</span><span class=n>python</span>
-</pre></div></p>
+<p> <pre><code class>
+```Python
+~/environment/workshop/exercises/python
+</code></pre></p>
 <p><code>cd</code> into the <code>add-esdk-start</code> directory.</p>
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
@@ -644,28 +645,29 @@
 <p>// Edit ./retrieve.js</p>
 <p>const { decryptStream, KmsKeyringNode } = require("@aws-crypto/client-node");</p>
 <p>// Save and exit</p>
-<p> <div class=codehilite><pre><span></span><span class=sb>``</span><span class=err>`</span><span class=n>Python</span>
-<span class=c1># Edit src/document_bucket/__init__.py</span>
+<p> <pre><code class>
+```Python
+# Edit src/document_bucket/__init__.py
 
-<span class=kn>import</span> <span class=nn>aws_encryption_sdk</span>
+import aws_encryption_sdk
 
-<span class=c1># Save and exit</span>
-<span class=c1># Edit src/document_bucket/api.py</span>
+# Save and exit
+# Edit src/document_bucket/api.py
 
-<span class=c1># ADD-ESDK-START</span>
-<span class=kn>import</span> <span class=nn>aws_encryption_sdk</span>
-<span class=kn>from</span> <span class=nn>aws_encryption_sdk</span> <span class=kn>import</span> <span class=n>KMSMasterKeyProvider</span>
+# ADD-ESDK-START
+import aws_encryption_sdk
+from aws_encryption_sdk import KMSMasterKeyProvider
 
-<span class=c1># Add a Master Key Provider to your __init__</span>
-<span class=c1># ADD-ESDK-START</span>
-<span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>bucket</span><span class=p>,</span> <span class=n>table</span><span class=p>,</span> <span class=n>master_key_provider</span><span class=p>:</span> <span class=n>KMSMasterKeyProvider</span><span class=p>):</span>
-    <span class=bp>self</span><span class=o>.</span><span class=n>bucket</span> <span class=o>=</span> <span class=n>bucket</span>
-    <span class=bp>self</span><span class=o>.</span><span class=n>table</span> <span class=o>=</span> <span class=n>table</span>
-    <span class=c1># ADD-ESDK-START</span>
-    <span class=bp>self</span><span class=o>.</span><span class=n>master_key_provider</span> <span class=o>=</span> <span class=n>master_key_provider</span>
+# Add a Master Key Provider to your __init__
+# ADD-ESDK-START
+def __init__(self, bucket, table, master_key_provider: KMSMasterKeyProvider):
+    self.bucket = bucket
+    self.table = table
+    # ADD-ESDK-START
+    self.master_key_provider = master_key_provider
 
-<span class=c1># Save and exit</span>
-</pre></div></p>
+# Save and exit
+</code></pre></p>
 <h4 id="what-just-happened">What Just Happened</h4>
 <p>You just imported a dependency on the AWS Encryption SDK library in your code.</p>
 <p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
@@ -675,18 +677,19 @@
 // Edit ./store.js</p>
 <p>const Body = fileStream.pipe(encryptStream(encryptKeyring));</p>
 <p>// Save and exit</p>
-<p> <div class=codehilite><pre><span></span>```<span class=nv>Python</span>
-# <span class=nv>Edit</span> <span class=nv>src</span><span class=o>/</span><span class=nv>document_bucket</span><span class=o>/</span><span class=nv>api</span>.<span class=nv>py</span>
+<p> <pre><code class>
+```Python
+# Edit src/document_bucket/api.py
 
-<span class=nv>def</span> <span class=nv>store</span><span class=ss>(</span><span class=nv>self</span>, <span class=nv>data</span>: <span class=nv>bytes</span>, <span class=nv>context</span>: <span class=nv>Dict</span>[<span class=nv>str</span>, <span class=nv>str</span>] <span class=o>=</span> {}<span class=ss>)</span> <span class=o>-&gt;</span> <span class=nv>PointerItem</span>:
-    # <span class=nv>ADD</span><span class=o>-</span><span class=nv>ESDK</span><span class=o>-</span><span class=nv>START</span>
-    <span class=nv>encrypted_data</span>, <span class=nv>header</span> <span class=o>=</span> <span class=nv>aws_encryption_sdk</span>.<span class=nv>encrypt</span><span class=ss>(</span>
-        <span class=nv>source</span><span class=o>=</span><span class=nv>data</span>,
-        <span class=nv>key_provider</span><span class=o>=</span><span class=nv>self</span>.<span class=nv>master_key_provider</span>,
-    <span class=ss>)</span>
+def store(self, data: bytes, context: Dict[str, str] = {}) -&gt; PointerItem:
+    # ADD-ESDK-START
+    encrypted_data, header = aws_encryption_sdk.encrypt(
+        source=data,
+        key_provider=self.master_key_provider,
+    )
 
-# <span class=nv>Save</span> <span class=nv>and</span> <span class=k>exit</span>
-</pre></div></p>
+# Save and exit
+</code></pre></p>
 <h4 id="what-just-happened_1">What Just Happened</h4>
 <p>The application just started encrypting data client-side with the AWS Encryption SDK and KMS!</p>
 <p>Now, before storing data in the Document Bucket, it uses the AWS Encryption SDK to:</p>
@@ -705,28 +708,29 @@
     .createReadStream()
     .pipe(decryptStream(decryptKeyring));</p>
 <p>// Save and Exit</p>
-<p> <div class=codehilite><pre><span></span>#### <span class=nv>What</span> <span class=nv>Just</span> <span class=nv>Happened</span>
-```<span class=nv>Python</span>
-# <span class=nv>Edit</span> <span class=nv>src</span><span class=o>/</span><span class=nv>document_bucket</span><span class=o>/</span><span class=nv>api</span>.<span class=nv>py</span>
+<p> <pre><code class>
+#### What Just Happened
+```Python
+# Edit src/document_bucket/api.py
 
-    <span class=nv>def</span> <span class=nv>retrieve</span><span class=ss>(</span>
-            <span class=nv>self</span>,
-            <span class=nv>pointer_key</span>: <span class=nv>str</span>,
-            <span class=nv>expected_context_keys</span>: <span class=nv>Set</span>[<span class=nv>str</span>] <span class=o>=</span> <span class=nv>set</span><span class=ss>()</span>,
-            <span class=nv>expected_context</span>: <span class=nv>Dict</span>[<span class=nv>str</span>, <span class=nv>str</span>] <span class=o>=</span> {},
-    <span class=ss>)</span> <span class=o>-&gt;</span> <span class=nv>DocumentBundle</span>:
-        <span class=nv>item</span> <span class=o>=</span> <span class=nv>self</span>.<span class=nv>_get_pointer_item</span><span class=ss>(</span><span class=nv>PointerQuery</span>.<span class=nv>from_key</span><span class=ss>(</span><span class=nv>pointer_key</span><span class=ss>))</span>
-        # <span class=nv>ADD</span><span class=o>-</span><span class=nv>ESDK</span><span class=o>-</span><span class=nv>START</span>
-        <span class=nv>encrypted_data</span> <span class=o>=</span> <span class=nv>self</span>.<span class=nv>_get_object</span><span class=ss>(</span><span class=nv>item</span><span class=ss>)</span>
-        <span class=nv>plaintext</span>, <span class=nv>header</span> <span class=o>=</span> <span class=nv>aws_encryption_sdk</span>.<span class=nv>decrypt</span><span class=ss>(</span>
-            <span class=nv>source</span><span class=o>=</span><span class=nv>encrypted_data</span>, <span class=nv>key_provider</span><span class=o>=</span><span class=nv>self</span>.<span class=nv>master_key_provider</span>
-        <span class=ss>)</span>
-        <span class=k>return</span> <span class=nv>DocumentBundle</span>.<span class=nv>from_data_and_context</span><span class=ss>(</span>
-            <span class=nv>plaintext</span>, <span class=nv>item</span>.<span class=nv>context</span>
-        <span class=ss>)</span>
+    def retrieve(
+            self,
+            pointer_key: str,
+            expected_context_keys: Set[str] = set(),
+            expected_context: Dict[str, str] = {},
+    ) -&gt; DocumentBundle:
+        item = self._get_pointer_item(PointerQuery.from_key(pointer_key))
+        # ADD-ESDK-START
+        encrypted_data = self._get_object(item)
+        plaintext, header = aws_encryption_sdk.decrypt(
+            source=encrypted_data, key_provider=self.master_key_provider
+        )
+        return DocumentBundle.from_data_and_context(
+            plaintext, item.context
+        )
 
-# <span class=nv>Save</span> <span class=nv>and</span> <span class=k>exit</span>
-</pre></div></p>
+# Save and exit
+</code></pre></p>
 <p>The application just started decrypting data client-side as well!</p>
 <p>The data returned from S3 for <code>retrieve</code> is now encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK:</p>
 <ol>
@@ -748,39 +752,41 @@ const encryptKeyring = new KmsKeyringNode({
 <p>const faytheCMK = config.state.getFaytheCMK();
 const decryptKeyring = new KmsKeyringNode({ keyIds: [faytheCMK] });</p>
 <p>// Save and exit</p>
-<p> <div class=codehilite><pre><span></span>```<span class=nv>Python</span>
+<p> <pre><code class>
+```Python
 
-# <span class=nv>Edit</span> <span class=nv>src</span><span class=o>/</span><span class=nv>document_bucket</span><span class=o>/</span><span class=nv>__init__</span>.<span class=nv>py</span>
-
-...
-
-# <span class=nv>ADD</span><span class=o>-</span><span class=nv>ESDK</span><span class=o>-</span><span class=nv>START</span>
-# <span class=nv>Pull</span> <span class=nv>configuration</span> <span class=nv>of</span> <span class=nv>KMS</span> <span class=nv>resources</span>
-<span class=nv>faythe_cmk</span> <span class=o>=</span> <span class=nv>state</span>[<span class=s2>&quot;</span><span class=s>FaytheCMK</span><span class=s2>&quot;</span>]
-# <span class=nv>And</span> <span class=nv>the</span> <span class=nv>Master</span> <span class=nv>Key</span> <span class=nv>Provider</span> <span class=nv>configuring</span> <span class=nv>how</span> <span class=nv>to</span> <span class=nv>use</span> <span class=nv>KMS</span>
-<span class=nv>cmk</span> <span class=o>=</span> [<span class=nv>faythe_cmk</span>]
-<span class=nv>mkp</span> <span class=o>=</span> <span class=nv>aws_encryption_sdk</span>.<span class=nv>KMSMasterKeyProvider</span><span class=ss>(</span><span class=nv>key_ids</span><span class=o>=</span>[<span class=nv>cmk</span>]<span class=ss>)</span>
+# Edit src/document_bucket/__init__.py
 
 ...
 
-<span class=nv>operations</span> <span class=o>=</span> <span class=nv>DocumentBucketOperations</span><span class=ss>(</span><span class=nv>bucket</span>, <span class=nv>table</span>, <span class=nv>mkp</span><span class=ss>)</span>
+# ADD-ESDK-START
+# Pull configuration of KMS resources
+faythe_cmk = state[&quot;FaytheCMK&quot;]
+# And the Master Key Provider configuring how to use KMS
+cmk = [faythe_cmk]
+mkp = aws_encryption_sdk.KMSMasterKeyProvider(key_ids=[cmk])
 
-# <span class=nv>Save</span> <span class=nv>and</span> <span class=k>exit</span>
-</pre></div></p>
+...
+
+operations = DocumentBucketOperations(bucket, table, mkp)
+
+# Save and exit
+</code></pre></p>
 <h4 id="what-just-happened_2">What Just Happened</h4>
 <p>In Getting Started, you launched CloudFormation stacks for CMKs. One of these CMKs was nicknamed Faythe. As part of launching these templates, the CMK's Amazon Resource Name (ARN) was written to a configuration file on disk, the <code>state</code> variable that is loaded and parsed.</p>
 <p>Now Faythe's ARN is pulled into a variable, and used to initialize a keyring or master key provider that will use the Faythe CMK. That new keyring/master key provider is passed in to your API, and you are set to start encrypting and decrypting with KMS and the Encryption SDK.</p>
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
-<p> <div class=codehilite><pre><span></span><span class=o>~/</span><span class=n>environment</span><span class=o>/</span><span class=n>workshop</span><span class=o>/</span><span class=n>exercises</span><span class=o>/</span><span class=n>java</span><span class=o>/</span><span class=n>add</span><span class=o>-</span><span class=n>esdk</span><span class=o>-</span><span class=n>complete</span>
-</pre></div></p>
+<p> <pre><code class=Java>~/environment/workshop/exercises/java/add-esdk-complete
+</code></pre></p>
 <p>```Javascript Node.js
 ~/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js
 ~/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js</p>
-<p> <div class=codehilite><pre><span></span><span class=o>```</span><span class=n>Python</span>
-<span class=o>~/</span><span class=n>environment</span><span class=o>/</span><span class=n>workshop</span><span class=o>/</span><span class=n>exercises</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=k>add</span><span class=o>-</span><span class=n>esdk</span><span class=o>-</span><span class=n>complete</span>
-</pre></div></p>
+<p> <pre><code class>
+```Python
+~/environment/workshop/exercises/python/add-esdk-complete
+</code></pre></p>
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
@@ -791,18 +797,19 @@ store = require("./store.js")
 list().then(console.log)
 store(fs.createReadStream("./store.js")).then(console.log)
 list().then(console.log)</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-8><input name=tab-group-8 type=radio id=tab-group-8-0_jfbvysk9or4j829 checked=checked class=code-tab data-lang aria-controls=tab-group-8-0_jfbvysk9or4j829-panel role=tab><label for=tab-group-8-0_jfbvysk9or4j829 class=code-tab-label data-lang id=tab-group-8-0_jfbvysk9or4j829-label></label><div class=code-tabpanel role=tabpanel data-lang id=tab-group-8-0_jfbvysk9or4j829-panel aria-labelledby=tab-group-8-0_jfbvysk9or4j829-label><div class=codehilite><pre><span></span><span class=o>```</span><span class=n>Javascript</span> <span class=n>Node</span><span class=p>.</span><span class=n>js</span> <span class=n>CLI</span>
-<span class=p>.</span><span class=o>/</span><span class=n>cli</span><span class=p>.</span><span class=n>js</span> <span class=n>list</span>
-<span class=p>.</span><span class=o>/</span><span class=n>cli</span><span class=p>.</span><span class=n>js</span> <span class=n>store</span> <span class=p>.</span><span class=o>/</span><span class=n>store</span><span class=p>.</span><span class=n>js</span>
-<span class=p>.</span><span class=o>/</span><span class=n>cli</span><span class=p>.</span><span class=n>js</span> <span class=n>list</span>
-</pre></div></div><input name=tab-group-8 type=radio id=tab-group-8-1_Python class=code-tab data-lang=Python aria-controls=tab-group-8-1_Python-panel role=tab><label for=tab-group-8-1_Python class=code-tab-label data-lang=Python id=tab-group-8-1_Python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=Python id=tab-group-8-1_Python-panel aria-labelledby=tab-group-8-1_Python-label><div class=codehilite><pre><span></span><span class=n>tox</span> <span class=o>-</span><span class=n>e</span> <span class=n>repl</span>
-<span class=kn>import</span> <span class=nn>document_bucket</span>
-<span class=n>ops</span> <span class=o>=</span> <span class=n>document_bucket</span><span class=o>.</span><span class=n>initialize</span><span class=p>()</span>
-<span class=n>ops</span><span class=o>.</span><span class=n>list</span><span class=p>()</span>
-<span class=n>ops</span><span class=o>.</span><span class=n>store</span><span class=p>(</span><span class=sa>b</span><span class=s1>&#39;some data&#39;</span><span class=p>)</span>
-<span class=n>ops</span><span class=o>.</span><span class=n>list</span><span class=p>()</span>
-<span class=c1># Ctrl-D when finished to exit the REPL</span>
-</pre></div></div></div>
+<div class=md-fenced-code-tabs id=tab-tab-group-8><input name=tab-group-8 type=radio id=tab-group-8-0_iqoieenu0xvazv4 checked=checked class=code-tab data-lang aria-controls=tab-group-8-0_iqoieenu0xvazv4-panel role=tab><label for=tab-group-8-0_iqoieenu0xvazv4 class=code-tab-label data-lang id=tab-group-8-0_iqoieenu0xvazv4-label></label><div class=code-tabpanel role=tabpanel data-lang id=tab-group-8-0_iqoieenu0xvazv4-panel aria-labelledby=tab-group-8-0_iqoieenu0xvazv4-label><pre><code class>
+```Javascript Node.js CLI
+./cli.js list
+./cli.js store ./store.js
+./cli.js list
+</code></pre></div><input name=tab-group-8 type=radio id=tab-group-8-1_Python class=code-tab data-lang=Python aria-controls=tab-group-8-1_Python-panel role=tab><label for=tab-group-8-1_Python class=code-tab-label data-lang=Python id=tab-group-8-1_Python-label>Python</label><div class=code-tabpanel role=tabpanel data-lang=Python id=tab-group-8-1_Python-panel aria-labelledby=tab-group-8-1_Python-label><pre><code class=Python>tox -e repl
+import document_bucket
+ops = document_bucket.initialize()
+ops.list()
+ops.store(b'some data')
+ops.list()
+# Ctrl-D when finished to exit the REPL
+</code></pre></div></div>
 
 <h2 id="explore-further">Explore Further</h2>
 <ul>
