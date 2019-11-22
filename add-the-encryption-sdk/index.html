@@ -1003,7 +1003,7 @@
 <span class="n">faythe_cmk</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;FaytheCMK&quot;</span><span class="p">]</span>
 <span class="c1"># And the Master Key Provider configuring how to use KMS</span>
 <span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">]</span>
-<span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cmk</span><span class="p">])</span>
+<span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="n">cmk</span><span class="p">)</span>
 
 <span class="n">operations</span> <span class="o">=</span> <span class="n">DocumentBucketOperations</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">mkp</span><span class="p">)</span>
 
