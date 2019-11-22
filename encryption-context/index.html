@@ -817,7 +817,6 @@
 </td></tr></table></div>
 </div>
 <h3 id="step-1-set-encrypion-context-on-encrypt">Step 1: Set Encrypion Context on Encrypt</h3>
-<h4 id="what-just-happened">What Just Happened</h4>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">Java</label>
@@ -849,6 +848,15 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<h4 id="what-just-happened">What Just Happened</h4>
+<p>The Document Bucket <code>context</code> will now be supplied to the AWS Encryption SDK and AWS KMS as encryption context. If a non-empty key-value pair map is supplied to <code>store</code>, those key-value pairs will be used in encryption and decryption operations all the way through to KMS:</p>
+<ul>
+<li>The contents of <code>context</code> will appear in KMS audit logs.</li>
+<li>The contents of <code>context</code> will be availble to use in KMS Key Policies and Grants to make authorization decisions.</li>
+<li>The contents of <code>context</code> will be written to the Encryption SDK message.</li>
+<li>Supplying the exact-match contents of <code>context</code> will be required to decrypt any encrypted data keys.</li>
+<li>The contents of <code>context</code> will now be available on Decrypt to use in making assertions.</li>
+</ul>
 <h3 id="step-2-use-encryption-context-on-decrypt">Step 2: Use Encryption Context on Decrypt</h3>
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
