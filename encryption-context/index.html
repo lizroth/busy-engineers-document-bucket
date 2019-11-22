@@ -504,8 +504,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-making-assertions-with-encryption-context" class="md-nav__link">
-    Step 3: Making Assertions With Encryption Context
+  <a href="#step-3-making-assertions" class="md-nav__link">
+    Step 3: Making Assertions
   </a>
   
     <nav class="md-nav">
@@ -694,8 +694,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-making-assertions-with-encryption-context" class="md-nav__link">
-    Step 3: Making Assertions With Encryption Context
+  <a href="#step-3-making-assertions" class="md-nav__link">
+    Step 3: Making Assertions
   </a>
   
     <nav class="md-nav">
@@ -798,7 +798,7 @@
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>If you just finished <a href="../multi-cmk/">Using Multiple CMKs</a>, you are all set.</p>
-<p>If you aren't sure, or want to catch up, jump into the <code>encryption-context-start</code> -start directory for the language of your choice.</p>
+<p>If you aren't sure, or want to catch up, jump into the <code>encryption-context-start</code> directory for the language of your choice.</p>
 <div class="superfences-tabs">
 <input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
 <label for="__tab_1_0">Java</label>
@@ -849,12 +849,24 @@
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_2" />
 <label for="__tab_3_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
+<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
+<span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <h4 id="what-just-happened_1">What Just Happened</h4>
-<h3 id="step-3-making-assertions-with-encryption-context">Step 3: Making Assertions With Encryption Context</h3>
+<h3 id="step-3-making-assertions">Step 3: Making Assertions</h3>
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
 <label for="__tab_4_0">Java</label>
