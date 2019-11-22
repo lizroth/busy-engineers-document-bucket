@@ -42,7 +42,7 @@
     
     
       
-        <title>Working with Encryption Context - Busy Engineer's Document Bucket Workshop</title>
+        <title>Working With Encryption Context - Busy Engineer's Document Bucket Workshop</title>
       
     
     
@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#exercise-3-encryption-context" tabindex="1" class="md-skip">
+      <a href="#exercise-3-working-with-encryption-context" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -143,7 +143,7 @@
                   Busy Engineer's Document Bucket Workshop
                 </span>
                 <span class="md-header-nav__topic">
-                  Working with Encryption Context
+                  Working With Encryption Context
                 </span>
               
             
@@ -388,11 +388,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Working with Encryption Context
+        Working With Encryption Context
       </label>
     
-    <a href="./" title="Working with Encryption Context" class="md-nav__link md-nav__link--active">
-      Working with Encryption Context
+    <a href="./" title="Working With Encryption Context" class="md-nav__link md-nav__link--active">
+      Working With Encryption Context
     </a>
     
       
@@ -664,7 +664,7 @@
                   <a href="https://github.com/aws-samples/busy-engineers-document-bucket/edit/master/docs/encryption-context.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="exercise-3-encryption-context">Exercise 3: Encryption Context</h1>
+                <h1 id="exercise-3-working-with-encryption-context">Exercise 3: Working With Encryption Context</h1>
 <h2 id="background">Background</h2>
 <p>The Busy Engineer's Document Bucket has metadata, called <code>context</code>, associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
 <p>One of the features AWS KMS and the AWS Encryption SDK both provide is called Encryption Context. At its core, Encryption Context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
@@ -699,24 +699,26 @@
 <li>DynamoDB record updates that create metadata mismatches between a document and its properties</li>
 <li>Swapping objects in S3 so that the data is no longer what it was expected to be</li>
 <li>Accidentally loading the wrong data blob</li>
-<li>Ensuring that objects listed as matching a context key actually do have that context key</li>
+<li>Defending against objects being listed as having a certain context key / property when they actually do not</li>
 </ul>
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
+<p>If you just finished <a href="../multi-cmk/">Using Multiple CMKs</a>, you are all set.</p>
+<p>If you aren't sure, or want to catch up, jump into the <code>encryption-context-start</code> -start directory for the language of your choice.</p>
 <div class="superfences-tabs">
 <input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
 <label for="__tab_1_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/java/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
 <label for="__tab_1_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/node-javascript/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
 <label for="__tab_1_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/python/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 </div>
