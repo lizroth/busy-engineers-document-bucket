@@ -230,13 +230,26 @@
       
         
 
-<nav class="md-tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
       
         
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Exercises
+        </a>
+      
+    </li>
+  
+
       
     </ul>
   </div>
@@ -284,6 +297,39 @@
       
       
       
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Exercises
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Exercises
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
 
   
 
@@ -451,16 +497,9 @@
     
   </li>
 
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
-      Getting Started
-    </a>
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -774,20 +813,20 @@
  8
  9
 10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
-
-<span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">PointerItem</span><span class="p">:</span>
+<span class="c1"># Find the store function and edit it to add the Master Key Provider</span>
+<span class="c1"># and to write the encrypted data</span>
     <span class="c1"># ADD-ESDK-START</span>
     <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
         <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
         <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
     <span class="p">)</span>
-
-<span class="c1"># Save and exit</span>
+    <span class="o">...</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_write_object</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <h4 id="what-just-happened_1">What Just Happened</h4>
-<p>The application just started encrypting data client-side with the AWS Encryption SDK and KMS!</p>
+<p>The application will now encrypt data client-side with the AWS Encryption SDK and KMS before storing it.</p>
 <p>Now, before storing data in the Document Bucket, it uses the AWS Encryption SDK to:</p>
 <ol>
 <li>Request a new data key using your keyring or Master Key Provider</li>
@@ -796,7 +835,7 @@
 <li>Extract the ciphertext to pass to the AWS S3 SDK to store in S3</li>
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
-<p>Now that you are encrypting data before storing it, you need to decrypt it before returning it to your caller. At least for it to be useful, anyway.</p>
+<p>Now that the application will encrypt data before storing it, it will need to decrypt the data before returning it to the caller. At least for the data to be useful, anyway.</p>
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
 <label for="__tab_4_0">JavaScript Node.JS</label>
@@ -817,11 +856,8 @@
 <span class="c1">// Save and Exit</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<h4 id="what-just-happened_2">What Just Happened</h4>
-<div class="superfences-tabs">
-<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
-<label for="__tab_5_0">Python</label>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -835,19 +871,9 @@
 11
 12
 13
-14
-15
-16
-17
-18
-19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
-
-    <span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">pointer_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">expected_context_keys</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span>
-            <span class="n">expected_context</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DocumentBundle</span><span class="p">:</span>
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the retrieve function and edit it to add a call to decrypt the</span>
+<span class="c1"># encrypted data before returning it</span>
         <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pointer_item</span><span class="p">(</span><span class="n">PointerQuery</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="n">pointer_key</span><span class="p">))</span>
         <span class="c1"># ADD-ESDK-START</span>
         <span class="n">encrypted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_object</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
@@ -862,7 +888,8 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The application just started decrypting data client-side as well!</p>
+<h4 id="what-just-happened_2">What Just Happened</h4>
+<p>The application now decrypts data client-side as well.</p>
 <p>The data returned from S3 for <code>retrieve</code> is now encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK:</p>
 <ol>
 <li>Read the AWS Encryption SDK formatted encrypted message</li>
@@ -873,8 +900,8 @@
 <h3 id="step-4-plumb-in-your-config">Step 4: Plumb In Your Config</h3>
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
 <div class="superfences-tabs">
-<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
-<label for="__tab_6_0">JavaScript Node.JS</label>
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -906,8 +933,8 @@
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_6" type="radio" id="__tab_6_1" />
-<label for="__tab_6_1">Python</label>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -921,9 +948,7 @@
 11
 12
 13
-14
-15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
 
 <span class="o">...</span>
 
@@ -933,8 +958,6 @@
 <span class="c1"># And the Master Key Provider configuring how to use KMS</span>
 <span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">]</span>
 <span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cmk</span><span class="p">])</span>
-
-<span class="o">...</span>
 
 <span class="n">operations</span> <span class="o">=</span> <span class="n">DocumentBucketOperations</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">mkp</span><span class="p">)</span>
 
@@ -948,20 +971,21 @@
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
+</pre></div>
+</td></tr></table>
+
 <div class="superfences-tabs">
-<input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
-<label for="__tab_7_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java/add-esdk-complete
+<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
+<label for="__tab_6_0">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/store.js</span>
+<span class="o">~</span><span class="err">/environment/workshop/exercises/node-javascript/add-esdk-complete/retrieve.js</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_1" />
-<label for="__tab_7_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/add-esdk-complete
-</pre></div>
-</td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_2" />
-<label for="__tab_7_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/add-esdk-complete
+<input name="__tabs_6" type="radio" id="__tab_6_1" />
+<label for="__tab_6_1">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">add</span><span class="o">-</span><span class="n">esdk</span><span class="o">-</span><span class="n">complete</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -969,8 +993,8 @@
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
 <div class="superfences-tabs">
-<input name="__tabs_8" type="radio" id="__tab_8_0" checked="checked" />
-<label for="__tab_8_0">JavaScript Node.JS</label>
+<input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
+<label for="__tab_7_0">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -984,8 +1008,8 @@
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_8" type="radio" id="__tab_8_1" />
-<label for="__tab_8_1">Node.JS CLI</label>
+<input name="__tabs_7" type="radio" id="__tab_7_1" />
+<label for="__tab_7_1">JavaScript Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
@@ -993,8 +1017,8 @@
 ./cli.js list
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_8" type="radio" id="__tab_8_2" />
-<label for="__tab_8_2">Python</label>
+<input name="__tabs_7" type="radio" id="__tab_7_2" />
+<label for="__tab_7_2">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -1039,20 +1063,20 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-        
-          <a href="../getting-started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../getting-started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
-                  Next
+                  Previous
                 </span>
                 Getting Started
               </span>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
           </a>
+        
         
       </nav>
     </div>
