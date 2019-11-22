@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#exercise-n-exercise-title" tabindex="1" class="md-skip">
+      <a href="#exercise-3-encryption-context" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -410,6 +410,33 @@
     Background
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-cryptography-and-encryption-context" class="md-nav__link">
+    AWS KMS: Cryptography and Encryption Context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-policy-and-audit-hooks" class="md-nav__link">
+    AWS KMS: Policy and Audit Hooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-aws-encryption-sdk" class="md-nav__link">
+    The AWS Encryption SDK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -514,6 +541,33 @@
     Background
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-cryptography-and-encryption-context" class="md-nav__link">
+    AWS KMS: Cryptography and Encryption Context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-policy-and-audit-hooks" class="md-nav__link">
+    AWS KMS: Policy and Audit Hooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-aws-encryption-sdk" class="md-nav__link">
+    The AWS Encryption SDK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -596,8 +650,30 @@
                   <a href="https://github.com/aws-samples/busy-engineers-document-bucket/edit/master/docs/encryption-context.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="exercise-n-exercise-title">Exercise n: Exercise Title</h1>
+                <h1 id="exercise-3-encryption-context">Exercise 3: Encryption Context</h1>
 <h2 id="background">Background</h2>
+<p>The Busy Engineer's Document Bucket has metadata associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
+<p>One of the features AWS KMS and the AWS Encryption SDK both provide is called Encryption Context. At its core, Encryption Context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
+<p>One useful model for thinking about encryption context is as Assertions about the <a href="https://en.wikipedia.org/wiki/Five_Ws" target="_blank">Five Ws</a>: Who, What, Where, When, Why. For example:</p>
+<ul>
+<li><em>Who</em> should have access to this decrypted data?</li>
+<li><em>What</em> data is being decrypted?</li>
+<li><em>Where</em> is the decryption happening?</li>
+<li><em>When</em> is decryption permissible?</li>
+<li><em>Why</em> is this data being decrypted?</li>
+</ul>
+<h3 id="aws-kms-cryptography-and-encryption-context">AWS KMS: Cryptography and Encryption Context</h3>
+<p>AWS KMS allows you to specify an encryption context on <code>kms:Encrypt</code>. If you do so, you must provide the exact same encryption context on <code>kms:Decrypt</code>, or the operation will fail. (The match is case-sensitive, and key-value pairs are compared in an order independent way.)</p>
+<p>Behind the scenes, KMS is cryptographically binding the Encryption Context to the key material you are <code>kms:Encrypt</code> or <code>kms:Decrypt</code>ing as <em>Additional Authenticated Data (AAD)</em>. In short, this is non-secret data that must be identical (not tampered-with or incomplete), or decryption fails.</p>
+<p>This feature defends against risks from ciphertexts being tampered with, modified, or replaced -- intentionally or unintentionally. It both defends against an attacker replacing one ciphertext with another as well as problems like operational events.</p>
+<p>For example, if a bad deployment swaps <code>us-west-2.cfg</code> with <code>eu-central-1.cfg</code> on your fleets, having <code>{ fleet: us-west-2 }</code> asserted in <code>us-west-2.cfg</code>'s encryption context will prevent it from accidentally being loaded by <code>eu-central-1</code>.</p>
+<h3 id="aws-kms-policy-and-audit-hooks">AWS KMS: Policy and Audit Hooks</h3>
+<p>KMS also makes the Encryption Context available to use in Key Policies and Grants. This means that you can use assertions you make about your data to control usage of your CMKs. Perhaps your <code>eu-central-1</code> fleet should only ever be permitted to access encrypted data for <code>{ shard: europe }</code>. You can write CMK policies that require <code>{ shard: europe }</code> to be asserted about all cryptographic operations, so that KMS refuses to authorize an attempt to decrypt, say, <code>{ shard: north-america }</code>. These options can help you secure your application and defend against both operational and security-related risks.</p>
+<p>Additionally, as part of the audit features that KMS provides, it logs the encryption context that was supplied with every operation. You can use this information to audit who was accessing what data and when, to detect anomalous call patterns, or to identify unexpected system states.</p>
+<p>What questions would you like to answer with CloudTrail Logs for your KMS operations? Encryption Context can help.</p>
+<h3 id="the-aws-encryption-sdk">The AWS Encryption SDK</h3>
+<p>The AWS Encryption SDK includes the encryption context as a core component. Encryption context may be supplied on encrypt -- it is optional, both for the Encryption SDK and for KMS, but strongly recommended. The Encryption SDK writes the encryption context in the encrypted message format. And on decrypt, the Encryption SDK validates the Encryption Context with KMS and returns the contents to you for you to make assertions about the contents.</p>
+<p>Using the Encryption SDK with KMS, you can use all of KMS' policy and audit features from Encryption Context, and use the Encryption SDK to make assertions to safeguard your application.</p>
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <div class="superfences-tabs">
