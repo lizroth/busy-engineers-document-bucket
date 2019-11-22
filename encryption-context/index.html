@@ -830,21 +830,25 @@
 </td></tr></table></div>
 <input name="__tabs_2" type="radio" id="__tab_2_2" />
 <label for="__tab_2_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
 <span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
+
 <span class="c1"># ENCRYPTION-CONTEXT-START: Set Encryption Context on Encrypt</span>
 <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
     <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
     <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
 <span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
 </span><span class="p">)</span>
+<span class="c1"># Save your changes</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -857,6 +861,7 @@
 <li>Supplying the exact-match contents of <code>context</code> will be required to decrypt any encrypted data keys.</li>
 <li>The contents of <code>context</code> will now be available on Decrypt to use in making assertions.</li>
 </ul>
+<p>Next you will update <code>retrieve</code> to use the encryption context on decrypt.</p>
 <h3 id="step-2-use-encryption-context-on-decrypt">Step 2: Use Encryption Context on Decrypt</h3>
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
@@ -871,11 +876,29 @@
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_2" />
 <label for="__tab_3_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span> 
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the retrieve(...) function, and use the Encryption SDK header&#39;s encryption</span>
+<span class="c1"># context to construct the DocumentBundle to return</span>
+
+<span class="c1"># ENCRYPTION-CONTEXT-START: Use Encryption Context on Decrypt</span>
+<span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="n">from_data_and_context</span><span class="p">(</span>
+<span class="hll">    <span class="n">plaintext</span><span class="p">,</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span>
+</span><span class="p">)</span>
+<span class="c1"># Save your changes</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <h4 id="what-just-happened_1">What Just Happened</h4>
+<p>Now on decrypt, the validated encryption context from the Encryption SDK Message Format header will be passed back to the application. Any business logic that would benefit from using the encryption context data for making decisions can use the version bound and validated by the Encryption SDK and KMS.</p>
+<p>Next you will add a mechanism for the application to test assertions made in encryption context before working with the returned data.</p>
 <h3 id="step-3-making-assertions">Step 3: Making Assertions</h3>
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
@@ -890,11 +913,48 @@
 </td></tr></table></div>
 <input name="__tabs_4" type="radio" id="__tab_4_2" />
 <label for="__tab_4_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the retrieve(...) function, and add some assertions about the contents</span>
+<span class="c1"># of the encryption context validated by the Encryption SDK</span>
+
+<span class="c1"># ENCRYPTION-CONTEXT-START: Making Assertions</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context_keys</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="hll">    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
+</span>        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
+        <span class="n">f</span><span class="s2">&quot;Expected all these keys: {expected_context_keys}, &quot;</span>
+        <span class="n">f</span><span class="s2">&quot;but got {header.encryption_context}!&quot;</span>
+    <span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">expected_context</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
+<span class="hll">        <span class="s2">&quot;Encryption context assertion failed! &quot;</span>
+</span>        <span class="n">f</span><span class="s2">&quot;Expected {expected_context}, &quot;</span>
+        <span class="n">f</span><span class="s2">&quot;but got {header.encryption_context}!&quot;</span>
+    <span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <h4 id="what-just-happened_2">What Just Happened</h4>
+<p><code>retrieve</code> will use its "expected context keys" argument to validate that all of those keys (regardless of the associated values) are present in the encryption context. <code>retrieve</code> will also use its "expected context" argument to validate that those exact key-value pairs are present in the encryption context. If either of those assumptions is invalid, <code>retrieve</code> will raise an exception before returning the data. These assertions safeguard against accidentally returning unintended, corrupted, or tampered data to the application.</p>
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>If you want to check your progress, or compare what you've done versus a finished example, check out the code in one of the <code>-complete</code> folders to compare.</p>
 <p>There is a <code>-complete</code> folder for each language.</p>
