@@ -718,20 +718,43 @@
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
 <label for="__tab_4_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">multi</span><span class="o">-</span><span class="n">cmk</span><span class="o">-</span><span class="n">complete</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java/multi-cmk-complete
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/multi-cmk-complete
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_4" type="radio" id="__tab_4_2" />
+<label for="__tab_4_2">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/multi-cmk-complete
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>```java tab="Java"script Node.js
-cd ~/environment/workshop/exercises/node-javascript/multi-cmk-complete
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">```</span><span class="n">python</span> <span class="n">tab</span><span class="o">=</span><span class="ss">&quot;Python&quot;</span>
-<span class="n">cd</span> <span class="o">~/</span><span class="n">environment</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">exercises</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">multi</span><span class="o">-</span><span class="n">cmk</span><span class="o">-</span><span class="n">complete</span>
-</pre></div>
-</td></tr></table></p>
 <h2 id="try-it-out">Try it Out</h2>
 <p>Adding the Walter CMK the list of CMKs that the application will (attempt) to use was a couple of lines of code, but has powerful implications.</p>
-<p>To help you explore the behavior of the system here</p>
+<p>To help you explore the behavior of the system, there are some additional <code>make</code> targets to change the permissions configuration of Faythe and Walter.</p>
+<p>Using these targets, you can add and remove permission for the application to use Faythe and Walter to generate data keys, encrypt, and decrypt, and observe how the application behavior changes -- as well as what is logged to CloudTrail.</p>
+<p>In <code>~/environment/workshop/exercises</code>, you'll find a <code>Makefile</code> with several targets for you to experiment with:</p>
+<ul>
+<li><code>make revoke_walter_grant</code> will remove the Grant providing permissions to use Walter in the application</li>
+<li><code>make revoke_faythe_grant</code> will remove the Grant providing permissions to use Faythe in the application</li>
+<li><code>make revoke_grants</code> will remove the Grants for both CMKs</li>
+<li><code>make create_grants</code> will add Grants to use either or both CMK, as needed</li>
+</ul>
+<p>You can observe the impact of changing Granted permissions by monitoring CloudTrail.</p>
+<ul>
+<li>Faythe is in <code>us-east-2</code>, so <a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#">check CloudTrail in us-east-2</a></li>
+<li>Walter is in <code>us-west-2</code>, so <a href="https://us-west-2.console.aws.amazon.com/cloudtrail/home?region=us-west-2#/dashboard">check CloudTrail in us-west-2</a></li>
+</ul>
+<p>Try out combinations of Grant permissions for your application and watch how the behavior changes:</p>
+<ul>
+<li>Revoke permission to use Faythe, and watch calls move to Walter</li>
+<li>Change the configuration order of Faythe and Walter, and watch how call patterns change to use the two CMKs</li>
+<li>Revoke permission to Walter, and encrypt some data with Faythe. Then, add permission back to Walter, revoke permission to use Faythe, and try to decrypt that data</li>
+<li>And many more!</li>
+</ul>
 <h2 id="explore-further">Explore Further</h2>
 <p>Want to dive into more content related to this exercise? Try out these links.</p>
 <ul>
