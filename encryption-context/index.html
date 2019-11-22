@@ -761,6 +761,13 @@
 </td></tr></table></div>
 </div>
 <h2 id="explore-further">Explore Further</h2>
+<p>Encryption context can provide different types of features and guardrails in your application logic. Consider these ideas:</p>
+<ul>
+<li><strong>Meta-operations on Encryption Context</strong> - the encryption context is stored on the <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/message-format.html" target="_blank">open-specification AWS Encryption SDK Message Format</a>. Would it help your system to write tools to process the metadata -- such as the encryption context -- on the message format?</li>
+<li><strong>DynamoDB Keys and Indexes</strong> - the Document Bucket adds composite indexes by <code>context</code> key. What about adding composite keys by key-value pairs? If you know a particular key should always be present in well-formed encrypted data, perhaps that should also be a <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">Secondary Index</a>?</li>
+<li><strong>Enforing EC Keys</strong> - If you know that there is a key that should always be present, and that you want to index on in DynamoDB, do you want to enforce that it's always present? You can extend the <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/concepts.html#crypt-materials-manager" target="_blank">Cryptographic Materials Manager</a> component in the AWS Encryption SDK to enforce this during cryptographic operations.</li>
+<li><strong>Alarms and Monitoring</strong> - How can you leverage encryption context and <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html" target="_blank">CloudWatch Alarms for CloudTrail</a> to monitor and protect your application?</li>
+</ul>
 <h1 id="next-exercise">Next exercise</h1>
                 
                   
