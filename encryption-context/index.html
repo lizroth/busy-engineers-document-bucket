@@ -767,7 +767,7 @@
 <li><em>Who</em> should have access to this decrypted data?</li>
 <li><em>What</em> data is being decrypted?</li>
 <li><em>Where</em> is the decryption happening?</li>
-<li><em>When</em> is decryption permissible?</li>
+<li><em>When</em> is this data being used?</li>
 <li><em>Why</em> is this data being decrypted?</li>
 </ul>
 <h3 id="aws-kms-cryptography-and-encryption-context">AWS KMS: Cryptography and Encryption Context</h3>
@@ -795,6 +795,7 @@
 <li>Accidentally loading the wrong data blob</li>
 <li>Defending against objects being listed as having a certain context key / property when they actually do not</li>
 </ul>
+<p>Also, after this change, the contents of <code>context</code> will be available in audit log entries written by KMS, and you can now use that metadata in your Key Policies and Grants.</p>
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>If you just finished <a href="../multi-cmk/">Using Multiple CMKs</a>, you are all set.</p>
@@ -980,17 +981,17 @@
 <div class="superfences-tabs">
 <input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
 <label for="__tab_6_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_1" />
 <label for="__tab_6_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_2" />
 <label for="__tab_6_2">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
 </pre></div>
 </td></tr></table></div>
 </div>
