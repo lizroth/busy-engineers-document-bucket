@@ -261,8 +261,6 @@
   
 
       
-        
-      
     </ul>
   </div>
 </nav>
@@ -500,26 +498,14 @@
 
 
   <li class="md-nav__item">
-    <a href="../encryption-context/" title="Working With Encryption Context" class="md-nav__link">
-      Working With Encryption Context
+    <a href="../encryption-context/" title="Working with Encryption Context" class="md-nav__link">
+      Working with Encryption Context
     </a>
   </li>
 
         
       </ul>
     </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../thank-you-and-closing/" title="Thank You and Closing" class="md-nav__link">
-      Thank You and Closing
-    </a>
   </li>
 
     
@@ -721,23 +707,29 @@
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
 <label for="__tab_3_0">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
 
+<span class="c1">// Save and exit</span>
 <span class="c1">// Edit store.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
+
+<span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_1" />
@@ -745,10 +737,14 @@
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/__init__.py</span>
 
 <span class="c1"># MULTI-CMK-START: Add Walter to the CMKs to Use</span>
 <span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">,</span> <span class="n">walter_cmk</span><span class="p">]</span>
+
+<span class="c1"># Save and exit</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -807,11 +803,94 @@
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
 <label for="__tab_5_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span>
+<span class="nx">list</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./list.js&quot;</span><span class="p">)</span>
+<span class="nx">store</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)</span>
+<span class="nx">retrieve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./retrieve&quot;</span><span class="p">)</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Just storing the s3 key</span>
+  <span class="nx">key</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Key</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">retrieve</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span>
+<span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_2" />
-<label for="__tab_5_2">Python</label>
+<label for="__tab_5_2">JavaScript Node.JS CLI</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
+./cli.js store ./store.js
+<span class="c1"># Note the &quot;Key&quot; value</span>
+./cli.js list
+<span class="c1"># Note the &quot;reference&quot; value</span>
+./cli.js retrieve <span class="nv">$KeyOrReferenceValue</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_3" />
+<label for="__tab_5_3">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">ts</span><span class="o">-</span><span class="nx">node</span><span class="o">/</span><span class="nx">register</span>
+<span class="p">;({</span><span class="nx">list</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/list.ts&quot;</span><span class="p">))</span>
+<span class="p">;({</span><span class="nx">store</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">))</span>
+<span class="nx">retrieve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./retrieve&quot;</span><span class="p">)</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Just storing the s3 key</span>
+  <span class="nx">key</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Key</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="nx">retrieve</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span>
+<span class="c1">// Ctrl-D when finished to exit the REPL</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_4" />
+<label for="__tab_5_4">Typescript Node.JS CLI</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.ts list
+./cli.ts store ./store.js
+<span class="c1"># Note the &quot;Key&quot; value</span>
+./cli.ts list
+<span class="c1"># Note the &quot;reference&quot; value</span>
+./cli.ts retrieve <span class="nv">$KeyOrReferenceValue</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_5" />
+<label for="__tab_5_5">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>tox -e repl
 </pre></div>
 </td></tr></table></div>
@@ -861,13 +940,13 @@
           </a>
         
         
-          <a href="../encryption-context/" title="Working With Encryption Context" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../encryption-context/" title="Working with Encryption Context" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Working With Encryption Context
+                Working with Encryption Context
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
