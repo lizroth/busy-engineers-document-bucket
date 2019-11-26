@@ -860,15 +860,26 @@
 <span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<p>```typescript tab="Typescript Node.JS" hl_lines=" 3 4 5"
-  // Edit src/store.ts
-  // ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt
-  const Body = fileStream.pipe(
-    encryptStream(encryptKeyring, { encryptionContext })
-  );</p>
-<p>// Save your changes
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<input name="__tabs_2" type="radio" id="__tab_2_2" />
+<label for="__tab_2_2">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="c1">// Edit src/store.ts</span>
+  <span class="c1">// ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt</span>
+<span class="hll">  <span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+</span><span class="hll">    <span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">,</span> <span class="p">{</span> <span class="nx">encryptionContext</span> <span class="p">})</span>
+</span><span class="hll">  <span class="p">);</span>
+</span>
+<span class="c1">// Save your changes</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_2" type="radio" id="__tab_2_3" />
+<label for="__tab_2_3">Python</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -877,20 +888,19 @@
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">```</span><span class="n">python</span> <span class="n">tab</span><span class="o">=</span><span class="ss">&quot;Python&quot;</span> <span class="n">hl_lines</span><span class="o">=</span><span class="ss">&quot;8&quot;</span>
-<span class="o">#</span> <span class="n">Edit</span> <span class="n">src</span><span class="o">/</span><span class="n">document_bucket</span><span class="o">/</span><span class="n">api</span><span class="p">.</span><span class="n">py</span>
-<span class="o">#</span> <span class="n">Find</span> <span class="n">the</span> <span class="n">store</span><span class="p">(...)</span> <span class="k">function</span><span class="p">,</span> <span class="k">and</span> <span class="k">add</span> <span class="n">context</span> <span class="k">to</span> <span class="n">the</span> <span class="n">encrypt</span> <span class="k">call</span>
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
+<span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
 
-<span class="o">#</span> <span class="n">ENCRYPTION</span><span class="o">-</span><span class="n">CONTEXT</span><span class="o">-</span><span class="k">START</span><span class="p">:</span> <span class="k">Set</span> <span class="n">encryption</span> <span class="n">context</span> <span class="k">on</span> <span class="n">Encrypt</span>
-<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span>
-    <span class="k">source</span><span class="o">=</span><span class="k">data</span><span class="p">,</span>
-    <span class="n">key_provider</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">master_key_provider</span><span class="p">,</span>
-    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="o">#</span> <span class="n">Save</span> <span class="n">your</span> <span class="n">changes</span>
+<span class="c1"># ENCRYPTION-CONTEXT-START: Set encryption context on Encrypt</span>
+<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+    <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
+<span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+</span><span class="p">)</span>
+<span class="c1"># Save your changes</span>
 </pre></div>
-</td></tr></table></p>
+</td></tr></table></div>
+</div>
 <h4 id="what-just-happened">What Just Happened</h4>
 <p>The Document Bucket <code>context</code> will now be supplied to the AWS Encryption SDK and AWS KMS as encryption context. If a non-empty key-value pair map is supplied to <code>store</code>, those key-value pairs will be used in encryption and decryption operations all the way through to KMS:</p>
 <ul>
