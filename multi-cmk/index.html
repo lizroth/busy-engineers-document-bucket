@@ -910,7 +910,9 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// To use the API programmatically, use this target to launch jshell</span>
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// To use the API programmatically, use this target to launch jshell</span>
 <span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
 <span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
 <span class="n">Api</span> <span class="n">documentBucket</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">initializeDocumentBucket</span><span class="o">();</span>
@@ -920,6 +922,8 @@
     <span class="n">DocumentBundle</span> <span class="n">document</span> <span class="o">=</span> <span class="n">documentBucket</span><span class="o">.</span><span class="na">retrieve</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">partitionKey</span><span class="o">());</span>
     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">document</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 <span class="o">}</span>
+<span class="c1">// Ctrl+D to exit jshell</span>
+
 <span class="c1">// Use the make targets to change the Grants and see what happens!</span>
 <span class="c1">// To run logic that you write in App.java, use this target</span>
 <span class="n">mvn</span> <span class="n">compile</span>
