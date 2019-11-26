@@ -190,7 +190,7 @@
         <div class="md-flex__cell md-flex__cell--shrink">
             <div class="md-header-nav__lang">
                 <div class="md-lang-drop">
-                    <button onclick="window.location.href = 'https://awssecworkshops.com';" class="md-lang-dropbtn fa fa-globe"></button>
+                    <button onclick="window.location.href = 'https://awssecworkshops.jp/';" class="md-lang-dropbtn fa fa-globe"></button>
                 </div>
             </div>
         </div>
@@ -790,15 +790,15 @@
 13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
 <span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
-
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+</span>
 <span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit ./retrieve.js</span>
 
 <span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
-
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+</span>
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -819,15 +819,15 @@
 13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
 <span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
-
+<span class="hll"><span class="kr">const</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
+</span>
 <span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit ./retrieve.js</span>
 
 <span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
-<span class="kr">const</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
-
+<span class="hll"><span class="kr">const</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">);</span>
+</span>
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -891,8 +891,8 @@
 6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
 <span class="c1">// ADD-ESDK-START: Encrypt the stream with a keyring</span>
-<span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
-
+<span class="hll"><span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
+</span>
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -906,8 +906,8 @@
 6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 
 <span class="c1">// ADD-ESDK-START: Encrypt the stream with a keyring</span>
-<span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
-
+<span class="hll"><span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">));</span>
+</span>
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -963,8 +963,8 @@
   <span class="k">return</span> <span class="nx">s3</span>
     <span class="p">.</span><span class="nx">getObject</span><span class="p">({</span> <span class="nx">Bucket</span><span class="p">,</span> <span class="nx">Key</span> <span class="p">})</span>
     <span class="p">.</span><span class="nx">createReadStream</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">decryptStream</span><span class="p">(</span><span class="nx">decryptKeyring</span><span class="p">));</span>
-
+<span class="hll">    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">decryptStream</span><span class="p">(</span><span class="nx">decryptKeyring</span><span class="p">));</span>
+</span>
 <span class="c1">// Save and Exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -984,8 +984,8 @@
   <span class="k">return</span> <span class="nx">s3</span>
     <span class="p">.</span><span class="nx">getObject</span><span class="p">({</span> <span class="nx">Bucket</span><span class="p">,</span> <span class="nx">Key</span> <span class="p">})</span>
     <span class="p">.</span><span class="nx">createReadStream</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">decryptStream</span><span class="p">(</span><span class="nx">decryptKeyring</span><span class="p">));</span>
-
+<span class="hll">    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">decryptStream</span><span class="p">(</span><span class="nx">decryptKeyring</span><span class="p">));</span>
+</span>
 <span class="c1">// Save and Exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -1055,19 +1055,19 @@
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
-  <span class="nx">generatorKeyId</span>: <span class="kt">faytheCMK</span>
-<span class="p">});</span>
-
-<span class="c1">// Save and exit</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
+</span><span class="hll">  <span class="nx">generatorKeyId</span>: <span class="kt">faytheCMK</span>
+</span><span class="hll"><span class="p">});</span>
+</span><span class="hll">
+</span><span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit retrieve.js</span>
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
-
-<span class="c1">// Save and exit</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
+</span><span class="hll">
+</span><span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
@@ -1092,19 +1092,19 @@
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
-  <span class="nx">generatorKeyId</span><span class="o">:</span> <span class="nx">faytheCMK</span>
-<span class="p">});</span>
-
-<span class="c1">// Save and exit</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
+</span><span class="hll">  <span class="nx">generatorKeyId</span><span class="o">:</span> <span class="nx">faytheCMK</span>
+</span><span class="hll"><span class="p">});</span>
+</span><span class="hll">
+</span><span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit retrieve.js</span>
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
 <span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
-
-<span class="c1">// Save and exit</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
+</span><span class="hll">
+</span><span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_2" />
