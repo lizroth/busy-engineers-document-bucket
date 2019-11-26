@@ -417,7 +417,7 @@
         
           <li class="md-nav__item">
   <a href="#aws-kms-cryptography-and-encryption-context" class="md-nav__link">
-    AWS KMS: Cryptography and Encryption Context
+    AWS KMS: Cryptography and encryption context
   </a>
   
 </li>
@@ -465,7 +465,7 @@
         
           <li class="md-nav__item">
   <a href="#step-1-set-encryption-context-on-encrypt" class="md-nav__link">
-    Step 1: Set Encryption Context on Encrypt
+    Step 1: Set encryption context on Encrypt
   </a>
   
     <nav class="md-nav">
@@ -485,7 +485,7 @@
         
           <li class="md-nav__item">
   <a href="#step-2-use-encryption-context-on-decrypt" class="md-nav__link">
-    Step 2: Use Encryption Context on Decrypt
+    Step 2: Use encryption context on Decrypt
   </a>
   
     <nav class="md-nav">
@@ -607,7 +607,7 @@
         
           <li class="md-nav__item">
   <a href="#aws-kms-cryptography-and-encryption-context" class="md-nav__link">
-    AWS KMS: Cryptography and Encryption Context
+    AWS KMS: Cryptography and encryption context
   </a>
   
 </li>
@@ -655,7 +655,7 @@
         
           <li class="md-nav__item">
   <a href="#step-1-set-encryption-context-on-encrypt" class="md-nav__link">
-    Step 1: Set Encryption Context on Encrypt
+    Step 1: Set encryption context on Encrypt
   </a>
   
     <nav class="md-nav">
@@ -675,7 +675,7 @@
         
           <li class="md-nav__item">
   <a href="#step-2-use-encryption-context-on-decrypt" class="md-nav__link">
-    Step 2: Use Encryption Context on Decrypt
+    Step 2: Use encryption context on Decrypt
   </a>
   
     <nav class="md-nav">
@@ -762,7 +762,7 @@
 <p>In this section, you will work with encryption context and explore its use in the Document Bucket and other applications.</p>
 <h2 id="background">Background</h2>
 <p>The Busy Engineer's Document Bucket has metadata, called <code>context</code>, associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
-<p>One of the features AWS KMS and the AWS Encryption SDK both provide is called Encryption Context. At its core, Encryption Context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
+<p>One of the features AWS KMS and the AWS Encryption SDK both provide is called encryption context. At its core, encryption context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
 <p>One useful model for thinking about encryption context is as Assertions about the <a href="https://en.wikipedia.org/wiki/Five_Ws" target="_blank">Five Ws</a>: Who, What, Where, When, Why. For example:</p>
 <ul>
 <li><em>Who</em> should have access to this decrypted data?</li>
@@ -771,19 +771,19 @@
 <li><em>When</em> is this data being used?</li>
 <li><em>Why</em> is this data being decrypted?</li>
 </ul>
-<h3 id="aws-kms-cryptography-and-encryption-context">AWS KMS: Cryptography and Encryption Context</h3>
+<h3 id="aws-kms-cryptography-and-encryption-context">AWS KMS: Cryptography and encryption context</h3>
 <p>AWS KMS allows you to specify an encryption context on <code>kms:Encrypt</code>. If you do so, you must provide the exact same encryption context on <code>kms:Decrypt</code>, or the operation will fail. (The match is case-sensitive, and key-value pairs are compared in an order independent way.)</p>
-<p>Behind the scenes, KMS is cryptographically binding the Encryption Context to the key material you are <code>kms:Encrypt</code> or <code>kms:Decrypt</code>ing as <em>Additional Authenticated Data (AAD)</em>. In short, this is non-secret data that must be identical (not tampered-with or incomplete), or decryption fails.</p>
+<p>Behind the scenes, KMS is cryptographically binding the encryption context to the key material you are <code>kms:Encrypt</code> or <code>kms:Decrypt</code>ing as <em>Additional Authenticated Data (AAD)</em>. In short, this is non-secret data that must be identical (not tampered-with or incomplete), or decryption fails.</p>
 <p>This feature defends against risks from ciphertexts being tampered with, modified, or replaced -- intentionally or unintentionally. It both defends against an attacker replacing one ciphertext with another as well as problems like operational events.</p>
 <p>For example, if a bad deployment swaps <code>us-west-2.cfg</code> with <code>eu-central-1.cfg</code> on your fleets, having <code>{ fleet: us-west-2 }</code> asserted in <code>us-west-2.cfg</code>'s encryption context will prevent it from accidentally being loaded by <code>eu-central-1</code>.</p>
 <h3 id="aws-kms-policy-and-audit-hooks">AWS KMS: Policy and Audit Hooks</h3>
-<p>KMS also makes the Encryption Context available to use in Key Policies and Grants. This means that you can use assertions you make about your data to control usage of your CMKs. Perhaps your <code>eu-central-1</code> fleet should only ever be permitted to access encrypted data for <code>{ shard: europe }</code>. You can write CMK policies that require <code>{ shard: europe }</code> to be asserted about all cryptographic operations, so that KMS refuses to authorize an attempt to decrypt, say, <code>{ shard: north-america }</code>. These options can help you secure your application and defend against both operational and security-related risks.</p>
+<p>KMS also makes the encryption context available to use in Key Policies and Grants. This means that you can use assertions you make about your data to control usage of your CMKs. Perhaps your <code>eu-central-1</code> fleet should only ever be permitted to access encrypted data for <code>{ shard: europe }</code>. You can write CMK policies that require <code>{ shard: europe }</code> to be asserted about all cryptographic operations, so that KMS refuses to authorize an attempt to decrypt, say, <code>{ shard: north-america }</code>. These options can help you secure your application and defend against both operational and security-related risks.</p>
 <p>Additionally, as part of the audit features that KMS provides, it logs the encryption context that was supplied with every operation. You can use this information to audit who was accessing what data and when, to detect anomalous call patterns, or to identify unexpected system states.</p>
-<p>What questions would you like to answer with CloudTrail Logs for your KMS operations? Encryption Context can help.</p>
+<p>What questions would you like to answer with CloudTrail Logs for your KMS operations? encryption context can help.</p>
 <h3 id="the-aws-encryption-sdk">The AWS Encryption SDK</h3>
 <p>The AWS Encryption SDK includes the encryption context as a core component. Encryption context <em>may</em> be supplied on encrypt -- it is optional, both for the Encryption SDK and for KMS, but strongly recommended.</p>
-<p>The Encryption SDK writes the encryption context in the encrypted message format. And on decrypt, the Encryption SDK validates the Encryption Context with KMS and returns the contents to you for you to make assertions about the contents.</p>
-<p>Using the Encryption SDK with KMS, you can use all of KMS' policy and audit features from Encryption Context, and use the Encryption SDK to make assertions to safeguard your application.</p>
+<p>The Encryption SDK writes the encryption context in the encrypted message format. And on decrypt, the Encryption SDK validates the encryption context with KMS and returns the contents to you for you to make assertions about the contents.</p>
+<p>Using the Encryption SDK with KMS, you can use all of KMS' policy and audit features from encryption context, and use the Encryption SDK to make assertions to safeguard your application.</p>
 <h3 id="use-in-the-document-bucket">Use in the Document Bucket</h3>
 <p>So how can encryption context be useful in the Document Bucket?</p>
 <p>In this exercise, you will walk through a few examples of how leveraging encryption context can help you secure and audit your application, and even build some convenience features.</p>
@@ -797,6 +797,7 @@
 <li>Defending against objects being listed as having a certain context key / property when they actually do not</li>
 </ul>
 <p>Also, after this change, the contents of <code>context</code> will be available in audit log entries written by KMS, and you can now use that metadata in your Key Policies and Grants.</p>
+<p>Remember, encryption context is not secret!</p>
 <h2 id="make-the-change">Make the Change</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>If you just finished <a href="../multi-cmk/">Using Multiple CMKs</a>, you are all set.</p>
@@ -808,27 +809,42 @@
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
-<label for="__tab_1_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/node-javascript/encryption-context-start
+<label for="__tab_1_1">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/node-typescript/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">Python</label>
+<label for="__tab_1_2">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/node-javascript/encryption-context-start
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_3" />
+<label for="__tab_1_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/python/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 </div>
-<h3 id="step-1-set-encryption-context-on-encrypt">Step 1: Set Encryption Context on Encrypt</h3>
+<h3 id="step-1-set-encryption-context-on-encrypt">Step 1: Set encryption context on Encrypt</h3>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span>
-</pre></div>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="c1">// Edit Api.java and find store(...)</span>
+    <span class="c1">// ENCRYPTION-CONTEXT-START: Set Encryption Context on Encrypt</span>
+    <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">encryptedMessage</span> <span class="o">=</span>
+<span class="hll">        <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">context</span><span class="o">);</span>
+</span>    <span class="n">DocumentBundle</span> <span class="n">bundle</span> <span class="o">=</span>
+<span class="hll">        <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndContext</span><span class="o">(</span><span class="n">encryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">context</span><span class="o">);</span>
+</span></pre></div>
 </td></tr></table></div>
 </div>
 <p>```javascript tab="JavaScript Node.JS" hl_lines=" 3 4 5"
   // Edit store.js
-  // ENCRYPTION-CONTEXT-COMPLETE: Set Encryption Context on Encrypt
+  // ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt
   const Body = fileStream.pipe(
     encryptStream(encryptKeyring, { encryptionContext })
   );</p>
@@ -842,7 +858,7 @@
 7
 8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">```</span><span class="n">typescript</span> <span class="n">tab</span><span class="o">=</span><span class="ss">&quot;Typescript Node.JS&quot;</span> <span class="n">hl_lines</span><span class="o">=</span><span class="ss">&quot; 3 4 5&quot;</span>
   <span class="o">//</span> <span class="n">Edit</span> <span class="n">src</span><span class="o">/</span><span class="n">store</span><span class="p">.</span><span class="n">ts</span>
-  <span class="o">//</span> <span class="n">ENCRYPTION</span><span class="o">-</span><span class="n">CONTEXT</span><span class="o">-</span><span class="n">COMPLETE</span><span class="p">:</span> <span class="k">Set</span> <span class="n">Encryption</span> <span class="n">Context</span> <span class="k">on</span> <span class="n">Encrypt</span>
+  <span class="o">//</span> <span class="n">ENCRYPTION</span><span class="o">-</span><span class="n">CONTEXT</span><span class="o">-</span><span class="n">COMPLETE</span><span class="p">:</span> <span class="k">Set</span> <span class="n">encryption</span> <span class="n">context</span> <span class="k">on</span> <span class="n">Encrypt</span>
   <span class="n">const</span> <span class="n">Body</span> <span class="o">=</span> <span class="n">fileStream</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span>
     <span class="n">encryptStream</span><span class="p">(</span><span class="n">encryptKeyring</span><span class="p">,</span> <span class="err">{</span> <span class="n">encryptionContext</span> <span class="err">}</span><span class="p">)</span>
   <span class="p">);</span>
@@ -865,7 +881,7 @@
 10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
 <span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
 
-<span class="c1"># ENCRYPTION-CONTEXT-START: Set Encryption Context on Encrypt</span>
+<span class="c1"># ENCRYPTION-CONTEXT-START: Set encryption context on Encrypt</span>
 <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
     <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
     <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
@@ -885,12 +901,18 @@
 <li>The contents of <code>context</code> will now be available on Decrypt to use in making assertions.</li>
 </ul>
 <p>Next you will update <code>retrieve</code> to use the encryption context on decrypt.</p>
-<h3 id="step-2-use-encryption-context-on-decrypt">Step 2: Use Encryption Context on Decrypt</h3>
+<h3 id="step-2-use-encryption-context-on-decrypt">Step 2: Use encryption context on Decrypt</h3>
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
 <label for="__tab_4_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">TODO</span>
-</pre></div>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="c1">// Edit Api.java and find retrieve(...)</span>
+    <span class="c1">// ENCRYPTION-CONTEXT-START: Use Encryption Context on Decrypt</span>
+<span class="hll">    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">actualContext</span> <span class="o">=</span> <span class="n">decryptedMessage</span><span class="o">.</span><span class="na">getEncryptionContext</span><span class="o">();</span>
+</span><span class="hll">    <span class="n">PointerItem</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">PointerItem</span><span class="o">.</span><span class="na">fromKeyAndContext</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">actualContext</span><span class="o">);</span>
+</span></pre></div>
 </td></tr></table></div>
 <input name="__tabs_4" type="radio" id="__tab_4_1" />
 <label for="__tab_4_1">JavaScript Node.JS</label>
@@ -966,7 +988,7 @@
 <span class="c1"># Find the retrieve(...) function, and use the Encryption SDK header&#39;s encryption</span>
 <span class="c1"># context to construct the DocumentBundle to return</span>
 
-<span class="c1"># ENCRYPTION-CONTEXT-START: Use Encryption Context on Decrypt</span>
+<span class="c1"># ENCRYPTION-CONTEXT-START: Use encryption context on Decrypt</span>
 <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="n">from_data_and_context</span><span class="p">(</span>
 <span class="hll">    <span class="n">plaintext</span><span class="p">,</span> <span class="n">header</span><span class="o">.</span><span class="n">encryption_context</span>
 </span><span class="p">)</span>
