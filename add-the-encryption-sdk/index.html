@@ -764,7 +764,12 @@
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">Python</label>
+<label for="__tab_1_2">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_3" />
+<label for="__tab_1_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python
 </pre></div>
 </td></tr></table></div>
@@ -773,40 +778,6 @@
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
 <p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
-<p>```java hl_lines=""
-// Edit Api.java
-package sfw.example.esdkworkshop;</p>
-<p>// ADD-ESDK-START: Add the ESDK Dependency
-import com.amazonaws.encryptionsdk.AwsCrypto;
-import com.amazonaws.encryptionsdk.CryptoResult;
-import com.amazonaws.encryptionsdk.MasterKey;
-import com.amazonaws.encryptionsdk.MasterKeyProvider;
-import com.amazonaws.encryptionsdk.kms.KmsMasterKey;</p>
-<p>...</p>
-<p>// ADD-ESDK-START: Add the ESDK Dependency
-private final AwsCrypto awsEncryptionSdk;
-private final MasterKeyProvider mkp;</p>
-<p>...</p>
-<p>public Api(
-    AmazonDynamoDB ddbClient,
-    String tableName,
-    AmazonS3 s3Client,
-    String bucketName,
-    // ADD-ESDK-START: Add the ESDK Dependency
-    MasterKeyProvider&lt;? extends MasterKey&gt; mkp) {
-  this.ddbClient = ddbClient;
-  this.tableName = tableName;
-  this.s3Client = s3Client
-  // ADD-ESDK-START: Add the ESDK Dependency
-  this.awsEncryptionSdk = awsEncryptionSdk;
-  this.mkp = mkp;
-}</p>
-<p>// Save and close.
-// Open App.java
-package sfw.example.esdkworkshop;</p>
-<p>// ADD-ESDK-START: Add the ESDK Dependency
-import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
-// Save and close.
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -820,25 +791,107 @@ import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
 11
 12
 13
-14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="sb">``</span><span class="err">`</span><span class="n">typescript</span> <span class="n">tab</span><span class="o">=</span><span class="s2">&quot;Typescript Node.JS&quot;</span> <span class="n">hl_lines</span><span class="o">=</span><span class="s2">&quot;4 11&quot;</span>
-<span class="o">//</span> <span class="n">Edit</span> <span class="o">./</span><span class="n">store</span><span class="o">.</span><span class="n">js</span>
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="c1">// Edit Api.java</span>
+</span><span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
 
-<span class="o">//</span> <span class="n">ADD</span><span class="o">-</span><span class="n">ESDK</span><span class="o">-</span><span class="n">START</span><span class="p">:</span> <span class="n">Add</span> <span class="n">the</span> <span class="nd">@aws</span><span class="o">-</span><span class="n">crypto</span><span class="o">/</span><span class="n">client</span><span class="o">-</span><span class="n">node</span> <span class="n">dependency</span>
-<span class="kn">import</span> <span class="p">{</span> <span class="n">encryptStream</span><span class="p">,</span> <span class="n">KmsKeyringNode</span> <span class="p">}</span> <span class="kn">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+<span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.AwsCrypto</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.CryptoResult</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.MasterKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.MasterKeyProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.kms.KmsMasterKey</span><span class="o">;</span>
 
-<span class="o">//</span> <span class="n">Save</span> <span class="ow">and</span> <span class="nb">exit</span>
+<span class="o">...</span>
 
-<span class="o">//</span> <span class="n">Edit</span> <span class="o">./</span><span class="n">retrieve</span><span class="o">.</span><span class="n">js</span>
+<span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">AwsCrypto</span> <span class="n">awsEncryptionSdk</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">MasterKeyProvider</span> <span class="n">mkp</span><span class="o">;</span>
 
-<span class="o">//</span> <span class="n">ADD</span><span class="o">-</span><span class="n">ESDK</span><span class="o">-</span><span class="n">START</span><span class="p">:</span> <span class="n">Add</span> <span class="n">the</span> <span class="nd">@aws</span><span class="o">-</span><span class="n">crypto</span><span class="o">/</span><span class="n">client</span><span class="o">-</span><span class="n">node</span> <span class="n">dependency</span>
-<span class="kn">import</span> <span class="p">{</span> <span class="n">decryptStream</span><span class="p">,</span> <span class="n">KmsKeyringNode</span> <span class="p">}</span> <span class="kn">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+<span class="o">...</span>
 
-<span class="o">//</span> <span class="n">Save</span> <span class="ow">and</span> <span class="nb">exit</span>
+<span class="kd">public</span> <span class="nf">Api</span><span class="o">(</span>
+    <span class="n">AmazonDynamoDB</span> <span class="n">ddbClient</span><span class="o">,</span>
+    <span class="n">String</span> <span class="n">tableName</span><span class="o">,</span>
+    <span class="n">AmazonS3</span> <span class="n">s3Client</span><span class="o">,</span>
+    <span class="n">String</span> <span class="n">bucketName</span><span class="o">,</span>
+    <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
+    <span class="n">MasterKeyProvider</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">MasterKey</span><span class="o">&gt;</span> <span class="n">mkp</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">ddbClient</span> <span class="o">=</span> <span class="n">ddbClient</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">tableName</span> <span class="o">=</span> <span class="n">tableName</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">s3Client</span> <span class="o">=</span> <span class="n">s3Client</span>
+  <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">awsEncryptionSdk</span> <span class="o">=</span> <span class="n">awsEncryptionSdk</span><span class="o">;</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">mkp</span> <span class="o">=</span> <span class="n">mkp</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">// Save and close.</span>
+<span class="c1">// Open App.java</span>
+<span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
+
+<span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
+<span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider</span><span class="o">;</span>
+<span class="c1">// Save and close.</span>
 </pre></div>
-</td></tr></table></p>
+</td></tr></table>
+
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
-<label for="__tab_2_0">JavaScript Node.JS</label>
+<label for="__tab_2_0">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
+
+<span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">encryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+</span>
+<span class="c1">// Save and exit</span>
+
+<span class="c1">// Edit ./retrieve.js</span>
+
+<span class="c1">// ADD-ESDK-START: Add the @aws-crypto/client-node dependency</span>
+<span class="hll"><span class="kr">import</span> <span class="p">{</span> <span class="nx">decryptStream</span><span class="p">,</span> <span class="nx">KmsKeyringNode</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;@aws-crypto/client-node&quot;</span><span class="p">;</span>
+</span>
+<span class="c1">// Save and exit</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -866,8 +919,8 @@ import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_2" type="radio" id="__tab_2_1" />
-<label for="__tab_2_1">Python</label>
+<input name="__tabs_2" type="radio" id="__tab_2_2" />
+<label for="__tab_2_2">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
