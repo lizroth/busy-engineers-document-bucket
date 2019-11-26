@@ -1042,9 +1042,9 @@
 25
 26</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit Api.java and find retrieve(...)</span>
     <span class="c1">// ENCRYPTION-CONTEXT-START: Making Assertions</span>
-    <span class="kt">boolean</span> <span class="n">allExpectedContextKeysFound</span> <span class="o">=</span> <span class="n">actualContext</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">containsAll</span><span class="o">(</span><span class="n">expectedContextKeys</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">allExpectedContextKeysFound</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Remove all of the keys that were found</span>
+<span class="hll">    <span class="kt">boolean</span> <span class="n">allExpectedContextKeysFound</span> <span class="o">=</span> <span class="n">actualContext</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">containsAll</span><span class="o">(</span><span class="n">expectedContextKeys</span><span class="o">);</span>
+</span><span class="hll">    <span class="k">if</span> <span class="o">(!</span><span class="n">allExpectedContextKeysFound</span><span class="o">)</span> <span class="o">{</span>
+</span>        <span class="c1">// Remove all of the keys that were found</span>
         <span class="n">expectedContextKeys</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">actualContext</span><span class="o">.</span><span class="na">keySet</span><span class="o">());</span>
         <span class="n">String</span> <span class="n">error</span> <span class="o">=</span>
         <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
@@ -1053,10 +1053,10 @@
             <span class="n">expectedContextKeys</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
        <span class="k">throw</span> <span class="k">new</span> <span class="n">DocumentBucketException</span><span class="o">(</span><span class="n">error</span><span class="o">,</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">());</span>
     <span class="o">}</span>
-    <span class="kt">boolean</span> <span class="n">allExpectedContextFound</span> <span class="o">=</span>
-        <span class="n">actualContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">containsAll</span><span class="o">(</span><span class="n">expectedContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">());</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">allExpectedContextFound</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">expectedContextEntries</span> <span class="o">=</span> <span class="n">expectedContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">();</span>
+<span class="hll">    <span class="kt">boolean</span> <span class="n">allExpectedContextFound</span> <span class="o">=</span>
+</span><span class="hll">        <span class="n">actualContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">containsAll</span><span class="o">(</span><span class="n">expectedContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">());</span>
+</span><span class="hll">    <span class="k">if</span> <span class="o">(!</span><span class="n">allExpectedContextFound</span><span class="o">)</span> <span class="o">{</span>
+</span>        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">expectedContextEntries</span> <span class="o">=</span> <span class="n">expectedContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">();</span>
         <span class="n">expectedContextEntries</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">actualContext</span><span class="o">.</span><span class="na">entrySet</span><span class="o">());</span>
         <span class="n">String</span> <span class="n">error</span> <span class="o">=</span>
             <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
@@ -1241,21 +1241,75 @@
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
-<label for="__tab_5_1">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-complete
+<label for="__tab_5_1">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_2" />
-<label for="__tab_5_2">Python</label>
+<label for="__tab_5_2">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-complete
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_3" />
+<label for="__tab_5_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
 </div>
 <h2 id="try-it-out">Try it Out</h2>
+<p>Now that you pass encryption context all the way through to KMS and validate it on return, what assertions do you want to make about your data?</p>
+<p>Here's some ideas for things to test:</p>
+<ul>
+<li>Expecting exact match of key-value pairs for keys like <code>stage</code>, <code>shard</code>, and <code>source-fleet</code></li>
+<li>Expecting a set of keys to be present like <code>submit-date</code> and <code>category</code></li>
+<li>Expecting an exact match of a subset of the supplied key-value pairs (e.g. only <code>stage</code> and <code>shard</code>, not <code>source-fleet</code>)</li>
+<li>Doing the same for expected keys with any value</li>
+<li>Adding a constraint of a new key that you didn't supply at encryption time</li>
+<li>Adding a constraint with a different value, like <code>stage=production</code></li>
+<li>Changing capitalization</li>
+<li>Using sorted versus unsorted mappings, such as <code>java.util.SortedMap&lt;K, V&gt;</code> in Java or <code>collections.OrderedDict</code> in Python</li>
+</ul>
+<p>There's a few simple suggestions to get you started in the snippets below.</p>
 <div class="superfences-tabs">
 <input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
 <label for="__tab_6_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// To use the API programmatically, use this target to launch jshell
+mvn jshell:run
+/open startup.jsh
+import java.util.HashMap<span class="p">;</span>
+Api <span class="nv">documentBucket</span> <span class="o">=</span> App.initializeDocumentBucket<span class="o">()</span><span class="p">;</span>
+HashMap&lt;String, String&gt; <span class="nv">context</span> <span class="o">=</span> new HashMap&lt;String, String&gt;<span class="o">()</span><span class="p">;</span>
+context.put<span class="o">(</span><span class="s2">&quot;shard&quot;</span>, <span class="s2">&quot;test&quot;</span><span class="o">)</span><span class="p">;</span>
+context.put<span class="o">(</span><span class="s2">&quot;app&quot;</span>, <span class="s2">&quot;document-bucket&quot;</span><span class="o">)</span><span class="p">;</span>
+context.put<span class="o">(</span><span class="s2">&quot;origin&quot;</span>, <span class="s2">&quot;development&quot;</span><span class="o">)</span><span class="p">;</span>
+documentBucket.list<span class="o">()</span><span class="p">;</span>
+documentBucket.store<span class="o">(</span><span class="s2">&quot;Store me in the Document Bucket!&quot;</span>.getBytes<span class="o">()</span>, context<span class="o">)</span><span class="p">;</span>
+<span class="k">for</span> <span class="o">(</span>PointerItem item : documentBucket.list<span class="o">())</span> <span class="o">{</span>
+    DocumentBundle <span class="nv">document</span> <span class="o">=</span> documentBucket.retrieve<span class="o">(</span>item.partitionKey<span class="o">()</span>, context<span class="o">)</span><span class="p">;</span>
+        System.out.println<span class="o">(</span>document.toString<span class="o">())</span><span class="p">;</span>
+<span class="o">}</span>
+// Ctrl+D to <span class="nb">exit</span> jshell
+
+// Or, to run logic that you write in App.java, use this target
+mvn compile
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_1" />
@@ -1384,7 +1438,23 @@
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_5" />
 <label for="__tab_6_5">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>tox -e repl
+import document_bucket
+<span class="nv">ops</span> <span class="o">=</span> document_bucket.initialize<span class="o">()</span>
+<span class="nv">context</span> <span class="o">=</span> <span class="o">{</span><span class="s2">&quot;host&quot;</span>: <span class="s2">&quot;cloud9&quot;</span>, <span class="s2">&quot;shard&quot;</span>: <span class="s2">&quot;development&quot;</span>, <span class="s2">&quot;purpose&quot;</span>: <span class="s2">&quot;experimental&quot;</span><span class="o">}</span>
+ops.list<span class="o">()</span>
+ops.store<span class="o">(</span>b<span class="s1">&#39;some data&#39;</span>, context<span class="o">)</span>
+<span class="k">for</span> item in ops.list<span class="o">()</span>:
+    ops.retrieve<span class="o">(</span>item.partition_key, <span class="nv">expected_context</span><span class="o">=</span>context<span class="o">)</span>
+<span class="c1"># Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
 </div>
