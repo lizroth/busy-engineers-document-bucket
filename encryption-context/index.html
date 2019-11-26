@@ -843,35 +843,32 @@
 </span><span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-<p>```javascript tab="JavaScript Node.JS" hl_lines=" 3 4 5"
-  // Edit store.js
-  // ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt
-  const Body = fileStream.pipe(
-    encryptStream(encryptKeyring, { encryptionContext })
-  );</p>
-<p>// Save your changes
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
 4
 5
 6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">```</span><span class="n">typescript</span> <span class="n">tab</span><span class="o">=</span><span class="ss">&quot;Typescript Node.JS&quot;</span> <span class="n">hl_lines</span><span class="o">=</span><span class="ss">&quot; 3 4 5&quot;</span>
-  <span class="o">//</span> <span class="n">Edit</span> <span class="n">src</span><span class="o">/</span><span class="n">store</span><span class="p">.</span><span class="n">ts</span>
-  <span class="o">//</span> <span class="n">ENCRYPTION</span><span class="o">-</span><span class="n">CONTEXT</span><span class="o">-</span><span class="n">COMPLETE</span><span class="p">:</span> <span class="k">Set</span> <span class="n">encryption</span> <span class="n">context</span> <span class="k">on</span> <span class="n">Encrypt</span>
-  <span class="n">const</span> <span class="n">Body</span> <span class="o">=</span> <span class="n">fileStream</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span>
-    <span class="n">encryptStream</span><span class="p">(</span><span class="n">encryptKeyring</span><span class="p">,</span> <span class="err">{</span> <span class="n">encryptionContext</span> <span class="err">}</span><span class="p">)</span>
-  <span class="p">);</span>
-
-<span class="o">//</span> <span class="n">Save</span> <span class="n">your</span> <span class="n">changes</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>  <span class="c1">// Edit store.js</span>
+  <span class="c1">// ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt</span>
+<span class="hll">  <span class="kr">const</span> <span class="nx">Body</span> <span class="o">=</span> <span class="nx">fileStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+</span><span class="hll">    <span class="nx">encryptStream</span><span class="p">(</span><span class="nx">encryptKeyring</span><span class="p">,</span> <span class="p">{</span> <span class="nx">encryptionContext</span> <span class="p">})</span>
+</span><span class="hll">  <span class="p">);</span>
+</span>
+<span class="c1">// Save your changes</span>
 </pre></div>
-</td></tr></table></p>
-<div class="superfences-tabs">
-<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
-<label for="__tab_3_0">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+</td></tr></table></div>
+</div>
+<p>```typescript tab="Typescript Node.JS" hl_lines=" 3 4 5"
+  // Edit src/store.ts
+  // ENCRYPTION-CONTEXT-COMPLETE: Set encryption context on Encrypt
+  const Body = fileStream.pipe(
+    encryptStream(encryptKeyring, { encryptionContext })
+  );</p>
+<p>// Save your changes
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -880,19 +877,20 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Edit src/document_bucket/api.py</span>
-<span class="c1"># Find the store(...) function, and add context to the encrypt call</span>
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="o">```</span><span class="n">python</span> <span class="n">tab</span><span class="o">=</span><span class="ss">&quot;Python&quot;</span> <span class="n">hl_lines</span><span class="o">=</span><span class="ss">&quot;8&quot;</span>
+<span class="o">#</span> <span class="n">Edit</span> <span class="n">src</span><span class="o">/</span><span class="n">document_bucket</span><span class="o">/</span><span class="n">api</span><span class="p">.</span><span class="n">py</span>
+<span class="o">#</span> <span class="n">Find</span> <span class="n">the</span> <span class="n">store</span><span class="p">(...)</span> <span class="k">function</span><span class="p">,</span> <span class="k">and</span> <span class="k">add</span> <span class="n">context</span> <span class="k">to</span> <span class="n">the</span> <span class="n">encrypt</span> <span class="k">call</span>
 
-<span class="c1"># ENCRYPTION-CONTEXT-START: Set encryption context on Encrypt</span>
-<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
-    <span class="n">source</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-    <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span><span class="p">,</span>
-<span class="hll">    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-</span><span class="p">)</span>
-<span class="c1"># Save your changes</span>
+<span class="o">#</span> <span class="n">ENCRYPTION</span><span class="o">-</span><span class="n">CONTEXT</span><span class="o">-</span><span class="k">START</span><span class="p">:</span> <span class="k">Set</span> <span class="n">encryption</span> <span class="n">context</span> <span class="k">on</span> <span class="n">Encrypt</span>
+<span class="n">encrypted_data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="k">source</span><span class="o">=</span><span class="k">data</span><span class="p">,</span>
+    <span class="n">key_provider</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">master_key_provider</span><span class="p">,</span>
+    <span class="n">encryption_context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="o">#</span> <span class="n">Save</span> <span class="n">your</span> <span class="n">changes</span>
 </pre></div>
-</td></tr></table></div>
-</div>
+</td></tr></table></p>
 <h4 id="what-just-happened">What Just Happened</h4>
 <p>The Document Bucket <code>context</code> will now be supplied to the AWS Encryption SDK and AWS KMS as encryption context. If a non-empty key-value pair map is supplied to <code>store</code>, those key-value pairs will be used in encryption and decryption operations all the way through to KMS:</p>
 <ul>
@@ -905,8 +903,8 @@
 <p>Next you will update <code>retrieve</code> to use the encryption context on decrypt.</p>
 <h3 id="step-2-use-encryption-context-on-decrypt">Step 2: Use Encryption Context on Decrypt</h3>
 <div class="superfences-tabs">
-<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
-<label for="__tab_4_0">Java</label>
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -918,8 +916,8 @@
 </span><span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_4" type="radio" id="__tab_4_1" />
-<label for="__tab_4_1">JavaScript Node.JS</label>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -949,8 +947,8 @@
 <span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_4" type="radio" id="__tab_4_2" />
-<label for="__tab_4_2">Typescript Node.JS</label>
+<input name="__tabs_3" type="radio" id="__tab_3_2" />
+<label for="__tab_3_2">Typescript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -978,8 +976,8 @@
 <span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_4" type="radio" id="__tab_4_3" />
-<label for="__tab_4_3">Python</label>
+<input name="__tabs_3" type="radio" id="__tab_3_3" />
+<label for="__tab_3_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -1005,8 +1003,8 @@
 <p>Next you will add a mechanism for the application to test assertions made in encryption context before working with the returned data.</p>
 <h3 id="step-3-making-assertions">Step 3: Making Assertions</h3>
 <div class="superfences-tabs">
-<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
-<label for="__tab_5_0">Java</label>
+<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
+<label for="__tab_4_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1060,8 +1058,8 @@
 <span class="c1">// Save your work</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_5" type="radio" id="__tab_5_1" />
-<label for="__tab_5_1">JavaScript Node.JS</label>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1119,8 +1117,8 @@
 <span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_5" type="radio" id="__tab_5_2" />
-<label for="__tab_5_2">Typescript Node.JS</label>
+<input name="__tabs_4" type="radio" id="__tab_4_2" />
+<label for="__tab_4_2">Typescript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1178,8 +1176,8 @@
 <span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_5" type="radio" id="__tab_5_3" />
-<label for="__tab_5_3">Python</label>
+<input name="__tabs_4" type="radio" id="__tab_4_3" />
+<label for="__tab_4_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1227,31 +1225,31 @@
 <p>If you want to check your progress, or compare what you've done versus a finished example, check out the code in one of the <code>-complete</code> folders to compare.</p>
 <p>There is a <code>-complete</code> folder for each language.</p>
 <div class="superfences-tabs">
-<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
-<label for="__tab_6_0">Java</label>
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_6" type="radio" id="__tab_6_1" />
-<label for="__tab_6_1">JavaScript Node.JS</label>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_6" type="radio" id="__tab_6_2" />
-<label for="__tab_6_2">Python</label>
+<input name="__tabs_5" type="radio" id="__tab_5_2" />
+<label for="__tab_5_2">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
 </div>
 <h2 id="try-it-out">Try it Out</h2>
 <div class="superfences-tabs">
-<input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
-<label for="__tab_7_0">Java</label>
+<input name="__tabs_6" type="radio" id="__tab_6_0" checked="checked" />
+<label for="__tab_6_0">Java</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_1" />
-<label for="__tab_7_1">JavaScript Node.JS</label>
+<input name="__tabs_6" type="radio" id="__tab_6_1" />
+<label for="__tab_6_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1287,8 +1285,8 @@
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_2" />
-<label for="__tab_7_2">JavaScript Node.JS CLI</label>
+<input name="__tabs_6" type="radio" id="__tab_6_2" />
+<label for="__tab_6_2">JavaScript Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1312,8 +1310,8 @@
   -k purpose
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_3" />
-<label for="__tab_7_3">Typescript Node.JS</label>
+<input name="__tabs_6" type="radio" id="__tab_6_3" />
+<label for="__tab_6_3">Typescript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1349,8 +1347,8 @@
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_4" />
-<label for="__tab_7_4">Typescript Node.JS CLI</label>
+<input name="__tabs_6" type="radio" id="__tab_6_4" />
+<label for="__tab_6_4">Typescript Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1374,8 +1372,8 @@
   -k purpose
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_5" />
-<label for="__tab_7_5">Python</label>
+<input name="__tabs_6" type="radio" id="__tab_6_5" />
+<label for="__tab_6_5">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
 </pre></div>
 </td></tr></table></div>
