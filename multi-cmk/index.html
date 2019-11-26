@@ -651,6 +651,7 @@
                 
                 
                 <h1 id="exercise-2-adding-multi-cmk-support-to-the-document-bucket">Exercise 2: Adding Multi-CMK Support to the Document Bucket</h1>
+<p>In this section, you will configure the AWS Encryption SDK to use multiple CMKs that reside in different regions.</p>
 <h2 id="background">Background</h2>
 <p>Now your Document Bucket will encrypt files when you <code>store</code> them, and will decrypt the files for you when you <code>retrieve</code> them.</p>
 <p>You're using one of your CMKs, Faythe. But what if you want to use multiple CMKs?</p>
@@ -858,7 +859,8 @@
 </ul>
 <p>Try out combinations of Grant permissions for your application and watch how the behavior changes:</p>
 <ul>
-<li>Revoke permission to use Faythe, and watch calls move to Walter</li>
+<li>Revoke permission to use Faythe, and watch calls move to Walter in CloudTrail and in your application</li>
+<li>With permission to use Faythe revoked, try retrieving an older document protected by Faythe</li>
 <li>Revoke permissions to both Faythe and Walter -- now operations fail</li>
 <li>Encrypt some data with both Faythe and Walter active, and revoke permission to either one -- notice that application operations continue to work</li>
 <li>Change the configuration order of Faythe and Walter, and watch how call patterns change to use the two CMKs</li>

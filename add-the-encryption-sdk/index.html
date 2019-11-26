@@ -731,6 +731,7 @@
                 
                 
                 <h1 id="exercise-1-add-the-aws-encryption-sdk">Exercise 1: Add the AWS Encryption SDK</h1>
+<p>In this section, you will add client-side encryption using the AWS Encryption SDK and KMS to the Busy Engineer's Document Bucket.</p>
 <h2 id="background">Background</h2>
 <p>The Busy Engineer's Document Bucket is an example application meant to show some high-level examples of real world AWS patterns. This includes how to integrate client-side encryption using AWS KMS and the AWS Encryption SDK in application code.</p>
 <p>Right now, the Document Bucket supports storing files (or documents, or other blobs of data) in a private S3 bucket, and indexing them in DynamoDB. This allows Document Bucket users to share files with other users, or store them for retrieval later. The DynamoDB entries provide fast lookups to the content of the bucket, along with metadata context for each bucket item.</p>
@@ -1166,9 +1167,44 @@
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
+<p>Experiment using the API as much as you like. To get you started, here are some suggested things to try.</p>
+<ul>
+<li>Compare <a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#" target="_blank">CloudTrail Logs for usages of Faythe</a> when you encrypt messages of different sizes (small, medium, large).</li>
+<li>Take a look at the <a href="https://s3.console.aws.amazon.com/s3/home" target="_blank">contents of your S3 Document Bucket</a> to inspect the raw object.</li>
+</ul>
+<p>If you want more ideas to extend, check out <a href="#explore-further">Explore Further</a> below.</p>
 <div class="superfences-tabs">
 <input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
-<label for="__tab_7_0">JavaScript Node.JS</label>
+<label for="__tab_7_0">Java</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// To use the API programmatically, use this target to launch jshell</span>
+<span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
+<span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
+<span class="n">Api</span> <span class="n">documentBucket</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">initializeDocumentBucket</span><span class="o">();</span>
+<span class="n">documentBucket</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
+<span class="n">documentBucket</span><span class="o">.</span><span class="na">store</span><span class="o">(</span><span class="s">&quot;Store me in the Document Bucket!&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">PointerItem</span> <span class="n">item</span> <span class="o">:</span> <span class="n">documentBucket</span><span class="o">.</span><span class="na">list</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">DocumentBundle</span> <span class="n">document</span> <span class="o">=</span> <span class="n">documentBucket</span><span class="o">.</span><span class="na">retrieve</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">partitionKey</span><span class="o">());</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">document</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="c1">// To run logic that you write in App.java, use this target</span>
+<span class="n">mvn</span> <span class="n">compile</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_7" type="radio" id="__tab_7_1" />
+<label for="__tab_7_1">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1194,8 +1230,8 @@
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_1" />
-<label for="__tab_7_1">JavaScript Node.JS CLI</label>
+<input name="__tabs_7" type="radio" id="__tab_7_2" />
+<label for="__tab_7_2">JavaScript Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -1209,8 +1245,8 @@
 ./cli.js retrieve <span class="nv">$KeyOrReferenceValue</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_2" />
-<label for="__tab_7_2">Typescript Node.JS</label>
+<input name="__tabs_7" type="radio" id="__tab_7_3" />
+<label for="__tab_7_3">Typescript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1236,8 +1272,8 @@
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_3" />
-<label for="__tab_7_3">Typescript Node.JS CLI</label>
+<input name="__tabs_7" type="radio" id="__tab_7_4" />
+<label for="__tab_7_4">Typescript Node.JS CLI</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -1251,8 +1287,8 @@
 ./cli.ts retrieve <span class="nv">$KeyOrReferenceValue</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_7" type="radio" id="__tab_7_4" />
-<label for="__tab_7_4">Python</label>
+<input name="__tabs_7" type="radio" id="__tab_7_5" />
+<label for="__tab_7_5">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -1271,9 +1307,9 @@
 </div>
 <h2 id="explore-further">Explore Further</h2>
 <ul>
-<li>TODO Retrieve</li>
-<li>TODO Examine TOML files</li>
-<li>TODO Generate and load files to store/retrieve</li>
+<li><strong>Leveraging the Message Format</strong> - The <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/message-format.html" target="_blank">AWS Encryption SDK Message Format</a> is an open standard. Can you write something to detect whether an entry in the Document Bucket has been encrypted in this format or not, and retrieve or decrypt appropriately?</li>
+<li><strong>More Test Content</strong> - Small test strings are enough to get started, but you might be curious to see what the behavior and performance looks like with larger documents. What if you add support for loading files to and from disk to the Document Bucket?</li>
+<li><strong>Configuration Glue</strong> - If you are curious how the Document Bucket is configured, take a peek at <code>~/environment/workshop/cdk/Makefile</code> and the <code>make state</code> target, as well as <code>config.toml</code> in the exercises root <code>~/environment/workshop/exercises/config.toml</code>. The Busy Engineer's Document Bucket uses a base <a href="https://github.com/toml-lang/toml" target="_blank">TOML</a> file to set standard names for all CloudFormation resources and a common place to discover the real deployed set. Then it uses the AWS Cloud Development Kit (CDK) to deploy the resources and write out their identifiers to the state file. Applications use the base TOML file <code>config.toml</code> to locate the state file and pull the expected resource names. And that's how the system bootstraps all the resources it needs!</li>
 </ul>
 <h1 id="next-exercise">Next exercise</h1>
 <p>Now that you are encrypting and decrypting, how about <a href="../multi-cmk/">adding Multiple CMKs</a>?</p>
