@@ -1247,20 +1247,20 @@
 17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
-<span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
+</span><span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
 </span><span class="hll">  <span class="nx">generatorKeyId</span><span class="o">:</span> <span class="nx">faytheCMK</span>
 </span><span class="hll"><span class="p">});</span>
-</span><span class="hll">
-</span><span class="c1">// Save and exit</span>
+</span>
+<span class="c1">// Save and exit</span>
 
 <span class="c1">// Edit retrieve.js</span>
 
 <span class="c1">// ADD-ESDK-START: Set up a keyring to use Faythe&#39;s CMK for decrypting.</span>
-<span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
-<span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
-</span><span class="hll">
-</span><span class="c1">// Save and exit</span>
+<span class="hll"><span class="kr">const</span> <span class="nx">faytheCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getFaytheCMK</span><span class="p">();</span>
+</span><span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">]</span> <span class="p">});</span>
+</span>
+<span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_3" />
