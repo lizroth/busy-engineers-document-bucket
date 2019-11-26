@@ -1065,14 +1065,14 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="c1">// Edit Api.java</span>
-</span><span class="c1">// Find retrieve(...)</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit Api.java</span>
+<span class="c1">// Find retrieve(...)</span>
     <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">getObjectData</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
     <span class="c1">// ADD-ESDK-START: Add Decryption to retrieve</span>
-    <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">decryptedMessage</span> <span class="o">=</span> <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
-    <span class="o">...</span>
-    <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndPointer</span><span class="o">(</span><span class="n">decryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">pointer</span><span class="o">);</span>
-</pre></div>
+<span class="hll">    <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">decryptedMessage</span> <span class="o">=</span> <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">decryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+</span>    <span class="o">...</span>
+<span class="hll">    <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndPointer</span><span class="o">(</span><span class="n">decryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">pointer</span><span class="o">);</span>
+</span></pre></div>
 </td></tr></table></div>
 <input name="__tabs_4" type="radio" id="__tab_4_1" />
 <label for="__tab_4_1">Typescript Node.JS</label>
@@ -1136,13 +1136,13 @@
 <span class="c1"># encrypted data before returning it</span>
         <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pointer_item</span><span class="p">(</span><span class="n">PointerQuery</span><span class="o">.</span><span class="n">from_key</span><span class="p">(</span><span class="n">pointer_key</span><span class="p">))</span>
         <span class="c1"># ADD-ESDK-START: Add Decryption to retrieve</span>
-        <span class="n">encrypted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_object</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="n">plaintext</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
-            <span class="n">source</span><span class="o">=</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="n">from_data_and_context</span><span class="p">(</span>
-            <span class="n">plaintext</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">context</span>
-        <span class="p">)</span>
+<span class="hll">        <span class="n">encrypted_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_object</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">plaintext</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">source</span><span class="o">=</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="n">key_provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_provider</span>
+</span><span class="hll">        <span class="p">)</span>
+</span>        <span class="k">return</span> <span class="n">DocumentBundle</span><span class="o">.</span><span class="n">from_data_and_context</span><span class="p">(</span>
+<span class="hll">            <span class="n">plaintext</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">context</span>
+</span>        <span class="p">)</span>
 
 <span class="c1"># Save and exit</span>
 </pre></div>
@@ -1161,7 +1161,36 @@
 <p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
 <div class="superfences-tabs">
 <input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
-<label for="__tab_5_0">Typescript Node.JS</label>
+<label for="__tab_5_0">Java</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="c1">// Edit App.java</span>
+</span>    <span class="n">AmazonS3</span> <span class="n">s3Client</span> <span class="o">=</span> <span class="n">AmazonS3ClientBuilder</span><span class="o">.</span><span class="na">defaultClient</span><span class="o">();</span>
+
+    <span class="c1">// ADD-ESDK-START: Configure the Faythe CMK in the Encryption SDK</span>
+    <span class="c1">// Load configuration of KMS resources</span>
+    <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">FaytheCMK</span><span class="o">;</span>
+
+    <span class="c1">// Set up the Master Key Provider to use KMS</span>
+    <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>
+        <span class="n">KmsMasterKeyProvider</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">withKeysForEncryption</span><span class="o">(</span><span class="n">faytheCMK</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+
+    <span class="c1">// Construct the API</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">Api</span><span class="o">(</span><span class="n">ddbClient</span><span class="o">,</span> <span class="n">tableName</span><span class="o">,</span> <span class="n">s3Client</span><span class="o">,</span> <span class="n">bucketName</span><span class="o">,</span> <span class="n">mkp</span><span class="o">);</span>
+</pre></div>
+</td></tr></table></div>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">Typescript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1197,8 +1226,8 @@
 <span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_5" type="radio" id="__tab_5_1" />
-<label for="__tab_5_1">JavaScript Node.JS</label>
+<input name="__tabs_5" type="radio" id="__tab_5_2" />
+<label for="__tab_5_2">JavaScript Node.JS</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1234,8 +1263,8 @@
 </span><span class="c1">// Save and exit</span>
 </pre></div>
 </td></tr></table></div>
-<input name="__tabs_5" type="radio" id="__tab_5_2" />
-<label for="__tab_5_2">Python</label>
+<input name="__tabs_5" type="radio" id="__tab_5_3" />
+<label for="__tab_5_3">Python</label>
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -1253,15 +1282,15 @@
 
 <span class="o">...</span>
 
-<span class="c1"># ADD-ESDK-START</span>
+<span class="c1"># ADD-ESDK-START: Configure the Faythe CMK in the Encryption SDK</span>
 <span class="c1"># Pull configuration of KMS resources</span>
-<span class="n">faythe_cmk</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;FaytheCMK&quot;</span><span class="p">]</span>
-<span class="c1"># And the Master Key Provider configuring how to use KMS</span>
-<span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">]</span>
-<span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="n">cmk</span><span class="p">)</span>
-
-<span class="n">operations</span> <span class="o">=</span> <span class="n">DocumentBucketOperations</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">mkp</span><span class="p">)</span>
-
+<span class="hll"><span class="n">faythe_cmk</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;FaytheCMK&quot;</span><span class="p">]</span>
+</span><span class="c1"># And the Master Key Provider configuring how to use KMS</span>
+<span class="hll"><span class="n">cmk</span> <span class="o">=</span> <span class="p">[</span><span class="n">faythe_cmk</span><span class="p">]</span>
+</span><span class="hll"><span class="n">mkp</span> <span class="o">=</span> <span class="n">aws_encryption_sdk</span><span class="o">.</span><span class="n">KMSMasterKeyProvider</span><span class="p">(</span><span class="n">key_ids</span><span class="o">=</span><span class="n">cmk</span><span class="p">)</span>
+</span>
+<span class="hll"><span class="n">operations</span> <span class="o">=</span> <span class="n">DocumentBucketOperations</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">mkp</span><span class="p">)</span>
+</span>
 <span class="c1"># Save and exit</span>
 </pre></div>
 </td></tr></table></div>
@@ -1290,7 +1319,7 @@
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_3" />
 <label for="__tab_6_3">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>~/environment/workshop/exercises/python/add-esdk-complete
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python/add-esdk-complete
 </pre></div>
 </td></tr></table></div>
 </div>
