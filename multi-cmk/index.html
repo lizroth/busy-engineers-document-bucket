@@ -898,7 +898,31 @@
 <div class="superfences-tabs">
 <input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
 <label for="__tab_5_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>TODO
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// To use the API programmatically, use this target to launch jshell</span>
+<span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
+<span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
+<span class="n">Api</span> <span class="n">documentBucket</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">initializeDocumentBucket</span><span class="o">();</span>
+<span class="n">documentBucket</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
+<span class="n">documentBucket</span><span class="o">.</span><span class="na">store</span><span class="o">(</span><span class="s">&quot;Store me in the Document Bucket!&quot;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">PointerItem</span> <span class="n">item</span> <span class="o">:</span> <span class="n">documentBucket</span><span class="o">.</span><span class="na">list</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">DocumentBundle</span> <span class="n">document</span> <span class="o">=</span> <span class="n">documentBucket</span><span class="o">.</span><span class="na">retrieve</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">partitionKey</span><span class="o">());</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">document</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="o">}</span>
+<span class="c1">// Use the make targets to change the Grants and see what happens!</span>
+<span class="c1">// To run logic that you write in App.java, use this target</span>
+<span class="n">mvn</span> <span class="n">compile</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
@@ -915,7 +939,8 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span>
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span>
 <span class="nx">list</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./list.js&quot;</span><span class="p">)</span>
 <span class="nx">store</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)</span>
 <span class="nx">retrieve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./retrieve&quot;</span><span class="p">)</span>
@@ -927,6 +952,7 @@
 <span class="p">})</span>
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="nx">retrieve</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span>
+<span class="c1">// Use the make targets to change the Grants and see what happens!</span>
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
@@ -937,12 +963,14 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.js list
 ./cli.js store ./store.js
 <span class="c1"># Note the &quot;Key&quot; value</span>
 ./cli.js list
 <span class="c1"># Note the &quot;reference&quot; value</span>
 ./cli.js retrieve <span class="nv">$KeyOrReferenceValue</span>
+<span class="c1"># Use the make targets to change the grants and see what happens!</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_3" />
@@ -959,7 +987,8 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">ts</span><span class="o">-</span><span class="nx">node</span><span class="o">/</span><span class="nx">register</span>
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">ts</span><span class="o">-</span><span class="nx">node</span><span class="o">/</span><span class="nx">register</span>
 <span class="p">;({</span><span class="nx">list</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/list.ts&quot;</span><span class="p">))</span>
 <span class="p">;({</span><span class="nx">store</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">))</span>
 <span class="nx">retrieve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./retrieve&quot;</span><span class="p">)</span>
@@ -972,6 +1001,7 @@
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="nx">retrieve</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">)</span>
 <span class="c1">// Ctrl-D when finished to exit the REPL</span>
+<span class="c1">// Use the make targets to change the Grants and see what happens!</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_4" />
@@ -981,17 +1011,35 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.ts list
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./cli.ts list
 ./cli.ts store ./store.js
 <span class="c1"># Note the &quot;Key&quot; value</span>
 ./cli.ts list
 <span class="c1"># Note the &quot;reference&quot; value</span>
 ./cli.ts retrieve <span class="nv">$KeyOrReferenceValue</span>
+<span class="c1"># Use the make targets to change the grants and see what happens!</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_5" />
 <label for="__tab_5_5">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>tox -e repl
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">tox</span> <span class="o">-</span><span class="n">e</span> <span class="n">repl</span>
+<span class="kn">import</span> <span class="nn">document_bucket</span>
+<span class="n">ops</span> <span class="o">=</span> <span class="n">document_bucket</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="n">ops</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;some data&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ops</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="c1"># Use the make targets to change the grants and see what happens!</span>
+<span class="c1"># Ctrl-D when finished to exit the REPL</span>
 </pre></div>
 </td></tr></table></div>
 </div>
