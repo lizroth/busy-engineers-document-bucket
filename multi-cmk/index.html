@@ -677,12 +677,12 @@
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
 <label for="__tab_1_1">Typescript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/nodejs-typescript/multi-cmk-start
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/multi-cmk-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
 <label for="__tab_1_2">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/nodejs-javascript/multi-cmk-start
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/multi-cmk-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_3" />
@@ -698,7 +698,7 @@
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit App.java</span>
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
     <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">FaytheCMK</span><span class="o">;</span>
     <span class="c1">// MULTI-CMK-START: Configure Walter</span>
 <span class="hll">    <span class="n">String</span> <span class="n">walterCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">WalterCMK</span><span class="o">;</span>
@@ -712,11 +712,11 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
 </span>
-<span class="c1">// Edit retrieve.js</span>
+<span class="c1">// Edit ./retrieve.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
 </span></pre></div>
@@ -729,11 +729,11 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit src/store.js</span>
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/store.ts</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
 </span>
-<span class="c1">// Edit retrieve.js</span>
+<span class="c1">// Edit ./src/retrieve.ts</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">walterCMK</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">getWalterCMK</span><span class="p">();</span>
 </span></pre></div>
@@ -759,7 +759,7 @@
 <div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit App.java</span>
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
     <span class="c1">// MULTI-CMK-START: Add Walter to the CMKs to Use</span>
     <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>
 <span class="hll">        <span class="n">KmsMasterKeyProvider</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">withKeysForEncryption</span><span class="o">(</span><span class="n">faytheCMK</span><span class="o">,</span> <span class="n">walterCMK</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
@@ -781,7 +781,7 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit store.js</span>
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./store.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
@@ -790,7 +790,7 @@
 </span><span class="hll"><span class="p">});</span>
 </span>
 <span class="c1">// Save and exit</span>
-<span class="c1">// Edit store.js</span>
+<span class="c1">// Edit ./retrieve.js</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
@@ -814,7 +814,7 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit src/store.js</span>
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/store.ts</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">encryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span>
@@ -823,7 +823,7 @@
 </span><span class="hll"><span class="p">});</span>
 </span>
 <span class="c1">// Save and exit</span>
-<span class="c1">// Edit store.js</span>
+<span class="c1">// Edit ./src/retrieve.ts</span>
 <span class="c1">// MULTI-CMK-START: Add the WalterCMK</span>
 <span class="p">...</span>
 <span class="hll"><span class="kr">const</span> <span class="nx">decryptKeyring</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KmsKeyringNode</span><span class="p">({</span> <span class="nx">keyIds</span><span class="o">:</span> <span class="p">[</span><span class="nx">faytheCMK</span><span class="p">,</span> <span class="nx">walterCMK</span><span class="p">]</span> <span class="p">});</span>
@@ -917,7 +917,11 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// To use the API programmatically, use this target to launch jshell</span>
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Compile your code</span>
+<span class="n">mvn</span> <span class="n">compile</span>
+<span class="c1">// To use the API programmatically, use this target to launch jshell</span>
 <span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
 <span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
 <span class="n">Api</span> <span class="n">documentBucket</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">initializeDocumentBucket</span><span class="o">();</span>
@@ -1000,9 +1004,9 @@
 14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nx">node</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">ts</span><span class="o">-</span><span class="nx">node</span><span class="o">/</span><span class="nx">register</span>
 <span class="p">;({</span><span class="nx">list</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/list.ts&quot;</span><span class="p">))</span>
 <span class="p">;({</span><span class="nx">store</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">))</span>
-<span class="nx">retrieve</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./retrieve&quot;</span><span class="p">)</span>
+<span class="p">;({</span><span class="nx">retrieve</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/retrieve.ts&quot;</span><span class="p">))</span>
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
-<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./src/store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Just storing the s3 key</span>
   <span class="nx">key</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Key</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
