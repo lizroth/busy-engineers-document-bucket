@@ -1309,7 +1309,7 @@ context.put<span class="o">(</span><span class="s2">&quot;origin&quot;</span>, <
 documentBucket.list<span class="o">()</span><span class="p">;</span>
 documentBucket.store<span class="o">(</span><span class="s2">&quot;Store me in the Document Bucket!&quot;</span>.getBytes<span class="o">()</span>, context<span class="o">)</span><span class="p">;</span>
 <span class="k">for</span> <span class="o">(</span>PointerItem item : documentBucket.list<span class="o">())</span> <span class="o">{</span>
-    DocumentBundle <span class="nv">document</span> <span class="o">=</span> documentBucket.retrieve<span class="o">(</span>item.partitionKey<span class="o">()</span>, context<span class="o">)</span><span class="p">;</span>
+    DocumentBundle <span class="nv">document</span> <span class="o">=</span> documentBucket.retrieve<span class="o">(</span>item.partitionKey<span class="o">()</span>.getS<span class="o">()</span>, context<span class="o">)</span><span class="p">;</span>
     System.out.println<span class="o">(</span>document.toString<span class="o">())</span><span class="p">;</span>
 <span class="o">}</span>
 // Ctrl+D to <span class="nb">exit</span> jshell
