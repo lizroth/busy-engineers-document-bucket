@@ -391,8 +391,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#make-the-change" class="md-nav__link">
-    Make the Change
+  <a href="#lets-go" class="md-nav__link">
+    Let's Go!
   </a>
   
     <nav class="md-nav">
@@ -414,8 +414,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -434,8 +434,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_1" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_1" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -454,8 +454,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_2" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_2" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -474,8 +474,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_3" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_3" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -591,8 +591,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#make-the-change" class="md-nav__link">
-    Make the Change
+  <a href="#lets-go" class="md-nav__link">
+    Let's Go!
   </a>
   
     <nav class="md-nav">
@@ -614,8 +614,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -634,8 +634,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_1" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_1" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -654,8 +654,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_2" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_2" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -674,8 +674,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_3" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_3" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -731,25 +731,11 @@
                 
                 
                 <h1 id="exercise-1-add-the-aws-encryption-sdk">Exercise 1: Add the AWS Encryption SDK</h1>
-<p>In this section, you will add client-side encryption using the AWS Encryption SDK and KMS to the Busy Engineer's Document Bucket.</p>
+<p>In this section, you will add client-side encryption to the Busy Engineer's Document Bucket using the AWS Encryption SDK and AWS KMS.</p>
 <h2 id="background">Background</h2>
-<p>The Busy Engineer's Document Bucket is an example application meant to show some high-level examples of real world AWS patterns. This includes how to integrate client-side encryption using AWS KMS and the AWS Encryption SDK in application code.</p>
-<p>Right now, the Document Bucket supports storing files (or documents, or other blobs of data) in a private S3 bucket, and indexing them in DynamoDB. This allows Document Bucket users to share files with other users, or store them for retrieval later. The DynamoDB entries provide fast lookups to the content of the bucket, along with metadata context for each bucket item.</p>
-<p>This context allows storing additional information about the S3 item. Perhaps the origin user, the destination fleet, the project, or any other tag that would be useful to know without downloading and examining the item.</p>
-<p>DynamoDB is also configured to allow indexing on which documents have which keys. So, for example, it's a quick query to find out which documents in the bucket have been tagged with "configuration" as a piece of metadata about the object contents.</p>
-<p>Here's the API the Document Bucket supports:</p>
-<ul>
-<li><code>list</code>: This operation queries DynamoDB for all entries for all items in the bucket, and their metadata. It returns the <code>set</code> of items that have been stored.</li>
-<li><code>store</code>: This operation accepts a blob of bytes and a <code>map</code> of metadata context. It generates a unique identifier for the document. The identifier and associated metadata are written to DynamoDB. The bytes of the data are written to S3 under a key of that unique identifier. Any context metadata keys in DynamoDB are updated to include that new object identifier.</li>
-<li><code>retrieve</code>: This operation accepts a unique identifier as an argument. First it looks that identifier up in DynamoDB and pulls the identifier and its context out. Then it retrieves that object from S3. It bundles these items together and returns them to the caller.</li>
-<li><code>search</code>: This operation accepts a metadata key to search. It then queries DynamoDB for the <code>set</code> of documents in the Document Bucket that have context matching that key. This operation then returns that set of document identifiers and their metadata.<ul>
-<li>Once the desired document or documents have been identified with the returned metadata, the document identifiers can be passed to <code>retrieve</code> to actually fetch the documents.</li>
-</ul>
-</li>
-</ul>
-<p>This is a start for sharing, storing, and searching documents of a variety of types. But what about sensitive documents? Or protecting, say, important configuration files from accidental corruption during storing or retrieving?</p>
-<p>Now you will add the AWS Encryption SDK to encrypt close to where the data originates: client-side encrypting the Document Bucket document before it is transmitted off of the host machine to the internet. You will use KMS to provide a <code>data key</code> for each document, using a CMK that you set up in <a href="../getting-started/">Getting Started</a> when you deployed your stacks.</p>
-<h2 id="make-the-change">Make the Change</h2>
+<p>In <a href="../getting-started/">Getting Started</a>, you set up your Busy Engineer's Document Bucket environment and selected a workshop language. </p>
+<p>Now you will add the AWS Encryption SDK to encrypt objects on the client, before they are transmitted off of the host machine to the internet. You will use AWS KMS to provide a <code>data key</code> for each object, using a CMK that you set up in <a href="../getting-started/">Getting Started</a>.</p>
+<h2 id="lets-go">Let's Go!</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>Make sure you are in the <code>exercises</code> directory for the language of your choice:</p>
 <div class="superfences-tabs">
@@ -775,7 +761,7 @@
 </td></tr></table></div>
 </div>
 <h3 id="step-1-add-the-esdk-dependency">Step 1: Add the ESDK Dependency</h3>
-<p>Look for <code>ADD-ESDK-START</code> comments to help orient yourself in the code.</p>
+<p>Look for <code>ADD-ESDK-START</code> comments in the code to help orient yourself.</p>
 <p>Start by adding the Encryption SDK dependency to the code.</p>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
@@ -965,9 +951,11 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened">What Just Happened</h4>
-<p>You just imported a dependency on the AWS Encryption SDK library in your code.</p>
-<p>You also changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations.</p>
+<h4 id="what-happened">What Happened?</h4>
+<ol>
+<li>You added a dependency on the AWS Encryption SDK library in your code</li>
+<li>You changed the API to expect that a Keyring or Master Key Provider will be passed to your code to use in <code>store</code> and <code>retrieve</code> operations</li>
+</ol>
 <h3 id="step-2-add-encryption-to-store">Step 2: Add Encryption to <code>store</code></h3>
 <p>Now that you have the AWS Encryption SDK imported, start encrypting your data before storing it.</p>
 <div class="superfences-tabs">
@@ -1044,17 +1032,17 @@
 </span></pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened_1">What Just Happened</h4>
-<p>The application will now encrypt data client-side with the AWS Encryption SDK and KMS before storing it.</p>
-<p>Now, before storing data in the Document Bucket, it uses the AWS Encryption SDK to:</p>
+<h4 id="what-happened_1">What Happened?</h4>
+<p>The application will use the AWS Encryption SDK to encrypt your data client-side under a CMK before storing it by:</p>
 <ol>
-<li>Request a new data key using your keyring or Master Key Provider</li>
-<li>Encrypt that data for you</li>
-<li>Return the encrypted data in the AWS Encryption SDK message format</li>
-<li>Extract the ciphertext to pass to the AWS S3 SDK to store in S3</li>
+<li>Requesting a new data key using your Keyring or Master Key Provider</li>
+<li>Encrypting your data with the returned data key</li>
+<li>Returning your encrypted data in the AWS Encryption SDK message format</li>
+<li>Extracting the ciphertext from the AWS Encryption SDK message</li>
+<li>Passing the ciphertext to the AWS S3 SDK for storage in S3</li>
 </ol>
 <h3 id="step-3-add-decryption-to-retrieve">Step 3: Add Decryption to <code>retrieve</code></h3>
-<p>Now that the application will encrypt data before storing it, it will need to decrypt the data before returning it to the caller. At least for the data to be useful, anyway.</p>
+<p>Now that the application encypts your data before storing it, it will need to decrypt your data before returning it to the caller (at least for the data to be useful, anyway).</p>
 <div class="superfences-tabs">
 <input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
 <label for="__tab_4_0">Java</label>
@@ -1147,17 +1135,17 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened_2">What Just Happened</h4>
-<p>The application now decrypts data client-side as well.</p>
-<p>The data returned from S3 for <code>retrieve</code> is now encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK:</p>
+<h4 id="what-happened_2">What Happened?</h4>
+<p>The application now decrypts data client-side, as well.</p>
+<p>The data returned from S3 for <code>retrieve</code> is encrypted. Before returning that data to the user, you added a call to the AWS Encryption SDK to decrypt the data. Under the hood, the Encryption SDK is:</p>
 <ol>
-<li>Read the AWS Encryption SDK formatted encrypted message</li>
-<li>Called KMS to request to decrypt your message's encrypted data key using the Faythe CMK</li>
-<li>Used the decrypted data key to decrypt the message</li>
-<li>Returned the message plaintext and Encryption SDK headers to you</li>
+<li>Reading the AWS Encryption SDK formatted encrypted message</li>
+<li>Calling KMS to request to decrypt your message's encrypted data key using the Faythe CMK</li>
+<li>Using the decrypted data key to decrypt the message</li>
+<li>Returning the message plaintext and Encryption SDK headers to you</li>
 </ol>
 <h3 id="step-4-configure-the-faythe-cmk-in-the-encryption-sdk">Step 4: Configure the Faythe CMK in the Encryption SDK</h3>
-<p>Now that you have your dependencies declared and your code updated to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
+<p>Now that you have declared your dependencies and updated your code to encrypt and decrypt data, the final step is to pass through the configuration to the AWS Encryption SDK to start using your KMS CMKs to protect your data.</p>
 <div class="superfences-tabs">
 <input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
 <label for="__tab_5_0">Java</label>
@@ -1292,9 +1280,9 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened_3">What Just Happened</h4>
-<p>In Getting Started, you launched CloudFormation stacks for CMKs. One of these CMKs was nicknamed Faythe. As part of launching these templates, the CMK's Amazon Resource Name (ARN) was written to a configuration file on disk, the <code>state</code> variable that is loaded and parsed.</p>
-<p>Now Faythe's ARN is pulled into a variable, and used to initialize a keyring or master key provider that will use the Faythe CMK. That new keyring/master key provider is passed in to your API, and you are set to start encrypting and decrypting with KMS and the Encryption SDK.</p>
+<h4 id="what-happened_3">What Happened?</h4>
+<p>In <a href="../getting-started/">Getting Started</a>, you launched CloudFormation stacks for CMKs. One of these CMKs was nicknamed Faythe. As part of launching these templates, the CMK's Amazon Resource Name (ARN) was written to a configuration file on disk, the <code>state</code> variable that is loaded and parsed.</p>
+<p>Now Faythe's ARN is pulled into a variable, and used to initialize a Keyring or Master Key Provider that will use the Faythe CMK. That new Keyring/Master Key Provider is passed into your API, and you are set to start encrypting and decrypting with KMS and the Encryption SDK.</p>
 <h3 id="checking-your-work">Checking Your Work</h3>
 <p>Want to check your progress, or compare what you've done versus a finished example?</p>
 <p>Check out the code in one of the <code>-complete</code> folders to compare.</p>
@@ -1323,12 +1311,13 @@
 <h2 id="try-it-out">Try it Out</h2>
 <p>Now that the code is written, let's load it up and try it out.</p>
 <p>If you'd like to try a finished example, use your language's <code>-complete</code> directory as described above.</p>
-<p>Experiment using the API as much as you like. To get you started, here are some suggested things to try.</p>
+<p>Experiment using the API as much as you like. </p>
+<p>To get started, here are some things to try:</p>
 <ul>
-<li>Compare <a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#" target="_blank">CloudTrail Logs for usages of Faythe</a> when you encrypt messages of different sizes (small, medium, large).</li>
-<li>Take a look at the <a href="https://s3.console.aws.amazon.com/s3/home" target="_blank">contents of your S3 Document Bucket</a> to inspect the raw object.</li>
+<li>Compare <a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#" target="_blank">CloudTrail Logs for usages of Faythe</a> when you encrypt messages of different sizes (small, medium, large)</li>
+<li>Take a look at the <a href="https://s3.console.aws.amazon.com/s3/home" target="_blank">contents of your S3 Document Bucket</a> to inspect the raw object</li>
 </ul>
-<p>If you want more ideas to extend, check out <a href="#explore-further">Explore Further</a> below.</p>
+<p>For more things to try, check out <a href="#explore-further">Explore Further</a>, below.</p>
 <div class="superfences-tabs">
 <input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
 <label for="__tab_7_0">Java</label>
