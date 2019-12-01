@@ -412,8 +412,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#errors-with-configuration" class="md-nav__link">
+    Errors with configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#automated-code-checks" class="md-nav__link">
     Automated code checks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-cloudformation-resources" class="md-nav__link">
+    Missing CloudFormation resources
   </a>
   
 </li>
@@ -497,8 +511,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#errors-with-configuration" class="md-nav__link">
+    Errors with configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#automated-code-checks" class="md-nav__link">
     Automated code checks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-cloudformation-resources" class="md-nav__link">
+    Missing CloudFormation resources
   </a>
   
 </li>
@@ -564,6 +592,15 @@
                 <h1 id="tips-and-troubleshooting">Tips and Troubleshooting</h1>
 <p>This page contains reference information that might be useful as you work through the workshop.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="errors-with-configuration">Errors with configuration</h3>
+<p>If you are getting a <code>NullPointerException</code> (Java), or a <code>KeyError</code> (Python), or similar errors when interacting with the TOML files (config and state), try running the state generation step again to make sure the file is generated and well formed.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/cdk/
+make state
+</pre></div>
+</td></tr></table>
+
+<p>Now try your work again.</p>
 <h3 id="automated-code-checks">Automated code checks</h3>
 <p>These commands will check your code for missing imports, syntax issues, and other minor issues that might trip you up.</p>
 <div class="superfences-tabs">
@@ -588,6 +625,8 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<h3 id="missing-cloudformation-resources">Missing CloudFormation resources</h3>
+<p>Make sure you take the defaults for which region to launch in (us-east-2). If you've changed the region for any part of the workshop, tear your stack down and start fresh.</p>
 <h3 id="more-disk-space-on-cloud9">More disk space on Cloud9</h3>
 <p>Working through the workshop, you might find that you are out of disk. If this happens, use the following script to expand your EBS volume. (<a href="https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html#move-environment-resize" target="_blank">Script source</a>)</p>
 <p>Note that this is adapted from the script source because the Busy Engineer's Cloud9 instances run on EC2 Nitro, which has different block device identifiers.</p>
