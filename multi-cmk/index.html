@@ -868,14 +868,18 @@
 <p>The application behavior will change. <strong>Important</strong> when you revoke permissions to the first CMK in the list for a keyring (which is Faythe by default), you will need to change the keyring configuration to use Walter as your generator to resume operations. See <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/js-examples.html" target="_blank">documentation of Generator CMKs</a> for more.</p>
 <p>You can also observe the impact of changing Granted permissions by monitoring CloudTrail. Note that log entries take a few minutes to propagate to CloudTrail.</p>
 <ul>
-<li>Faythe is in <code>us-east-2</code>, so check CloudTrail in that region with these links:</li>
+<li>Faythe is in <code>us-east-2</code>, so check CloudTrail in that region with these links:<ul>
 <li><a href="https://console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=GenerateDataKey" target="_blank">GenerateDataKey operations in CloudTrail in us-east-2</a></li>
 <li><a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=Encrypt" target="_blank">Encrypt operations in CloudTrail in us-east-2</a></li>
 <li><a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=Decrypt" target="_blank">Decrypt operations in CloudTrail in us-east-2</a></li>
-<li>Walter is in <code>us-west-2</code>, so check CloudTrail in that region with these links:</li>
+</ul>
+</li>
+<li>Walter is in <code>us-west-2</code>, so check CloudTrail in that region with these links:<ul>
 <li><a href="https://console.aws.amazon.com/cloudtrail/home?region=us-west-2#/events?EventName=GenerateDataKey" target="_blank">GenerateDataKey operations in CloudTrail in us-west-2</a></li>
 <li><a href="https://us-west-2.console.aws.amazon.com/cloudtrail/home?region=us-west-2#/events?EventName=Encrypt" target="_blank">Encrypt operations in CloudTrail in us-west-2</a></li>
 <li><a href="https://us-west-2.console.aws.amazon.com/cloudtrail/home?region=us-west-2#/events?EventName=Decrypt" target="_blank">Decrypt operations in CloudTrail in us-west-2</a></li>
+</ul>
+</li>
 </ul>
 <p>Try out combinations of Grant permissions for your application and watch how the behavior changes:</p>
 <ul>
