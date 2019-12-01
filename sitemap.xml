@@ -11,17 +11,7 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://awssecworkshops.com/add-the-encryption-sdk/</loc>
-     <lastmod>2019-12-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://awssecworkshops.com/multi-cmk/</loc>
-     <lastmod>2019-12-01</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://awssecworkshops.com/encryption-context/</loc>
+     <loc>https://awssecworkshops.com/exercises/</loc>
      <lastmod>2019-12-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
