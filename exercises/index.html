@@ -13,7 +13,7 @@
         <meta name="description" content="An introduction to using AWS KMS and the AWS Encryption SDK">
       
       
-        <link rel="canonical" href="https://awssecworkshops.com/getting-started/">
+        <link rel="canonical" href="https://awssecworkshops.com/exercises/">
       
       
         <meta name="author" content="aws-cryptools@amazon.com">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Getting Started - Busy Engineer's Document Bucket Workshop</title>
+        <title>Exercise Overview - Busy Engineer's Document Bucket Workshop</title>
       
     
     
@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#getting-started" tabindex="1" class="md-skip">
+      <a href="#exercise-overview" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -143,7 +143,7 @@
                   Busy Engineer's Document Bucket Workshop
                 </span>
                 <span class="md-header-nav__topic">
-                  Getting Started
+                  Exercise Overview
                 </span>
               
             
@@ -320,70 +320,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Getting Started
-      </label>
-    
-    <a href="./" title="Getting Started" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
       Getting Started
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#workshop-details" class="md-nav__link">
-    Workshop Details
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#background" class="md-nav__link">
-    Background
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lets-go" class="md-nav__link">
-    Let's Go!
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explore-further" class="md-nav__link">
-    Explore Further
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -476,43 +417,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#workshop-details" class="md-nav__link">
-    Workshop Details
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#background" class="md-nav__link">
-    Background
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lets-go" class="md-nav__link">
-    Let's Go!
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explore-further" class="md-nav__link">
-    Explore Further
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -523,95 +427,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/aws-samples/busy-engineers-document-bucket/edit/master/docs/getting-started.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/aws-samples/busy-engineers-document-bucket/edit/master/docs/exercises.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="getting-started">Getting Started</h1>
-<h2 id="workshop-details">Workshop Details</h2>
-<p>In this workshop, you will add encryption and decryption features to the Busy Engineer's Document Bucket to learn about some real world AWS patterns for integrating client-side encryption using AWS Key Management Service (AWS KMS) and the AWS Encryption software development kit (ESDK) in application code. You will learn how to leverage features like multiple AWS KMS Customer Master Key (CMK) support and Encryption Context to secure your application.</p>
-<p>To begin, the Document Bucket supports storing objects (documents or files or other blobs of data) in a private Amazon S3 bucket, and indexing them in Amazon DynamoDB. This allows Document Bucket users to share objects with other users, and store them for retrieval later. The DynamoDB entries provide metadata context for each Document Bucket object, as well as fast lookups to the provided context.</p>
-<p>This context allows users to store additional information about the S3 object like the origin user, the destination fleet, the project, or any other tag that would be useful to know without having to download and examine the object.</p>
-<p>DynamoDB is configured to allow you to index on the keys associated with the S3 objects. So, for example, it's a quick query to find out which objects have been tagged with metadata context that includes "configuration".</p>
-<p>The Document Bucket supports the following APIs:</p>
-<ul>
-<li><code>list</code>: This operation queries DynamoDB for all entries for all objects in the Document Bucket, and their metadata. It returns the <code>set</code> of items that have been stored.</li>
-<li><code>store</code>: This operation accepts a blob of bytes and a <code>map</code> of metadata context. It generates a unique identifier (UID) for the object. The UID and associated metadata are written to DynamoDB. The bytes of the object are written to S3 under a key of that UID. Any context metadata keys in DynamoDB are updated to include that new UID.</li>
-<li><code>retrieve</code>: This operation accepts a unique identifier (UID) as an argument. It looks up the UID in DynamoDB to identify the associated context and then retrieves the referenced object from S3. It returns the Document Bundle (UID, context, and referenced object) to the caller.</li>
-<li><code>search</code>: This operation accepts a metadata key as search input. It queries DynamoDB for the <code>set</code> of objects in the Document Bucket with context matching that key. It returns the <code>set</code> of UIDs and their associated metadata.<ul>
-<li>Once you have identified the desired object(s), you can pass the UIDs to <code>retrieve</code> to fetch the objects.</li>
-</ul>
-</li>
-</ul>
-<p>This is a start for sharing, storing, and searching various objects. </p>
-<p>But what about sensitive documents? Or protecting, say, important configuration files from accidental corruption during storing or retrieving? </p>
-<p>The workshop exercises will help you address some of these challenges.</p>
-<h2 id="background">Background</h2>
-<p>In this section, we will give you step-by-step instructions to prepare your AWS Environment to work with the Busy Engineer's Document Bucket. </p>
-<p>To set up your environment, you will:</p>
-<ul>
-<li>Deploy a CloudFormation stack to launch an AWS Cloud9 integrated development environment (IDE)</li>
-<li>AWS Cloud9 lets you write, run, and debug your code with just a browser</li>
-<li>Launch the Cloud9 IDE that you will use for the rest of the workshop</li>
-<li>Launch resource stacks using the AWS Cloud Development Kit (CDK), including:<ul>
-<li>The <code>BusyEngineersDocumentBucket</code> stack, with your DynamoDB table and S3 bucket</li>
-<li>One CMK in one region, called Faythe, that you will use in encryption and decryption operations</li>
-<li>One CMK in another region, called Walter, that you will use in encryption and decryption operations</li>
-</ul>
-</li>
-<li>Bootstrap the development environment in Cloud9</li>
-</ul>
-<h2 id="lets-go">Let's Go!</h2>
+                <h1 id="exercise-overview">Exercise Overview</h1>
+<p>In the Busy Engineer's Document Bucket, you will work on the following exercises:</p>
 <ol>
-<li>Sign in to your AWS Account for the workshop<ul>
-<li>If you are using your own account, make sure this is <strong>not</strong> a production account! This is a workshop for learning and experimentation. Don't put production at risk!</li>
-</ul>
-</li>
-<li>Click this link to <a href="https://us-east-2.console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/quickcreate?templateUrl=https%3A%2F%2Fbusy-engineers-cfn.s3.us-east-2.amazonaws.com%2Fdocument-bucket-cloud9-bootstrap.yaml&stackName=BusyEngineersDocumentBucketEnvironment" target="_blank">load the CloudFormation template for your Cloud9 IDE</a></li>
-<li>Click <strong>Create Stack</strong> to launch the stack</li>
-<li>It will take about three minutes to launch your Cloud9 IDE</li>
-<li>Click this link to <a href="https://us-east-2.console.aws.amazon.com/cloud9/home?region=us-east-2#" target="_blank">Open the Cloud9 Console and find your Cloud9 IDE</a></li>
-<li>You may need to wait a minute and refresh while CloudFormation spins up the resources</li>
-<li>There will be a blue tile with your workshop IDE when it's ready</li>
-<li>At the bottom of the tile, click <strong>Open IDE</strong> to launch Cloud9</li>
-<li>Type <code>cd ~/environment/workshop</code> and hit <code>Enter</code></li>
-<li>Type <code>make bootstrap</code> and hit <code>Enter</code> to set up your workshop environment</li>
-<li>Wait until you see <code>*** BOOTSTRAP COMPLETE ***</code></li>
-<li><code>make bootstrap</code> will take approximately 5 minutes. If you are in a live workshop, you can run this step during the presentation. If you are working on your own, grab a cup of your favorite beverage while you wait.</li>
-<li>At this point you have deployed your workshop stacks using CDK and set up language environments for all of the workshop languages</li>
-<li>In Cloud9, close your Terminal window and open a new one (<code>Window -&gt; New Terminal</code>) to pick up the changes <code>make bootstrap</code> installed</li>
-<li>Choose your workshop language, and <code>cd</code> to its folder under <code>exercises</code></li>
+<li><a href="../add-the-encryption-sdk/">Adding the AWS Encryption SDK</a>, where you will lay the groundwork to start using the AWS Encryption SDK with a single CMK for encryption and decryption operations.</li>
+<li><a href="../multi-cmk/">Using Multiple CMKs</a>, where you will configure the Encryption SDK to use multiple CMKs for encryption and decryption operations.</li>
+<li><a href="../encryption-context/">Working With Encryption Context</a>, where you will explore using encryption context in your application for security and operational benefits.</li>
 </ol>
-<div class="superfences-tabs">
-<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
-<label for="__tab_1_0">Java</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/java
-</pre></div>
-</td></tr></table></div>
-<input name="__tabs_1" type="radio" id="__tab_1_1" />
-<label for="__tab_1_1">Typescript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript
-</pre></div>
-</td></tr></table></div>
-<input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript
-</pre></div>
-</td></tr></table></div>
-<input name="__tabs_1" type="radio" id="__tab_1_3" />
-<label for="__tab_1_3">Python</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/python
-</pre></div>
-</td></tr></table></div>
-</div>
-<p><strong>Your environment is ready!</strong> </p>
-<p>Start the workshop with <a href="../add-the-encryption-sdk/">Exercise 1: Add the Encryption SDK</a>.</p>
-<h2 id="explore-further">Explore Further</h2>
-<ul>
-<li>Check out the <code>~/environment/workshop/cdk</code> directory to see how the workshop resources are described using CDK</li>
-<li><a href="https://en.wikipedia.org/wiki/Alice_and_Bob#Cast_of_characters" target="_blank">Who are Faythe and Walter?</a></li>
-</ul>
-<h1 id="next-steps">Next steps</h1>
-<p>Now that you have your environment and language selected, you can proceed to the <a href="../exercises/">exercises</a>.</p>
+<p>Ready to begin? Get started with <a href="../add-the-encryption-sdk/">Adding the AWS Encryption SDK</a>.</p>
                 
                   
                 
@@ -628,41 +454,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Home
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../add-the-encryption-sdk/" title="Add the Encryption SDK" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Add the Encryption SDK
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
