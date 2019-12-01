@@ -42,7 +42,7 @@
     
     
       
-        <title>Exercise 3: Working With Encryption Context - Busy Engineer's Document Bucket Workshop</title>
+        <title>Exercise 3 - Busy Engineer's Document Bucket Workshop</title>
       
     
     
@@ -143,7 +143,7 @@
                   Busy Engineer's Document Bucket Workshop
                 </span>
                 <span class="md-header-nav__topic">
-                  Exercise 3: Working With Encryption Context
+                  Exercise 3
                 </span>
               
             
@@ -250,6 +250,10 @@
       
         
       
+        
+      
+        
+      
     </ul>
   </div>
 </nav>
@@ -323,9 +327,206 @@
 
 
   <li class="md-nav__item">
-    <a href="../exercises/" title="Exercises" class="md-nav__link">
-      Exercises
+    <a href="../add-the-encryption-sdk/" title="Exercise 1" class="md-nav__link">
+      Exercise 1
     </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../multi-cmk/" title="Exercise 2" class="md-nav__link">
+      Exercise 2
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Exercise 3
+      </label>
+    
+    <a href="./" title="Exercise 3" class="md-nav__link md-nav__link--active">
+      Exercise 3
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-kms-operations-and-encryption-context" class="md-nav__link">
+    AWS KMS: KMS Operations and Encryption Context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-kms-policy-and-audit-hooks" class="md-nav__link">
+    AWS KMS: Policy and Audit Hooks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-aws-encryption-sdk" class="md-nav__link">
+    The AWS Encryption SDK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-in-the-document-bucket" class="md-nav__link">
+    Use in the Document Bucket
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-the-change" class="md-nav__link">
+    Make the Change
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-directory" class="md-nav__link">
+    Starting Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-set-encryption-context-on-encrypt" class="md-nav__link">
+    Step 1: Set Encryption Context on Encrypt
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-just-happened" class="md-nav__link">
+    What Just Happened
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-use-encryption-context-on-decrypt" class="md-nav__link">
+    Step 2: Use Encryption Context on Decrypt
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-just-happened_1" class="md-nav__link">
+    What Just Happened
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-making-assertions" class="md-nav__link">
+    Step 3: Making Assertions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-just-happened_2" class="md-nav__link">
+    What Just Happened
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-your-work" class="md-nav__link">
+    Checking Your Work
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-it-out" class="md-nav__link">
+    Try it Out
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explore-further" class="md-nav__link">
+    Explore Further
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -1259,6 +1460,41 @@ ops.store<span class="o">(</span>b<span class="s1">&#39;some data&#39;</span>, c
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../multi-cmk/" title="Exercise 2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Exercise 2
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../thank-you-and-closing/" title="Thank You and Closing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Thank You and Closing
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
