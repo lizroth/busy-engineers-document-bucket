@@ -609,7 +609,15 @@
 <h3 id="errors-with-configuration">Errors with configuration</h3>
 <p>If you are getting a <code>NullPointerException</code> (Java), or a <code>KeyError</code> (Python), or similar errors when interacting with the TOML files (config and state), try running the state generation step again to make sure the file is generated and well formed.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/cdk/
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Check the contents of your state file</span>
+cat ~/.busy_engineers_state.toml
+
+<span class="c1"># Regenerate your state file, if needed</span>
+<span class="nb">cd</span> ~/environment/workshop/cdk/
 make state
 </pre></div>
 </td></tr></table>
