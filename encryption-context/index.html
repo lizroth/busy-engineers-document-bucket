@@ -818,8 +818,8 @@
     <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">encryptedMessage</span> <span class="o">=</span>
 <span class="hll">        <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">context</span><span class="o">);</span>
 </span>    <span class="n">DocumentBundle</span> <span class="n">bundle</span> <span class="o">=</span>
-<span class="hll">        <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndContext</span><span class="o">(</span><span class="n">encryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">context</span><span class="o">);</span>
-</span><span class="c1">// Save your changes</span>
+        <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndContext</span><span class="o">(</span><span class="n">encryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">context</span><span class="o">);</span>
+<span class="c1">// Save your changes</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_2" type="radio" id="__tab_2_1" />
@@ -1274,8 +1274,10 @@
 18
 19
 20
-21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// Compile your code
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>// Compile your code
 mvn compile
+
 // To use the API programmatically, use this target to launch jshell
 mvn jshell:run
 /open startup.jsh
@@ -1293,8 +1295,8 @@ documentBucket.store<span class="o">(</span><span class="s2">&quot;Store me in t
 <span class="o">}</span>
 // Ctrl+D to <span class="nb">exit</span> jshell
 
-// Or, to run logic that you write in App.java, use this target
-mvn compile
+// Or, to run logic that you write in App.java, use this target after compile
+mvn exec:java
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_6" type="radio" id="__tab_6_1" />

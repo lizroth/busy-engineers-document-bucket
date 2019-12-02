@@ -784,7 +784,8 @@
 37
 38
 39
-40</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
+40
+41</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
 <span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
 
 <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
@@ -795,7 +796,8 @@
 </span><span class="hll"><span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.kms.KmsMasterKey</span><span class="o">;</span>
 </span>
 <span class="o">...</span>
-
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">tableName</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">bucketName</span><span class="o">;</span>
 <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
 <span class="hll"><span class="kd">private</span> <span class="kd">final</span> <span class="n">AwsCrypto</span> <span class="n">awsEncryptionSdk</span><span class="o">;</span>
 </span><span class="hll"><span class="kd">private</span> <span class="kd">final</span> <span class="n">MasterKeyProvider</span> <span class="n">mkp</span><span class="o">;</span>
@@ -819,8 +821,8 @@
 
 <span class="c1">// Save and close.</span>
 <span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
-<span class="hll"><span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
-</span>
+<span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
+
 <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
 <span class="hll"><span class="kn">import</span> <span class="nn">com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider</span><span class="o">;</span>
 </span><span class="c1">// Save and close.</span>
@@ -949,11 +951,11 @@
 7
 8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
 <span class="kd">public</span> <span class="n">PointerItem</span> <span class="nf">store</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
-<span class="hll">    <span class="c1">// ADD-ESDK-START: Add Encryption to store</span>
-</span><span class="hll">    <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">encryptedMessage</span> <span class="o">=</span> <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
+    <span class="c1">// ADD-ESDK-START: Add Encryption to store</span>
+<span class="hll">    <span class="n">CryptoResult</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[],</span> <span class="n">KmsMasterKey</span><span class="o">&gt;</span> <span class="n">encryptedMessage</span> <span class="o">=</span> <span class="n">awsEncryptionSdk</span><span class="o">.</span><span class="na">encryptData</span><span class="o">(</span><span class="n">mkp</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
 </span><span class="hll">    <span class="n">DocumentBundle</span> <span class="n">bundle</span> <span class="o">=</span>
-</span>        <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndContext</span><span class="o">(</span><span class="n">encryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">context</span><span class="o">);</span>
-    <span class="n">writeItem</span><span class="o">(</span><span class="n">bundle</span><span class="o">.</span><span class="na">getPointer</span><span class="o">());</span>
+</span><span class="hll">        <span class="n">DocumentBundle</span><span class="o">.</span><span class="na">fromDataAndContext</span><span class="o">(</span><span class="n">encryptedMessage</span><span class="o">.</span><span class="na">getResult</span><span class="o">(),</span> <span class="n">context</span><span class="o">);</span>
+</span>    <span class="n">writeItem</span><span class="o">(</span><span class="n">bundle</span><span class="o">.</span><span class="na">getPointer</span><span class="o">());</span>
     <span class="o">...</span>
 </pre></div>
 </td></tr></table></div>
@@ -1150,8 +1152,8 @@
 <span class="hll">    <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>
 </span><span class="hll">        <span class="n">KmsMasterKeyProvider</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">withKeysForEncryption</span><span class="o">(</span><span class="n">faytheCMK</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
 </span>
-    <span class="k">return</span> <span class="k">new</span> <span class="n">Api</span><span class="o">(</span><span class="n">ddbClient</span><span class="o">,</span> <span class="n">tableName</span><span class="o">,</span> <span class="n">s3Client</span><span class="o">,</span> <span class="n">bucketName</span><span class="o">,</span> <span class="n">mkp</span><span class="o">);</span>
-</pre></div>
+<span class="hll">    <span class="k">return</span> <span class="k">new</span> <span class="n">Api</span><span class="o">(</span><span class="n">ddbClient</span><span class="o">,</span> <span class="n">tableName</span><span class="o">,</span> <span class="n">s3Client</span><span class="o">,</span> <span class="n">bucketName</span><span class="o">,</span> <span class="n">mkp</span><span class="o">);</span>
+</span></pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
 <label for="__tab_5_1">Typescript Node.JS</label>
@@ -1315,8 +1317,10 @@
 13
 14
 15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Compile your code</span>
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Compile your code</span>
 <span class="n">mvn</span> <span class="n">compile</span>
+
 <span class="c1">// To use the API programmatically, use this target to launch jshell</span>
 <span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
 <span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
@@ -1329,8 +1333,8 @@
 <span class="o">}</span>
 <span class="c1">// Ctrl+D to exit jshell</span>
 
-<span class="c1">// Or, to run logic that you write in App.java, use this target</span>
-<span class="n">mvn</span> <span class="n">compile</span>
+<span class="c1">// Or, to run logic that you write in App.java, use this target after compile</span>
+<span class="n">mvn</span> <span class="n">exec</span><span class="o">:</span><span class="n">java</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_7" type="radio" id="__tab_7_1" />

@@ -740,8 +740,8 @@
 3
 4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
     <span class="c1">// MULTI-CMK-START: Add Walter to the CMKs to Use</span>
-    <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>
-<span class="hll">        <span class="n">KmsMasterKeyProvider</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">withKeysForEncryption</span><span class="o">(</span><span class="n">faytheCMK</span><span class="o">,</span> <span class="n">walterCMK</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+<span class="hll">    <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>
+</span><span class="hll">        <span class="n">KmsMasterKeyProvider</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">withKeysForEncryption</span><span class="o">(</span><span class="n">faytheCMK</span><span class="o">,</span> <span class="n">walterCMK</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
 </span></pre></div>
 </td></tr></table></div>
 <input name="__tabs_3" type="radio" id="__tab_3_1" />
@@ -910,8 +910,10 @@
 14
 15
 16
-17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Compile your code</span>
+17
+18</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Compile your code</span>
 <span class="n">mvn</span> <span class="n">compile</span>
+
 <span class="c1">// To use the API programmatically, use this target to launch jshell</span>
 <span class="n">mvn</span> <span class="n">jshell</span><span class="o">:</span><span class="n">run</span>
 <span class="o">/</span><span class="n">open</span> <span class="n">startup</span><span class="o">.</span><span class="na">jsh</span>
@@ -925,8 +927,8 @@
 <span class="c1">// Ctrl+D to exit jshell</span>
 
 <span class="c1">// Use the make targets to change the Grants and see what happens!</span>
-<span class="c1">// To run logic that you write in App.java, use this target</span>
-<span class="n">mvn</span> <span class="n">compile</span>
+<span class="c1">// To run logic that you write in App.java, use this target after compile</span>
+<span class="n">mvn</span> <span class="n">exec</span><span class="o">:</span><span class="n">java</span>
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
