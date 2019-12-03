@@ -1392,7 +1392,7 @@ mvn exec:java
   <span class="nx">purpose</span><span class="o">:</span> <span class="s2">&quot;simple demonstration&quot;</span><span class="p">,</span>
   <span class="nx">origin</span><span class="o">:</span> <span class="s2">&quot;us-east-2&quot;</span>
 <span class="p">}</span>
-<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./src/store.js&quot;</span><span class="p">),</span> <span class="nx">encryptionContext</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">),</span> <span class="nx">encryptionContext</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Just storing the s3 key</span>
   <span class="nx">key</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Key</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>

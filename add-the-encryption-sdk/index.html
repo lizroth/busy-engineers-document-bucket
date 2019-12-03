@@ -820,7 +820,7 @@
 </span><span class="o">}</span>
 
 <span class="c1">// Save and close.</span>
-<span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
+<span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
 <span class="kn">package</span> <span class="nn">sfw.example.esdkworkshop</span><span class="o">;</span>
 
 <span class="c1">// ADD-ESDK-START: Add the ESDK Dependency</span>
@@ -1141,12 +1141,12 @@
  9
 10
 11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/Api.java</span>
     <span class="n">AmazonS3</span> <span class="n">s3Client</span> <span class="o">=</span> <span class="n">AmazonS3ClientBuilder</span><span class="o">.</span><span class="na">defaultClient</span><span class="o">();</span>
 
     <span class="c1">// ADD-ESDK-START: Configure the Faythe CMK in the Encryption SDK</span>
     <span class="c1">// Load configuration of KMS resources</span>
-<span class="hll">    <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">FaytheCMK</span><span class="o">;</span>
+<span class="hll">    <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">stateConfig</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">FaytheCMK</span><span class="o">;</span>
 </span>
     <span class="c1">// Set up the Master Key Provider to use KMS</span>
 <span class="hll">    <span class="n">KmsMasterKeyProvider</span> <span class="n">mkp</span> <span class="o">=</span>

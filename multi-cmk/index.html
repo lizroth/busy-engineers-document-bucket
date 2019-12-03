@@ -678,9 +678,9 @@
 2
 3
 4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// Edit ./src/main/java/sfw/example/esdkworkshop/App.java</span>
-    <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">FaytheCMK</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">faytheCMK</span> <span class="o">=</span> <span class="n">stateConfig</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">faytheCMK</span><span class="o">;</span>
     <span class="c1">// MULTI-CMK-START: Configure Walter</span>
-<span class="hll">    <span class="n">String</span> <span class="n">walterCMK</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">WalterCMK</span><span class="o">;</span>
+<span class="hll">    <span class="n">String</span> <span class="n">walterCMK</span> <span class="o">=</span> <span class="n">stateConfig</span><span class="o">.</span><span class="na">contents</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">WalterCMK</span><span class="o">;</span>
 </span></pre></div>
 </td></tr></table></div>
 <input name="__tabs_2" type="radio" id="__tab_2_1" />
@@ -999,7 +999,7 @@
 <span class="p">;({</span><span class="nx">store</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">))</span>
 <span class="p">;({</span><span class="nx">retrieve</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;./src/retrieve.ts&quot;</span><span class="p">))</span>
 <span class="nx">list</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
-<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./src/store.js&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">store</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s2">&quot;./src/store.ts&quot;</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">r</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="c1">// Just storing the s3 key</span>
   <span class="nx">key</span> <span class="o">=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Key</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
