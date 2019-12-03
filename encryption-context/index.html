@@ -421,8 +421,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#make-the-change" class="md-nav__link">
-    Make the Change
+  <a href="#lets-go" class="md-nav__link">
+    Let's Go!
   </a>
   
     <nav class="md-nav">
@@ -444,8 +444,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -464,8 +464,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_1" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_1" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -484,8 +484,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_2" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_2" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -618,8 +618,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#make-the-change" class="md-nav__link">
-    Make the Change
+  <a href="#lets-go" class="md-nav__link">
+    Let's Go!
   </a>
   
     <nav class="md-nav">
@@ -641,8 +641,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -661,8 +661,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_1" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_1" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -681,8 +681,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-just-happened_2" class="md-nav__link">
-    What Just Happened
+  <a href="#what-happened_2" class="md-nav__link">
+    What Happened?
   </a>
   
 </li>
@@ -740,7 +740,7 @@
                 <h1 id="exercise-3-working-with-encryption-context">Exercise 3: Working With Encryption Context</h1>
 <p>In this section, you will work with encryption context and explore its use in the Document Bucket and other applications.</p>
 <h2 id="background">Background</h2>
-<p>The Busy Engineer's Document Bucket has metadata, called <code>context</code>, associated with each document. This meatadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
+<p>The Busy Engineer's Document Bucket has metadata, called <code>context</code>, associated with each document. This metadata is a set of key-value string pairs, associated with the item in DynamoDB, searchable there, and attached to the S3 object as well.</p>
 <p>One of the features AWS KMS and the AWS Encryption SDK both provide is called encryption context. At its core, encryption context is this metadata mapping: keys that are associated with context about the object, and values indicating information about what that context is. All the information in the map is non-secret, and is the basis for several feature integrations.</p>
 <p>One useful model for thinking about encryption context is as Assertions about the <a href="https://en.wikipedia.org/wiki/Five_Ws" target="_blank">Five Ws</a>: Who, What, Where, When, Why. For example:</p>
 <ul>
@@ -777,7 +777,7 @@
 </ul>
 <p>Also, after this change, the contents of <code>context</code> will be available in audit log entries written by KMS, and you can now use that metadata in your Key Policies and Grants.</p>
 <p>Remember, encryption context is not secret!</p>
-<h2 id="make-the-change">Make the Change</h2>
+<h2 id="lets-go">Let's Go!</h2>
 <h3 id="starting-directory">Starting Directory</h3>
 <p>If you just finished <a href="../multi-cmk/">Using Multiple CMKs</a>, you are all set.</p>
 <p>If you aren't sure, or want to catch up, jump into the <code>encryption-context-start</code> directory for the language of your choice.</p>
@@ -788,13 +788,13 @@
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
-<label for="__tab_1_1">Typescript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/encryption-context-start
+<label for="__tab_1_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-start
+<label for="__tab_1_2">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/encryption-context-start
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_1" type="radio" id="__tab_1_3" />
@@ -880,7 +880,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened">What Just Happened</h4>
+<h4 id="what-happened">What Happened?</h4>
 <p>The Document Bucket <code>context</code> will now be supplied to the AWS Encryption SDK and AWS KMS as encryption context. If a non-empty key-value pair map is supplied to <code>store</code>, those key-value pairs will be used in encryption and decryption operations all the way through to KMS:</p>
 <ul>
 <li>The contents of <code>context</code> will appear in KMS audit logs.</li>
@@ -989,7 +989,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened_1">What Just Happened</h4>
+<h4 id="what-happened_1">What Happened?</h4>
 <p>Now on decrypt, the validated encryption context from the Encryption SDK Message Format header will be passed back to the application. Any business logic that would benefit from using the encryption context data for making decisions can use the version bound and validated by the Encryption SDK and KMS.</p>
 <p>Next you will add a mechanism for the application to test assertions made in encryption context before working with the returned data.</p>
 <h3 id="step-3-making-assertions">Step 3: Making Assertions</h3>
@@ -1209,7 +1209,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<h4 id="what-just-happened_2">What Just Happened</h4>
+<h4 id="what-happened_2">What Happened?</h4>
 <p><code>retrieve</code> will use its "expected context keys" argument to validate that all of those keys (with any associated values) are present in the encryption context. <code>retrieve</code> will also use its "expected context" argument to validate that the exact key-value pairs specified in expected context are present in the actual encryption context. If either of those assumptions is invalid, <code>retrieve</code> will raise an exception before returning the data. These assertions safeguard against accidentally returning unintended, corrupted, or tampered data to the application.</p>
 <p>Now the Document Bucket will use AWS KMS and the AWS Encryption SDK to ensure that the <code>context</code> metadata is consistent throughout the lifetime of the objects, resistant to tampering or corruption, and make the validated context available to the application logic to make additional business logic assertions safely.</p>
 <h3 id="checking-your-work">Checking Your Work</h3>
@@ -1222,13 +1222,13 @@
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_1" />
-<label for="__tab_5_1">Typescript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/encryption-context-complete
+<label for="__tab_5_1">JavaScript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_2" />
-<label for="__tab_5_2">JavaScript Node.JS</label>
-<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-javascript/encryption-context-complete
+<label for="__tab_5_2">Typescript Node.JS</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment/workshop/exercises/node-typescript/encryption-context-complete
 </pre></div>
 </td></tr></table></div>
 <input name="__tabs_5" type="radio" id="__tab_5_3" />
@@ -1459,7 +1459,7 @@ ops.store<span class="o">(</span>b<span class="s1">&#39;some data&#39;</span>, c
 <li><strong>Alarms and Monitoring</strong> - How can you leverage encryption context and <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html" target="_blank">CloudWatch Alarms for CloudTrail</a> to monitor and protect your application?</li>
 </ul>
 <h1 id="next-exercise">Next exercise</h1>
-<p>That's it! You have officially completed the Busy Engineer's Document Bucket workshop. Proceed to <a href="../thank-you-and-closing/">Thank You and Closing</a> for some parting thoughts and information.</p>
+<p>Congratulations! You have officially completed the Busy Engineer's Document Bucket workshop. Proceed to <a href="../thank-you-and-closing/">Thank You and Closing</a> to tear down your workshop environment.</p>
                 
                   
                 
