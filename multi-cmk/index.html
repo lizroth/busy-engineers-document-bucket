@@ -866,12 +866,15 @@
 <li><code>make create_grants</code> will add Grants to use either or both CMK, as needed</li>
 </ul>
 <p>The application behavior will change. <strong>Important</strong> when you revoke permissions to the first CMK in the list for a keyring (which is Faythe by default), you will need to change the keyring configuration to use Walter as your generator to resume operations. See <a href="https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/js-examples.html" target="_blank">documentation of Generator CMKs</a> for more.</p>
-<p>You can also observe the impact of changing Granted permissions by monitoring CloudTrail. Note that log entries take a few minutes to propagate to CloudTrail.</p>
+<p>You can also observe the impact of changing Granted permissions by monitoring CloudTrail. Note that log entries take a few minutes to propagate to CloudTrail, and that Faythe and Walter are in different regions, so you will need to look at CloudTrail in the region for each one.</p>
 <ul>
 <li>Faythe is in <code>us-east-2</code>, so check CloudTrail in that region with these links:<ul>
 <li><a href="https://console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=GenerateDataKey" target="_blank">GenerateDataKey operations in CloudTrail in us-east-2</a></li>
-<li><a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=Encrypt" target="_blank">Encrypt operations in CloudTrail in us-east-2</a></li>
 <li><a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=Decrypt" target="_blank">Decrypt operations in CloudTrail in us-east-2</a></li>
+<li><a href="https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/events?EventName=Encrypt" target="_blank">Encrypt operations in CloudTrail in us-east-2</a><ul>
+<li>Note: Unless you change your keyring/master key provider configuration, you may not observe Encrypt operations against Faythe.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Walter is in <code>us-west-2</code>, so check CloudTrail in that region with these links:<ul>
